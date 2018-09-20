@@ -13,6 +13,7 @@ import {
 import {
   FlexLayoutModule
 } from '@angular/flex-layout';
+import { NgbActiveModal, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   MatButtonModule,
   MatToolbarModule,
@@ -30,7 +31,7 @@ import {
   MatCheckboxModule,
   MatTooltipModule,
   MatChipsModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
 } from '@angular/material';
 import {
   FormsModule
@@ -67,6 +68,7 @@ import {
     MatTooltipModule,
     MatChipsModule,
     MatButtonToggleModule,
+    NgbModule.forRoot(),
   ],
 
 
