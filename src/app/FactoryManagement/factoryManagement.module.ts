@@ -41,6 +41,8 @@ import { CustomerListComponent } from './Customer/customer.component';
 import { PriceListComponent } from './Price/price.component';
 import { SizeListComponent } from './Size/size.component';
 import { SupplierListComponent } from './Supplier/supplier.component';
+import { PlantsService } from './Services/plants.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -56,6 +58,7 @@ import { SupplierListComponent } from './Supplier/supplier.component';
   ],
 
   imports: [
+    HttpClientModule,
     CommonModule,
     // FormsRouterModule,
     FlexLayoutModule,
@@ -80,8 +83,9 @@ import { SupplierListComponent } from './Supplier/supplier.component';
     MatButtonToggleModule,
     NgbModule.forRoot(),
   ],
-
-
+  providers: [
+    PlantsService
+  ],
   exports: [
     PlantsListComponent,
     RawMaterialListComponent,

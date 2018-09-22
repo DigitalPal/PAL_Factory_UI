@@ -13,7 +13,8 @@ export const environment = {
     storageBucket: 'newproject-5d731.appspot.com',
     messagingSenderId: '737689833575'
   },
-  mailApi: '/assets/list.json'
+  mailApi: '/assets/list.json',
+  factoryAPIBase: 'http://api.digitalpal.co.in'
 };
 export const palete = {
     primary: '#D32F2F',

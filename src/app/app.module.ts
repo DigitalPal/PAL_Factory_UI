@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { FactoryManagementModule } from './FactoryManagement/factoryManagement.module';
 import { LoginModule } from './pages/login/login.module';
+import { PlantsService } from './FactoryManagement/Services/plants.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -15,6 +17,7 @@ import { LoginModule } from './pages/login/login.module';
     AppComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     LazyLoadModule,
     CoreModule,
@@ -22,7 +25,9 @@ import { LoginModule } from './pages/login/login.module';
     FactoryManagementModule,
     LoginModule
   ],
-  providers: [],
+  providers: [
+    PlantsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
