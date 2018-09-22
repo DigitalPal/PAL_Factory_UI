@@ -34,7 +34,7 @@
           <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
               <mat-cell *matCellDef="let row" >
-                  <button style="margin-left:5px;" type="button" class="btn btn-info btn-sm">Edit</button>
+                  <button style="margin-left:5px;" type="button" (click)="open(content)" class="btn btn-info btn-sm">Edit</button>
                   <button style="margin-left:5px;" type="button" class="btn btn-info btn-sm">Delete</button>
               </mat-cell>
             </ng-container>

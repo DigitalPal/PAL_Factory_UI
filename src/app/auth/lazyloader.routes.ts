@@ -4,10 +4,20 @@ import { DashboardCrmComponent } from '../dashboard-crm/dashboard-crm.component'
 import { LoginComponent } from '../pages/login/login.component';
 import { DashcardComponent } from '../dashboard-widget/dashcard/dashcard.component';
 import { PlantsListComponent } from '../FactoryManagement/Plants/plants.component';
+import { RawMaterialListComponent } from '../FactoryManagement/RawMaterial/rawmaterial.component';
+import { CustomerListComponent } from '../FactoryManagement/Customer/customer.component';
+import { PriceListComponent } from '../FactoryManagement/Price/price.component';
+import { SizeListComponent } from '../FactoryManagement/Size/size.component';
+import { SupplierListComponent } from '../FactoryManagement/Supplier/supplier.component';
 
 export const appRoutes: Routes = [{
     path: '', component: AuthComponent, children: [
         { path: 'plants', component: PlantsListComponent },
+        { path: 'rawMaterial', component: RawMaterialListComponent },
+        { path: 'customers', component: CustomerListComponent },
+        { path: 'prices', component: PriceListComponent },
+        { path: 'sizes', component: SizeListComponent },
+        { path: 'suppliers', component: SupplierListComponent },
         { path: 'dashboard', component: DashboardCrmComponent },
         { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },

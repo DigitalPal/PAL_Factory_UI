@@ -36,13 +36,23 @@ import {
 import {
   FormsModule
 } from '@angular/forms';
+import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
+import { CustomerListComponent } from './Customer/customer.component';
+import { PriceListComponent } from './Price/price.component';
+import { SizeListComponent } from './Size/size.component';
+import { SupplierListComponent } from './Supplier/supplier.component';
 
 
 
 @NgModule({
 
   declarations: [
-    PlantsListComponent
+    PlantsListComponent,
+    RawMaterialListComponent,
+    CustomerListComponent,
+    PriceListComponent,
+    SizeListComponent,
+    SupplierListComponent
   ],
 
   imports: [
@@ -73,7 +83,12 @@ import {
 
 
   exports: [
-    PlantsListComponent
+    PlantsListComponent,
+    RawMaterialListComponent,
+    CustomerListComponent,
+    PriceListComponent,
+    SizeListComponent,
+    SupplierListComponent
   ],
 })
 export class FactoryManagementModule {}
