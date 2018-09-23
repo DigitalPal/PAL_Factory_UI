@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Plant } from '../Entities/plant';
 import { PlantsService } from '../Services/plants.service';
 @Component({
@@ -11,21 +12,23 @@ export class PlantsListComponent implements OnInit {
   public displayedColumns = ['name', 'address', 'contact', 'adminUser', 'actions'];
   plants: Plant[] = [];
   model = {
+    id: null,
     name: '',
     address: '',
     contact: '',
     adminUser: ''
   };
-  closeResult: string;
-  constructor(private modalService: NgbModal, private service: PlantsService) {}
+  constructor(private modalService: NgbModal, private service: PlantsService, private spinner: NgxSpinnerService) {}
 
   open(content, row) {
     if (!row) {
+      this.model.id = null;
       this.model.name = '';
       this.model.address = '';
       this.model.contact = '';
       this.model.adminUser = null;
     } else {
+      this.model.id = row.id;
       this.model.name = row.name;
       this.model.address = row.address;
       this.model.contact = row.contact;
@@ -35,26 +38,21 @@ export class PlantsListComponent implements OnInit {
       size: 'lg',
       ariaLabelledBy: 'modal-basic-title'
     }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      this.spinner.show();
       if (result === 'SAVE') {
-        this.savePlant();
+        if (this.model.id) {
+          this.editPlant();
+        } else {
+          this.savePlant();
+        }
       }
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      // handle close exception
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
   ngOnInit() {
+    this.spinner.show();
     this.getPlants();
   }
 
@@ -67,6 +65,24 @@ export class PlantsListComponent implements OnInit {
       userId: this.model.adminUser,
     }).subscribe(s => this.getPlants());
   }
+
+  deletePlant(row) {
+    this.spinner.show();
+    this.service.deletePlant(row).subscribe(s => this.getPlants());
+  }
+
+
+  editPlant() {
+    this.service.editPlant({
+      id: this.model.id,
+      name: this.model.name,
+      address: this.model.address,
+      contact: this.model.contact,
+      userName: this.model.adminUser,
+      userId: this.model.adminUser,
+    }).subscribe(s => this.getPlants());
+  }
+
 
   getPlants() {
     this.service.getPlants('').subscribe(s => {
@@ -84,6 +100,7 @@ export class PlantsListComponent implements OnInit {
         });
       }
       this.plants = localPlants;
+      this.spinner.hide();
     });
   }
 }

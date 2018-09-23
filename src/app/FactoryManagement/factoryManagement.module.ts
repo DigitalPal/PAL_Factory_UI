@@ -43,7 +43,7 @@ import { SizeListComponent } from './Size/size.component';
 import { SupplierListComponent } from './Supplier/supplier.component';
 import { PlantsService } from './Services/plants.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -82,6 +82,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatChipsModule,
     MatButtonToggleModule,
     NgbModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     PlantsService

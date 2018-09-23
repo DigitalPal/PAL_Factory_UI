@@ -29,4 +29,27 @@ export class PlantsService {
     return this.http.post(url, [request], { headers: headers });
   }
 
+  editPlant(plant: Plant): Observable<any> {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    const request = {};
+    request['Id'] = plant.id;
+    request['Name'] = plant.name;
+    request['CreatedBy'] = plant.userName;
+    request['Address'] = plant.address;
+    request['ContactNumber'] = plant.contact;
+    return this.http.put(url, [request], { headers: headers });
+  }
+
+
+  deletePlant(plant: Plant): Observable<any> {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.delete(url + '/' + plant.id, { headers: headers });
+  }
+
 }
