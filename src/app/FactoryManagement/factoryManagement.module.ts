@@ -42,6 +42,7 @@ import { PriceListComponent } from './Price/price.component';
 import { SizeListComponent } from './Size/size.component';
 import { SupplierListComponent } from './Supplier/supplier.component';
 import { PlantsService } from './Services/plants.service';
+import { RawMaterialService } from './Services/rawMaterial.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -85,7 +86,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule
   ],
   providers: [
-    PlantsService
+    PlantsService,
+    RawMaterialService
   ],
   exports: [
     PlantsListComponent,

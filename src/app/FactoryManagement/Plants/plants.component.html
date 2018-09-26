@@ -46,6 +46,9 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
       </mat-table>
+      <div class="example-no-results" style="display: block; text-align: center; margin: 10px" *ngIf="plants?.length == 0">
+        No plant added
+      </div>
     </div>
   </div>
 </div>

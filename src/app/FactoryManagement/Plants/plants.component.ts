@@ -45,6 +45,8 @@ export class PlantsListComponent implements OnInit {
         } else {
           this.savePlant();
         }
+      } else {
+        this.spinner.hide();
       }
     }, (reason) => {
       // handle close exception
