@@ -1,10 +1,10 @@
-export interface Supplier{
-    Id? : string; 
-SupplierName : string; 
-SupplierNumber : string; 
-GSTNumber : string; 
-Address : string; 
-ContactNumber : string; 
-Type : string; 
-Description : string; 
-    }
+export interface Supplier {
+  id?: string;
+  supplierName: string;
+  supplierNumber: string;
+  gst: string;
+  address: string;
+  contactNumber: string;
+  type: string;
+  description: string;
+}

@@ -21,7 +21,7 @@
       
               <ng-container matColumnDef="custNumber">
                 <mat-header-cell *matHeaderCellDef> Customer Number </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.custNumber}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.customerNumber}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="gst">
@@ -36,7 +36,7 @@
 
               <ng-container matColumnDef="contact">
                 <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.contact}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.contactNumber}} </mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="type">
@@ -46,7 +46,7 @@
 
               <ng-container matColumnDef="desc">
                 <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.desc}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
               </ng-container>
   
             <ng-container matColumnDef="actions">
@@ -89,7 +89,7 @@
               <label for="txtcustomerNumber" class="col-sm-2 col-form-label">Customer Number</label>
               <div class="col-sm-10">
                   <div class="md-form mt-0">
-                      <input type="text" [(ngModel)]="model.custNumber" #name="ngModel" name="custNumber" class="form-control" id="txtcustomerNumber"
+                      <input type="text" [(ngModel)]="model.customerNumber" #name="ngModel" name="customerNumber" class="form-control" id="txtcustomerNumber"
               placeholder="Customer Number">
                   </div>
               </div>
@@ -140,7 +140,7 @@
             <label for="txtdesc" class="col-sm-2 col-form-label">Description</label>
             <div class="col-sm-10">
                 <div class="md-form mt-0">
-                    <input type="text" [(ngModel)]="model.desc" #name="ngModel" name="desc" class="form-control" id="txtdesc"
+                    <input type="text" [(ngModel)]="model.description" #name="ngModel" name="description" class="form-control" id="txtdesc"
               placeholder="Description">
                 </div>
             </div>
