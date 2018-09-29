@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { CustomersService } from '../Services/customers.service';
+import { Customer } from '../Entities/customer';
   @Component({
     selector: 'app-customer-list',
     templateUrl: './customer.component.html',
@@ -7,16 +10,55 @@ import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-boo
   })
   export class CustomerListComponent implements OnInit {
     public displayedColumns = ['name', 'custNumber', 'gst', 'address', 'contact', 'type', 'desc', 'actions'];
-    customers = [{name: 'NAMARTA DEVELOPERS', custNumber: 'CUST00001', gst: 'GTSIN000921', address: 'Katraj, Pune', contact: '9999999999', type: 'Builder', desc: 'Leading Builder'}
-    , {name: 'TEST DEVELOPERS', custNumber: 'CUST00002', gst: 'GTSIN000875', address: 'Balaji Nagar, Pune', contact: '9999999999', type: 'Builder', desc: 'Leading Builder'}];
-    closeResult: string;
-    constructor(private modalService: NgbModal) {}
+    
+    customers: Customer[] = [];
+    model = {
+    id: null,
+    name:'',
+    custNumber: '',
+    gst: '',
+    address:'',
+    contact: '',
+    type:'',
+    desc:''
+    };
+    
+    constructor(private modalService: NgbModal, private service: CustomersService, private spinner: NgxSpinnerService) {}
 
-    open(content) {
-      this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
+    open(content, row) {
+      if (!row) {
+        this.model.id = null;
+        this.model.name = '';
+        this.model.custNumber='';
+        this.model.gst = '';
+        this.model.address = '';
+        this.model.contact = '';
+        this.model.type = '';
+        this.model.desc = '';
+      } else {
+        this.model.id = row.id;
+        this.model.name = row.name;
+        this.model.custNumber = row.custNumber;
+        this.model.gst = row.gst;
+        this.model.address = row.address;
+        this.model.contact = row.contact;
+        this.model.type = row.type;
+        this.model.desc = row.desc;
+      }
+      this.modalService.open(content, {
+        size: 'lg',
+        ariaLabelledBy: 'modal-basic-title'
+      }).result.then((result) => {
+        this.spinner.show();
+        if (result === 'SAVE') {
+          if (this.model.id) {
+            this.editCustomer();
+          } else {
+            this.saveCustomer();
+          }
+        }
       }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        // handle close exception
       });
     }
 
@@ -31,5 +73,62 @@ import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-boo
     }
 
     ngOnInit() {
+      this.spinner.show();
+      this.getCustomers();
     }
+
+    saveCustomer() {
+      this.service.addCustomer({
+        Name: this.model.name,
+        CustomerNumber : this.model.custNumber,
+        GSTNumber: this.model.gst,
+        Address: this.model.address,
+        ContactNumber: this.model.contact,
+        Type: this.model.type,
+        Description: this.model.desc,
+      }).subscribe(s => this.getCustomers());
+    }
+
+    deleteCustomer(row) {
+      this.spinner.show();
+      this.service.deleteCustomer(row).subscribe(s => this.getCustomers());
+    }
+
+    editCustomer() {
+      this.service.editCustomer({
+        Id: this.model.id,
+        Name: this.model.name,
+        CustomerNumber : this.model.custNumber,
+        GSTNumber: this.model.gst,
+        Address: this.model.address,
+        ContactNumber: this.model.contact,
+        Type: this.model.type,
+        Description: this.model.desc,
+      }).subscribe(s => this.getCustomers());
+    }
+
+    getCustomers() {
+      this.service.getCustomers('').subscribe(s => {
+        const localCustomers = [];
+        if (s && s.length > 0) {
+          s.forEach(element => {
+            localCustomers.push({
+              id: element.Id,
+              name: element.Name,
+              custNumber:element.CustomerNumber,
+              gst:element.GSTNumber,
+              address: element.Address,
+              contact: element.ContactNumber,
+              type:element.Type,
+              desc:element.Description,
+              userName: element.CreatedBy,
+              userId: element.CreatedBy
+            });
+          });
+        }
+        this.customers = localCustomers;
+        this.spinner.hide();
+      });
+    }
+
   }
