@@ -33,7 +33,7 @@ import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawM
   providers: [
     PlantsService,
     CustomersService,
-    SuppliersService
+    SuppliersService,
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,

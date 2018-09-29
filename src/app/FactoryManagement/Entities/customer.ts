@@ -1,10 +1,10 @@
-export interface Customer{
-    Id? : string;
-    Name : string; 
-    CustomerNumber : string; 
-    GSTNumber : string; 
-    Address : string; 
-    ContactNumber : string; 
-    Type : string; 
-    Description : string; 
-    }
+export interface Customer {
+  id?: string;
+  name: string;
+  customerNumber: string;
+  gst: string;
+  address: string;
+  contactNumber: string;
+  type: string;
+  description: string;
+}
