@@ -66,14 +66,14 @@ export const menus = [
         'sub': [
             {
                 'name': 'Raw Material Inward',
-                'link': '/auth/dashboard',
+                'link': '/auth/rawMaterialInward',
                 'icon': 'select_all',
                 'chip': false,
                 'open': true,
             },
             {
                 'name': 'Raw Material Consumption',
-                'link': '/auth/dashboard',
+                'link': '/auth/rawMaterialConsumption',
                 'icon': 'select_all',
                 'chip': false,
                 'open': true,
