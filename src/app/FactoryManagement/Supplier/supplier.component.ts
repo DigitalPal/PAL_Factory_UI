@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SuppliersService } from '../Services/suppliers.service';
+import { Supplier } from '../Entities/supplier';
   @Component({
     selector: 'app-supplier-list',
     templateUrl: './supplier.component.html',
@@ -7,19 +10,57 @@ import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-boo
   })
   export class SupplierListComponent implements OnInit {
     public displayedColumns = ['name', 'supplierNumber', 'gst', 'address', 'contact', 'type', 'desc', 'actions'];
-    suppliers = [{name: 'DARSHAN ASSOCIATS ', supplierNumber: 'CUST00001', gst: 'GTSIN000921', address: 'Katraj, Pune', contact: '9999999999', type: 'Builder', desc: 'Leading Builder'}
-    , {name: 'AB TOOLS & HARDWARE ', supplierNumber: 'CUST00002', gst: 'GTSIN000875', address: 'Balaji Nagar, Pune', contact: '9999999999', type: 'Builder', desc: 'Leading Builder'}];
-    closeResult: string;
-    constructor(private modalService: NgbModal) {}
+    
+    suppliers: Supplier[] = [];
+    model = {
+    id: null,
+    supplierName:'',
+    supplierNumber: '',
+    gst: '',
+    address:'',
+    contact: '',
+    type:'',
+    desc:''
+    };
 
-    open(content) {
-      this.modalService.open(content, {size: 'lg', ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
+    constructor(private modalService: NgbModal, private service: SuppliersService, private spinner: NgxSpinnerService) {}
+
+    open(content, row) {
+      if (!row) {
+        this.model.id = null;
+        this.model.supplierName = '';
+        this.model.supplierNumber='';
+        this.model.gst = '';
+        this.model.address = '';
+        this.model.contact = '';
+        this.model.type = '';
+        this.model.desc = '';
+      } else {
+        this.model.id = row.id;
+        this.model.supplierName = row.supplierName;
+        this.model.supplierNumber = row.supplierNumber;
+        this.model.gst = row.gst;
+        this.model.address = row.address;
+        this.model.contact = row.contact;
+        this.model.type = row.type;
+        this.model.desc = row.desc;
+      }
+      this.modalService.open(content, {
+        size: 'lg',
+        ariaLabelledBy: 'modal-basic-title'
+      }).result.then((result) => {
+        this.spinner.show();
+        if (result === 'SAVE') {
+          if (this.model.id) {
+            this.editSupplier();
+          } else {
+            this.saveSupplier();
+          }
+        }
       }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        // handle close exception
       });
     }
-
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -31,5 +72,62 @@ import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-boo
     }
 
     ngOnInit() {
+      this.spinner.show();
+      this.getSuppliers();
     }
+
+    saveSupplier() {
+      this.service.addSupplier({
+        SupplierName: this.model.supplierName,
+        SupplierNumber : this.model.supplierNumber,
+        GSTNumber: this.model.gst,
+        Address: this.model.address,
+        ContactNumber: this.model.contact,
+        Type: this.model.type,
+        Description: this.model.desc,
+      }).subscribe(s => this.getSuppliers());
+    }
+
+    deleteSupplier(row) {
+      this.spinner.show();
+      this.service.deleteSupplier(row).subscribe(s => this.getSuppliers());
+    }
+
+    editSupplier() {
+      this.service.editSupplier({
+        Id: this.model.id,
+        SupplierName: this.model.supplierName,
+        SupplierNumber : this.model.supplierNumber,
+        GSTNumber: this.model.gst,
+        Address: this.model.address,
+        ContactNumber: this.model.contact,
+        Type: this.model.type,
+        Description: this.model.desc,
+      }).subscribe(s => this.getSuppliers());
+    }
+
+    getSuppliers() {
+      this.service.getSuppliers('').subscribe(s => {
+        const localSuppliers = [];
+        if (s && s.length > 0) {
+          s.forEach(element => {
+            localSuppliers.push({
+              id: element.Id,
+              supplierName: element.SupplierName,
+              supplierNumber:element.SupplierNumber,
+              gst:element.GSTNumber,
+              address: element.Address,
+              contact: element.ContactNumber,
+              type:element.Type,
+              desc:element.Description,
+              userName: element.CreatedBy,
+              userId: element.CreatedBy
+            });
+          });
+        }
+        this.suppliers = localSuppliers;
+        this.spinner.hide();
+      });
+    }
+
   }

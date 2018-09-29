@@ -8,6 +8,8 @@ import { CoreModule } from './core/core.module';
 import { FactoryManagementModule } from './FactoryManagement/factoryManagement.module';
 import { LoginModule } from './pages/login/login.module';
 import { PlantsService } from './FactoryManagement/Services/plants.service';
+import { CustomersService } from './FactoryManagement/Services/customers.service';
+import { SuppliersService } from './FactoryManagement/Services/suppliers.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -26,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     LoginModule
   ],
   providers: [
-    PlantsService
+    PlantsService,
+    CustomersService,
+    SuppliersService
   ],
   bootstrap: [AppComponent]
 })
