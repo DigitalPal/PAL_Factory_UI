@@ -45,6 +45,10 @@ import { PlantsService } from './Services/plants.service';
 import { RawMaterialService } from './Services/rawMaterial.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
+import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
+import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
+import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
 
 
 @NgModule({
@@ -55,7 +59,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CustomerListComponent,
     PriceListComponent,
     SizeListComponent,
-    SupplierListComponent
+    SupplierListComponent,
+    RawMaterialListComponent,
+    RawMaterialInwardListComponent,
+    RawMaterialConsumptionListComponent,
   ],
 
   imports: [
@@ -87,7 +94,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   providers: [
     PlantsService,
-    RawMaterialService
+    RawMaterialService,
+    RawMaterialInwardService,
+    RawMaterialConsumptionService,
   ],
   exports: [
     PlantsListComponent,
@@ -95,7 +104,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CustomerListComponent,
     PriceListComponent,
     SizeListComponent,
-    SupplierListComponent
+    SupplierListComponent,
+    RawMaterialListComponent,
+    RawMaterialInwardListComponent,
+    RawMaterialConsumptionListComponent,
   ],
 })
 export class FactoryManagementModule {}

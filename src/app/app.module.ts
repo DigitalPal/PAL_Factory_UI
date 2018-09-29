@@ -10,6 +10,8 @@ import { LoginModule } from './pages/login/login.module';
 import { PlantsService } from './FactoryManagement/Services/plants.service';
 import { RawMaterialService } from './FactoryManagement/Services/rawMaterial.service';
 import { HttpClientModule } from '@angular/common/http';
+import { RawMaterialInwardService } from './FactoryManagement/Services/rawMaterialInwardService';
+import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawMaterialConsumptionService';
 
 
 
@@ -28,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     PlantsService,
-    RawMaterialService
+    RawMaterialService,
+    RawMaterialInwardService,
+    RawMaterialConsumptionService,
   ],
   bootstrap: [AppComponent]
 })
