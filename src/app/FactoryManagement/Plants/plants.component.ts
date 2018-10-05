@@ -96,7 +96,7 @@ export class PlantsListComponent implements OnInit {
             name: element.Name,
             address: element.Address,
             contact: element.ContactNumber,
-            userName: element.CreatedBy,
+            userName: 'Astracon Admin', // element.CreatedBy,
             userId: element.CreatedBy
           });
         });

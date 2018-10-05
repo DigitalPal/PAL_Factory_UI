@@ -14,6 +14,7 @@ import { RawMaterialService } from './FactoryManagement/Services/rawMaterial.ser
 import { HttpClientModule } from '@angular/common/http';
 import { RawMaterialInwardService } from './FactoryManagement/Services/rawMaterialInwardService';
 import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawMaterialConsumptionService';
+import { ProductionEntryService } from './FactoryManagement/Services/productionEntry.service';
 
 
 
@@ -37,6 +38,7 @@ import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawM
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
+    ProductionEntryService
   ],
   bootstrap: [AppComponent]
 })

@@ -49,6 +49,8 @@ import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
 import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
 import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
+import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
+import { ProductionEntryService } from './Services/productionEntry.service';
 
 
 @NgModule({
@@ -63,6 +65,7 @@ import { RawMaterialConsumptionService } from './Services/rawMaterialConsumption
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+    ProductionEntryListComponent
   ],
 
   imports: [
@@ -97,6 +100,7 @@ import { RawMaterialConsumptionService } from './Services/rawMaterialConsumption
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
+    ProductionEntryService
   ],
   exports: [
     PlantsListComponent,
@@ -108,6 +112,7 @@ import { RawMaterialConsumptionService } from './Services/rawMaterialConsumption
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+    ProductionEntryListComponent
   ],
 })
 export class FactoryManagementModule {}

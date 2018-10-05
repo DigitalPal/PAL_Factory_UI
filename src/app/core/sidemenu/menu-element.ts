@@ -15,7 +15,7 @@ export const menus = [
             },
             {
                 'name': 'Manage Users',
-                'link': '/auth/dashboard',
+                'link': '/auth/plants',
                 'icon': 'list',
                 'chip': false,
                 'open': true,
@@ -80,14 +80,14 @@ export const menus = [
             },
             {
                 'name': 'Production Entry',
-                'link': '/auth/dashboard',
+                'link': '/auth/productionEntry',
                 'icon': 'select_all',
                 'chip': false,
                 'open': true,
             },
             {
                 'name': 'Dispatch Entry',
-                'link': '/auth/dashboard',
+                'link': '/auth/productionEntry',
                 'icon': 'select_all',
                 'chip': false,
                 'open': true,
