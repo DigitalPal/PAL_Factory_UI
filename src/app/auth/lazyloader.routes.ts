@@ -11,6 +11,7 @@ import { SizeListComponent } from '../FactoryManagement/Size/size.component';
 import { SupplierListComponent } from '../FactoryManagement/Supplier/supplier.component';
 import { RawMaterialInwardListComponent } from '../FactoryManagement/RawMaterialInward/rawMaterialInward.component';
 import { RawMaterialConsumptionListComponent } from '../FactoryManagement/RawMaterialConsumption/rawMaterialConsumption.component';
+import { ProductionEntryListComponent } from '../FactoryManagement/ProductionEntry/productionEntry.component';
 
 export const appRoutes: Routes = [{
     path: '', component: AuthComponent, children: [
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [{
         { path: 'suppliers', component: SupplierListComponent },
         { path: 'rawMaterialInward', component: RawMaterialInwardListComponent },
         { path: 'rawMaterialConsumption', component: RawMaterialConsumptionListComponent },
+        { path: 'productionEntry', component: ProductionEntryListComponent },
         { path: 'dashboard', component: DashboardCrmComponent },
         { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },

@@ -40,12 +40,12 @@ export class RawMaterialService {
   }
 
 
-  deleteRawMaterial(plant: Plant): Observable<any> {
+  deleteRawMaterial(rawMaterial: RawMaterial): Observable<any> {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialDetails';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.delete(url + '/' + plant.id, { headers: headers });
+    return this.http.delete(url + '/' + rawMaterial.id, { headers: headers });
   }
 
 }

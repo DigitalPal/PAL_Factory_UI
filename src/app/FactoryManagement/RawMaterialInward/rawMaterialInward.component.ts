@@ -11,7 +11,19 @@ import { RawMaterialInwardService } from '../Services/rawMaterialInwardService';
 export class RawMaterialInwardListComponent implements OnInit {
   public displayedColumns = ['date', 'material', 'supplier', 'vehicleNumber'
   , 'challanNumber', 'quantity', 'unloadingDetails', 'remark', 'actions'];
-  rawMaterialInwards: RawMaterialInward[] = [];
+  rawMaterialInwards: RawMaterialInward[] = [{
+    date: '02/10/2018',
+    challanNumber: 'CH0001',
+    materialname: 'PONDASH',
+    quantity: 100,
+    remark: 'NA',
+    supplierName: 'PRATIK TRANSPORT',
+    unloadingDetails: 'Mathadi',
+    vehicleNumber: 'MH12/KP8225',
+    id: null,
+    materialId: null,
+    supplierId: null
+  }];
   model = {
     id: null,
     date: '',
