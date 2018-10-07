@@ -15,6 +15,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RawMaterialInwardService } from './FactoryManagement/Services/rawMaterialInwardService';
 import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawMaterialConsumptionService';
 import { ProductionEntryService } from './FactoryManagement/Services/productionEntry.service';
+import { OrderService } from './FactoryManagement/Services/order.service';
+import { DispatchService } from './FactoryManagement/Services/disptach.service';
+import { InvoiceService } from './FactoryManagement/Services/invoice.service';
 
 
 
@@ -38,7 +41,10 @@ import { ProductionEntryService } from './FactoryManagement/Services/productionE
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
-    ProductionEntryService
+    ProductionEntryService,
+    OrderService,
+    DispatchService,
+    InvoiceService
   ],
   bootstrap: [AppComponent]
 })
