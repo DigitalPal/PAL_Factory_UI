@@ -12,18 +12,19 @@ import { SupplierListComponent } from '../FactoryManagement/Supplier/supplier.co
 import { RawMaterialInwardListComponent } from '../FactoryManagement/RawMaterialInward/rawMaterialInward.component';
 import { RawMaterialConsumptionListComponent } from '../FactoryManagement/RawMaterialConsumption/rawMaterialConsumption.component';
 import { ProductionEntryListComponent } from '../FactoryManagement/ProductionEntry/productionEntry.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 export const appRoutes: Routes = [{
     path: '', component: AuthComponent, children: [
-        { path: 'plants', component: PlantsListComponent },
-        { path: 'rawMaterial', component: RawMaterialListComponent },
-        { path: 'customers', component: CustomerListComponent },
-        { path: 'prices', component: PriceListComponent },
-        { path: 'sizes', component: SizeListComponent },
-        { path: 'suppliers', component: SupplierListComponent },
-        { path: 'rawMaterialInward', component: RawMaterialInwardListComponent },
-        { path: 'rawMaterialConsumption', component: RawMaterialConsumptionListComponent },
-        { path: 'productionEntry', component: ProductionEntryListComponent },
+        { path: 'plants', component: PlantsListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterial', component: RawMaterialListComponent,canActivate:[AuthGuard] },
+        { path: 'customers', component: CustomerListComponent,canActivate:[AuthGuard] },
+        { path: 'prices', component: PriceListComponent,canActivate:[AuthGuard] },
+        { path: 'sizes', component: SizeListComponent,canActivate:[AuthGuard] },
+        { path: 'suppliers', component: SupplierListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterialInward', component: RawMaterialInwardListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterialConsumption', component: RawMaterialConsumptionListComponent,canActivate:[AuthGuard] },
+        { path: 'productionEntry', component: ProductionEntryListComponent,canActivate:[AuthGuard] },
         { path: 'dashboard', component: DashboardCrmComponent },
         { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
