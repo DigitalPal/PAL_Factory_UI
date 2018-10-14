@@ -35,7 +35,7 @@ export class DispatchDetailsComponent implements OnInit {
     // this.spinner.show();
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
-        this.service.getOrder('').subscribe(details => {
+        this.service.getDispatch('').subscribe(details => {
           this.model.id = details.id;
           this.model.orderNumber = details.orderNumber;
           this.model.dispatchNumber = details.dispatchNumber;

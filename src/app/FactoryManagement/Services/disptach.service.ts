@@ -8,19 +8,19 @@ import { Dispatch } from '../Entities/Dispatch';
 export class DispatchService {
   constructor(private http: HttpClient) {}
 
-  getOrder(orderId): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+  getDispatch(dispatchId): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url, {
+    return this.http.get(url + '/' + dispatchId, {
       headers: headers
     });
   }
 
-  getDispatchs(logedInUser): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+  getDispatches(logedInUser): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -31,31 +31,43 @@ export class DispatchService {
   }
 
   addDispatch(dispatch: Dispatch): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    // request['Name'] = plant.name;
-    // request['CreatedBy'] = plant.userName;
-    // request['Address'] = plant.address;
-    // request['ContactNumber'] = plant.contact;
+    request['DispatchNumber'] = dispatch.dispatchNumber;
+    // request['ChallanNumber'] = dispatch.ChallanNumber;
+    request['OrderId'] = dispatch.orderId;
+    request['OrderNumber'] = dispatch.orderNumber;
+    request['DispatchDate'] = dispatch.date;
+    request['TransportName'] = dispatch.transportName;
+    request['Laoding'] = dispatch.loading;
+    request['Unloading'] = dispatch.unloading;
+    request['Remark'] = dispatch.remark;
+    request['DispatchDetails'] = dispatch.products;
     return this.http.post(url, [request], {
       headers: headers
     });
   }
 
   editDispatch(dispatch: Dispatch): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    // request['Id'] = plant.id;
-    // request['Name'] = plant.name;
-    // request['CreatedBy'] = plant.userName;
-    // request['Address'] = plant.address;
-    // request['ContactNumber'] = plant.contact;
+    request['Id'] = dispatch.id;
+    request['DispatchNumber'] = dispatch.dispatchNumber;
+    // request['ChallanNumber'] = dispatch.ChallanNumber;
+    request['OrderId'] = dispatch.orderId;
+    request['OrderNumber'] = dispatch.orderNumber;
+    request['DispatchDate'] = dispatch.date;
+    request['TransportName'] = dispatch.transportName;
+    request['Laoding'] = dispatch.loading;
+    request['Unloading'] = dispatch.unloading;
+    request['Remark'] = dispatch.remark;
+    request['DispatchDetails'] = dispatch.products;
     return this.http.put(url, [request], {
       headers: headers
     });
@@ -63,7 +75,7 @@ export class DispatchService {
 
 
   deleteDispatch(dispatch: Dispatch): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };

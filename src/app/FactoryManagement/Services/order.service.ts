@@ -8,17 +8,21 @@ import { Order } from '../Entities/Order';
 export class OrderService {
   constructor(private http: HttpClient) {}
 
-  getOrder(orderId): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+
+  getOrder(orderId): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url, { headers: headers });
+    return this.http.get(url + '/' + orderId, {
+      headers: headers
+    });
   }
 
+
   getOrders(logedInUser): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -27,35 +31,56 @@ export class OrderService {
   }
 
   addOrder(order: Order): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
+
     const request = {};
-    // request['Name'] = plant.name;
-    // request['CreatedBy'] = plant.userName;
-    // request['Address'] = plant.address;
-    // request['ContactNumber'] = plant.contact;
+    request['OrderNumber'] = order.orderNumber;
+    request['CustomerPONumber'] = order.customerPONumber;
+    request['CustomerId'] = order.customerId;
+    request['OrderDate'] = order.date.month + '-' + order.date.day + '-' + order.date.year;
+    request['Price'] = order.price;
+    request['Remark'] = order.remark;
+    const products = [];
+    order.products.forEach(fe => {
+      products.push({ 'ProductId': fe.productId, 'Quantity': +fe.quantity});
+    });
+    request['Products'] = products;
+    request['CreatedBy'] = environment.userId;
+    request['TenantId'] = environment.tenantId;
+    request['PlantId'] = environment.plantId;
     return this.http.post(url, [request], { headers: headers });
   }
 
   editOrder(order: Order): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    // request['Id'] = plant.id;
-    // request['Name'] = plant.name;
-    // request['CreatedBy'] = plant.userName;
-    // request['Address'] = plant.address;
-    // request['ContactNumber'] = plant.contact;
+    request['Id'] = order.id;
+    request['OrderNumber'] = order.orderNumber;
+    request['CustomerPONumber'] = order.customerPONumber;
+    request['CustomerId'] = order.customerId;
+    request['OrderDate'] = order.date;
+    request['Price'] = order.price;
+    request['Remark'] = order.remark;
+    const products = [];
+    order.products.forEach(fe => {
+      products.push({ 'ProductId': fe.productId, 'Quantity': fe.quantity});
+    });
+    request['Products'] = products;
+    request['CreatedBy'] = environment.userId;
+    request['TenantId'] = environment.tenantId;
+    request['PlantId'] = environment.plantId;
     return this.http.put(url, [request], { headers: headers });
   }
 
 
   deleteOrder(order: Order): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Plant';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
@@ -63,7 +88,7 @@ export class OrderService {
   }
 
   getProducts(logedInUser): Observable<any> {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/SizeDetails';
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Product';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -71,4 +96,12 @@ export class OrderService {
     return this.http.get(url, { headers: headers });
   }
 
+  getMaxNumbers(logedInUser): Observable<any> {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Order/maxNumbers';
+    const request = null;
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.get(url, { headers: headers });
+  }
 }

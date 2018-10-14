@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
     , private router: Router) {}
 
   ngOnInit() {
-    this.spinner.show();
+    // this.spinner.show();
     this.getOrders();
   }
 
@@ -31,15 +31,25 @@ export class OrderListComponent implements OnInit {
       if (s && s.length > 0) {
         s.forEach(element => {
             localOrders.push({
-            // id: element.Id,
-            // name: element.Title,
-            // measurementType: element.MeasureType,
+              id: element.Id,
+              orderNumber: element.OrderNumber,
+              customerPONumber: element.CustomerPONumber,
+              customerName: element.CustomerName,
+              customerId: element.CustomerId,
+              date: element.OrderDate,
+              price: element.Price,
+              remark: element.Remark,
+              status: element.OrderStatus,
           });
         });
       }
       this.orders = localOrders;
       this.spinner.hide();
     });
+  }
+
+  invoiceClicked(row) {
+    this.router.navigate(['/auth/orderDetails'], {fragment: row.id});
   }
 
 }

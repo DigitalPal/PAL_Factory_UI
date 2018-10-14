@@ -14,7 +14,11 @@ export const environment = {
     messagingSenderId: '737689833575'
   },
   mailApi: '/assets/list.json',
-  factoryAPIBase: 'http://api.digitalpal.co.in'
+  factoryAPIBase: 'http://api.digitalpal.co.in',
+  userId: '24C87A2E-D345-4921-9E99-D00BB00F2182',
+  tenantId: 'e5d7c3e4-4c63-4a54-a928-0e7eff10e248',
+  plantId: '84715330-3d99-4b3a-9dcf-465223663a0e',
+  orderId: 'ORD-12102018-1',
 };
 export const palete = {
     primary: '#D32F2F',
@@ -29,4 +33,4 @@ export const palete = {
     tertiaryLight: '#9C27B0',
     quaternaryLight: '#673AB7',
     quinaryLight: '#3F51B5'
-}
+};

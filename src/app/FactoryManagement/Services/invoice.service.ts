@@ -24,10 +24,16 @@ export class InvoiceService {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    // request['Name'] = invoice.name;
-    // request['CreatedBy'] = invoice.userName;
-    // request['Address'] = Invoice.address;
-    // request['ContactNumber'] = Invoice.contact;
+    request['InvoiceNumber'] = invoice.invoiceNumber;
+    request['InvoiceDate'] = invoice.date;
+    request['OrderId'] = invoice.orderId;
+    request['OrderNumber'] = invoice.orderNumber;
+    request['DispatchId'] = invoice.disptachId;
+    request['DispatchNumber'] = invoice.disptachNumber;
+    request['TransportCharges'] = invoice.transportCharges;
+    request['LaodingUnloadingCharges'] = invoice.loadingCharges;
+    request['Amount'] = invoice.price;
+    request['InvoiceStatus'] = '';
     return this.http.post(url, [request], {
       headers: headers
     });
@@ -39,11 +45,17 @@ export class InvoiceService {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    // request['Id'] = Invoice.id;
-    // request['Name'] = Invoice.name;
-    // request['CreatedBy'] = Invoice.userName;
-    // request['Address'] = Invoice.address;
-    // request['ContactNumber'] = Invoice.contact;
+    request['Id'] = invoice.id;
+    request['InvoiceNumber'] = invoice.invoiceNumber;
+    request['InvoiceDate'] = invoice.date;
+    request['OrderId'] = invoice.orderId;
+    request['OrderNumber'] = invoice.orderNumber;
+    request['DispatchId'] = invoice.disptachId;
+    request['DispatchNumber'] = invoice.disptachNumber;
+    request['TransportCharges'] = invoice.transportCharges;
+    request['LaodingUnloadingCharges'] = invoice.loadingCharges;
+    request['Amount'] = invoice.price;
+    request['InvoiceStatus'] = '';
     return this.http.put(url, [request], {
       headers: headers
     });

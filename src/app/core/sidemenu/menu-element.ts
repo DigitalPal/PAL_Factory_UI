@@ -87,7 +87,7 @@ export const menus = [
             },
             {
                 'name': 'Dispatch Entry',
-                'link': '/auth/productionEntry',
+                'link': '/auth/dispatchList',
                 'icon': 'select_all',
                 'chip': false,
                 'open': true,
@@ -160,8 +160,8 @@ export const menus = [
         'chip': null,
         'sub': [
             {
-                'name': 'Generate PO For Supplier',
-                'link': '/auth/dashboard',
+                'name': 'Orders',
+                'link': '/auth/orderList',
                 'icon': 'keyboard_tab',
                 'chip': false,
                 'open': true,

@@ -9,7 +9,9 @@ import { InvoiceService } from '../Services/invoice.service';
   styleUrls: ['./invoiceList.component.scss']
 })
 export class InvoiceListComponent implements OnInit {
-  public displayedColumns = ['name', 'address', 'contact', 'adminUser', 'actions'];
+  public displayedColumns = ['invoiceNumber', 'orderNumber'
+  , 'customerName', 'date', 'disptachNumber', 'transportCharges'
+  , 'loadingCharges', 'unloadingCharges', 'price', 'remark', 'actions'];
   plants: Invoice[] = [];
   model = {
     id: null,
@@ -21,27 +23,45 @@ export class InvoiceListComponent implements OnInit {
     date: '',
     disptachNumber: '',
     disptachId: '',
-    transportCharges: '',
-    loadingCharges: '',
-    unloadingCharges: '',
-    price: '',
+    transportCharges: 0,
+    loadingCharges: 0,
+    unloadingCharges: 0,
+    price: 0,
     remark: '',
   };
   constructor(private modalService: NgbModal, private service: InvoiceService, private spinner: NgxSpinnerService) {}
 
   open(content, row) {
     if (!row) {
-    //   this.model.id = null;
-    //   this.model.name = '';
-    //   this.model.address = '';
-    //   this.model.contact = '';
-    //   this.model.adminUser = null;
+      this.model.id = row.id;
+      this.model.invoiceNumber = row.invoiceNumber;
+      this.model.orderNumber = row.orderNumber;
+      this.model.orderId = row.orderId;
+      this.model.customerId = row.customerId;
+      this.model.customerName = row.customerName;
+      this.model.date = row.date;
+      this.model.disptachNumber = row.disptachNumber;
+      this.model.disptachId = row.disptachId;
+      this.model.transportCharges = row.transportCharges;
+      this.model.loadingCharges = row.loadingCharges;
+      this.model.unloadingCharges = row.unloadingCharges;
+      this.model.price = row.price;
+      this.model.remark = row.remark;
     } else {
-    //   this.model.id = row.id;
-    //   this.model.name = row.name;
-    //   this.model.address = row.address;
-    //   this.model.contact = row.contact;
-    //   this.model.adminUser = row.userId;
+      this.model.id = null;
+      this.model.invoiceNumber = '';
+      this.model.orderNumber = '';
+      this.model.orderId = '';
+      this.model.customerId = '';
+      this.model.customerName = '';
+      this.model.date = '';
+      this.model.disptachNumber = '';
+      this.model.disptachId = '';
+      this.model.transportCharges = 0;
+      this.model.loadingCharges = 0;
+      this.model.unloadingCharges = 0;
+      this.model.price = 0;
+      this.model.remark = '';
     }
     this.modalService.open(content, {
       size: 'lg',
@@ -68,30 +88,17 @@ export class InvoiceListComponent implements OnInit {
   }
 
   saveInvoice() {
-    this.service.addInvoice({
-    //   name: this.model.name,
-    //   address: this.model.address,
-    //   contact: this.model.contact,
-    //   userName: this.model.adminUser,
-    //   userId: this.model.adminUser,
-    }).subscribe(s => this.getInvoices());
+    this.service.addInvoice(this.model).subscribe(s => this.getInvoices());
   }
 
-  deletePlant(row) {
+  deleteInvoice(row) {
     this.spinner.show();
     this.service.deleteInvoice(row).subscribe(s => this.getInvoices());
   }
 
 
   editInvoice() {
-    this.service.editInvoice({
-    //   id: this.model.id,
-    //   name: this.model.name,
-    //   address: this.model.address,
-    //   contact: this.model.contact,
-    //   userName: this.model.adminUser,
-    //   userId: this.model.adminUser,
-    }).subscribe(s => this.getInvoices());
+    this.service.editInvoice(this.model).subscribe(s => this.getInvoices());
   }
 
 
@@ -113,5 +120,9 @@ export class InvoiceListComponent implements OnInit {
       this.plants = localPlants;
       this.spinner.hide();
     });
+  }
+
+  openPayments() {
+    
   }
 }

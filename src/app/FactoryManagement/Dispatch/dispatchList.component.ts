@@ -25,7 +25,7 @@ export class DispatchListComponent implements OnInit {
   }
 
   getDispatch() {
-    this.service.getDispatchs('').subscribe(s => {
+    this.service.getDispatches('').subscribe(s => {
       const localDispatches = [];
       if (s && s.length > 0) {
         s.forEach(element => {

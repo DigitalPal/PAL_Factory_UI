@@ -14,7 +14,7 @@ export class OrderDetailsComponent implements OnInit {
     orderNumber: '',
     customerPONumber: '',
     customerName: '',
-    date: '',
+    date: null,
     price: 0,
     remark: '',
     status: '',
@@ -30,60 +30,83 @@ export class OrderDetailsComponent implements OnInit {
   customerMaster = [];
 
   constructor(private service: OrderService, private spinner: NgxSpinnerService
-    , private route: ActivatedRoute, private customerService: CustomersService, private router: Router) {}
+    , private route: ActivatedRoute, private customerService: CustomersService
+    , private router: Router) {}
 
   ngOnInit() {
-    this.getProducts();
+
     this.getCustomers();
-    // this.spinner.show();
+    this.spinner.show();
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
-        this.service.getOrder('').subscribe(details => {
-          this.model.id = details.id;
-          this.model.orderNumber = details.orderNumber;
-          this.model.customerPONumber = details.customerPONumber;
-          this.model.customerName = details.customerName;
-          this.model.date = details.date;
-          this.model.price = details.price;
-          this.model.remark = details.remark;
-          this.model.status = details.status;
-          this.model.products = [{
-            productId: '1',
-            productName: '250X250X250',
-            quantity: 120
-          }, {
-            productId: '2',
-            productName: '200X200X200',
-            quantity: 100
-          }];
+        this.service.getOrder(fragment).subscribe(details => {
+
+          this.model.id = details.Id;
+          this.model.orderNumber = details.OrderNumber;
+          this.model.customerPONumber = details.CustomerPONumber;
+          this.model.customerName = details.CustomerName.trim();
+          const dateHere = new Date(details.OrderDate);
+          this.model.date = {
+            day: dateHere.getDate(),
+            month: dateHere.getMonth() + 1,
+            year: dateHere.getFullYear()
+          };
+          this.model.price = details.Price;
+          this.model.remark = details.Remark;
+          this.model.status = details.OrderStatus;
+          const products = [];
+          details.Products.forEach(fe => {
+            products.push({
+              productId: fe.ProductId,
+              productName: fe.ProductName,
+              quantity: fe.Quantity
+            });
+          });
+          this.getProducts();
+          this.spinner.hide();
+          this.model.products = products;
           this.model.productId = '';
           this.model.productName = '';
           this.model.quantity = 0;
-          this.model.customerId = details.customerId;
+          this.model.customerId = details.CustomerId;
         });
       } else {
-        this.model.id = null;
-        this.model.orderNumber = '';
-        this.model.customerPONumber = '';
-        this.model.customerName = '';
-        this.model.date = '';
-        this.model.price = 0;
-        this.model.remark = '';
-        this.model.status = '';
-        this.model.products = [];
-        this.model.productId = '';
-        this.model.productName = '';
-        this.model.quantity = 0;
-        this.model.customerId = '';
+        this.service.getMaxNumbers('').subscribe(s => {
+          this.getProducts();
+          this.spinner.hide();
+          const newOrderNo = (+s.OrderNumber.split('-')[2]) + 1;
+
+          const orderNumber = 'ORD-' + new Date().getDate().toString() +
+            (new Date().getMonth() + 1).toString() +
+            new Date().getFullYear().toString() +
+            '-' + newOrderNo;
+
+          this.model.id = null;
+          this.model.orderNumber = orderNumber;
+          this.model.customerPONumber = '';
+          this.model.customerName = '';
+          this.model.date = '';
+          this.model.price = 0;
+          this.model.remark = '';
+          this.model.status = '';
+          this.model.products = [];
+          this.model.productId = '';
+          this.model.productName = '';
+          this.model.quantity = 0;
+          this.model.customerId = '';
+        });
       }
     });
   }
 
-  saveOrder() {
-    // this.service.addOrder({}).subscribe(s => s);
+  saveData() {
+    this.service.addOrder(this.model).subscribe(s => {
+      this.router.navigate(['/auth/orderList']);
+    });
   }
 
   editOrder() {
+    // TODO
     // this.service.editOrder({}).subscribe(s => s);
   }
 
@@ -124,7 +147,7 @@ export class OrderDetailsComponent implements OnInit {
         if (!productHere) {
           localProducts.push({
             id: element.Id,
-            name: element.Size.toString().trim(),
+            name: element.Name.toString().trim(),
           });
         }
       });
@@ -152,7 +175,4 @@ export class OrderDetailsComponent implements OnInit {
     this.router.navigate(['/auth/orderList']);
   }
 
-  saveData() {
-    this.router.navigate(['/auth/orderList']);
-  }
 }

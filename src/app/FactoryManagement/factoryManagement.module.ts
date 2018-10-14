@@ -59,6 +59,7 @@ import { DispatchListComponent } from './Dispatch/dispatchList.component';
 import { DispatchService } from './Services/disptach.service';
 import { InvoiceListComponent } from './Invoice/invoiceList.component';
 import { InvoiceService } from './Services/invoice.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { InvoiceService } from './Services/invoice.service';
     MatChipsModule,
     MatButtonToggleModule,
     NgbModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule
   ],
   providers: [
     PlantsService,

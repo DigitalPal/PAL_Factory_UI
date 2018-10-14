@@ -10,6 +10,7 @@ export interface Dispatch {
     remark: string;
     products: ProductQuantity[];
   }
+  
   export interface ProductQuantity {
       productId: string;
       productName: string;
