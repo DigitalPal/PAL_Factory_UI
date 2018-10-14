@@ -51,6 +51,15 @@ import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/ra
 import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
 import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
 import { ProductionEntryService } from './Services/productionEntry.service';
+import { OrderDetailsComponent } from './Orders/orderDetails.component';
+import { OrderListComponent } from './Orders/orderList.component';
+import { OrderService } from './Services/order.service';
+import { DispatchDetailsComponent } from './Dispatch/dispatchDetails.component';
+import { DispatchListComponent } from './Dispatch/dispatchList.component';
+import { DispatchService } from './Services/disptach.service';
+import { InvoiceListComponent } from './Invoice/invoiceList.component';
+import { InvoiceService } from './Services/invoice.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -65,7 +74,12 @@ import { ProductionEntryService } from './Services/productionEntry.service';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
-    ProductionEntryListComponent
+    ProductionEntryListComponent,
+    OrderDetailsComponent,
+    OrderListComponent,
+    DispatchDetailsComponent,
+    DispatchListComponent,
+    InvoiceListComponent
   ],
 
   imports: [
@@ -93,14 +107,18 @@ import { ProductionEntryService } from './Services/productionEntry.service';
     MatChipsModule,
     MatButtonToggleModule,
     NgbModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule
   ],
   providers: [
     PlantsService,
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
-    ProductionEntryService
+    ProductionEntryService,
+    OrderService,
+    DispatchService,
+    InvoiceService
   ],
   exports: [
     PlantsListComponent,
@@ -112,7 +130,12 @@ import { ProductionEntryService } from './Services/productionEntry.service';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
-    ProductionEntryListComponent
+    ProductionEntryListComponent,
+    OrderDetailsComponent,
+    OrderListComponent,
+    DispatchListComponent,
+    DispatchDetailsComponent,
+    InvoiceListComponent
   ],
 })
 export class FactoryManagementModule {}
