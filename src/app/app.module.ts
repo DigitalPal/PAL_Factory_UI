@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RawMaterialInwardService } from './FactoryManagement/Services/rawMaterialInwardService';
 import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawMaterialConsumptionService';
 import { ProductionEntryService } from './FactoryManagement/Services/productionEntry.service';
-import { AuthGuard } from './login/auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 
 

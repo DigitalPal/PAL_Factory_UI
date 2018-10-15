@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Plant } from '../FactoryManagement/Entities/plant';
-import { PlantsService } from '../FactoryManagement/Services/plants.service';
 import { AuthenticationService } from '../FactoryManagement/Services/authentication.service';
-import { Router } from '@angular/router';
+import { PlantsService } from '../FactoryManagement/Services/plants.service';
 
 @Component({
   selector: 'cdk-login',
@@ -13,14 +13,15 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private service: PlantsService, private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private modalService: NgbModal, private service: PlantsService
+    , private authenticationService: AuthenticationService, private router: Router) {}
   plants: Plant[] = [];
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  Authenticate(userName,password){
-    this.authenticationService.userAuthentication(userName,password).subscribe((data : any)=>{
-      localStorage.setItem('userToken',data.access_token);
+  Authenticate(userName, password) {
+    console.log('here');
+    this.authenticationService.userAuthentication(userName, password).subscribe((data: any) => {
+      localStorage.setItem('userToken', data.access_token);
       this.router.navigate(['/home']);
     });
   }
