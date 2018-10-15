@@ -8,6 +8,9 @@ import {
   PlantsListComponent
 } from './Plants/plants.component';
 import {
+  ProductsListComponent
+} from './Product/products.component';
+import {
   FormsRouterModule
 } from '../forms/forms.router';
 import {
@@ -38,8 +41,8 @@ import {
 } from '@angular/forms';
 import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
 import { CustomerListComponent } from './Customer/customer.component';
-import { PriceListComponent } from './Price/price.component';
-import { SizeListComponent } from './Size/size.component';
+import { PriceDetailListComponent } from './Price/priceDetails.component';
+import { SizeDetailListComponent } from './Size/sizeDetails.component';
 import { SupplierListComponent } from './Supplier/supplier.component';
 import { PlantsService } from './Services/plants.service';
 import { RawMaterialService } from './Services/rawMaterial.service';
@@ -49,6 +52,9 @@ import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
 import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
 import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
+import { SizeDetailsService } from './Services/sizeDetails.service';
+import { PriceDetailsService } from './Services/priceDetails.service';
+import { ProductsService } from './Services/products.service';
 
 
 @NgModule({
@@ -57,12 +63,13 @@ import { RawMaterialConsumptionService } from './Services/rawMaterialConsumption
     PlantsListComponent,
     RawMaterialListComponent,
     CustomerListComponent,
-    PriceListComponent,
-    SizeListComponent,
+    PriceDetailListComponent,
+    SizeDetailListComponent,
     SupplierListComponent,
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+    ProductsListComponent,
   ],
 
   imports: [
@@ -97,17 +104,20 @@ import { RawMaterialConsumptionService } from './Services/rawMaterialConsumption
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
+    SizeDetailsService,
+    ProductsService,
   ],
   exports: [
     PlantsListComponent,
     RawMaterialListComponent,
     CustomerListComponent,
-    PriceListComponent,
-    SizeListComponent,
+    PriceDetailListComponent,
+    SizeDetailListComponent,
     SupplierListComponent,
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+    ProductsListComponent,
   ],
 })
 export class FactoryManagementModule {}

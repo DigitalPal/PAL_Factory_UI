@@ -11,9 +11,12 @@ import { PlantsService } from './FactoryManagement/Services/plants.service';
 import { CustomersService } from './FactoryManagement/Services/customers.service';
 import { SuppliersService } from './FactoryManagement/Services/suppliers.service';
 import { RawMaterialService } from './FactoryManagement/Services/rawMaterial.service';
+import { SizeDetailsService } from './FactoryManagement/Services/sizeDetails.service';
+import { PriceDetailsService } from './FactoryManagement/Services/priceDetails.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RawMaterialInwardService } from './FactoryManagement/Services/rawMaterialInwardService';
 import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawMaterialConsumptionService';
+import { ProductsService } from './FactoryManagement/Services/products.service';
 
 
 
@@ -37,6 +40,9 @@ import { RawMaterialConsumptionService } from './FactoryManagement/Services/rawM
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
+    SizeDetailsService,
+    PriceDetailsService,
+    ProductsService,
   ],
   bootstrap: [AppComponent]
 })
