@@ -3,43 +3,49 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RawMaterialConsumption } from '../Entities/RawMaterialConsumption';
 import { RawMaterialConsumptionService } from '../Services/rawMaterialConsumptionService';
+import { ProductionEntry } from '../Entities/ProductionEntry';
+import { ProductionEntryService } from '../Services/productionEntry.service';
 @Component({
-  selector: 'app-rawmaterial-consumption-list',
-  templateUrl: './rawMaterialConsumption.component.html',
-  styleUrls: ['./rawMaterialConsumption.component.scss']
+  selector: 'app-production-entry-list',
+  templateUrl: './productionEntry.component.html',
+  styleUrls: ['./productionEntry.component.scss']
 })
-export class RawMaterialConsumptionListComponent implements OnInit {
-  public displayedColumns = ['date', 'material', 'quantity', 'remark', 'actions'];
-  rawMaterialConsumptions: RawMaterialConsumption[] = [{
-    date: '02/10/2018',
-    id: null,
-    materialId: null,
-    materialname: 'PONDASH',
-    quantity: 50,
+export class ProductionEntryListComponent implements OnInit {
+  public displayedColumns = ['date', 'product', 'quantity', 'breakage', 'remark', 'actions'];
+  productionEntries: ProductionEntry[] = [{
+      breakage: '0',
+      date: '02/10/2018',
+      id: null,
+      productId: null,
+      productname: '600X250X125 MM',
+      quantity: 500,
     remark: 'NA'
   }];
   model = {
     id: null,
     date: '',
-    material: '',
+    product: '',
     quantity: 0,
+    breakage: '',
     remark: '',
   };
-  constructor(private modalService: NgbModal, private service: RawMaterialConsumptionService, private spinner: NgxSpinnerService) {}
+  constructor(private modalService: NgbModal, private service: ProductionEntryService, private spinner: NgxSpinnerService) {}
 
   open(content, row) {
     console.log(row);
     if (!row) {
       this.model.id = null;
       this.model.date = '';
-      this.model.material = '';
+      this.model.product = '';
       this.model.quantity = 0;
+      this.model.breakage = '';
       this.model.remark = '';
     } else {
       this.model.id = row.id;
       this.model.date = row.date;
-      this.model.material = row.material;
+      this.model.product = row.material;
       this.model.quantity = row.quantity;
+      this.model.breakage = row.breakage;
       this.model.remark = row.remark;
     }
     this.modalService.open(content, {
@@ -49,9 +55,9 @@ export class RawMaterialConsumptionListComponent implements OnInit {
       this.spinner.show();
       if (result === 'SAVE') {
         if (this.model.id) {
-          this.editRawMaterialConsumption();
+          this.editProductionEntry();
         } else {
-          this.saveRawMaterialConsumption();
+          this.saveProductionEntry();
         }
       } else {
         this.spinner.hide();
@@ -63,23 +69,23 @@ export class RawMaterialConsumptionListComponent implements OnInit {
 
   ngOnInit() {
     // this.spinner.show();
-    this.getRawMaterialConsumption();
+    this.getProductionEntry();
   }
 
-  saveRawMaterialConsumption() {
+  saveProductionEntry() {
     // this.service.addRawMaterial({
     //   name: this.model.name,
     //   measurementType: this.model.measurementType,
     // }).subscribe(s => this.getRawMaterial());
   }
 
-  deleteRawMaterialConsumption(row) {
+  deleteProductionEntry(row) {
     // this.spinner.show();
     // this.service.deleteRawMaterial(row).subscribe(s => this.getRawMaterial());
   }
 
 
-  editRawMaterialConsumption() {
+  editProductionEntry() {
     // this.service.editRawMaterial({
     //   id: this.model.id,
     //   name: this.model.name,
@@ -88,7 +94,7 @@ export class RawMaterialConsumptionListComponent implements OnInit {
   }
 
 
-  getRawMaterialConsumption() {
+  getProductionEntry() {
     // this.service.getRawMaterials('').subscribe(s => {
     //   const localRawMaterials = [];
     //   if (s && s.length > 0) {

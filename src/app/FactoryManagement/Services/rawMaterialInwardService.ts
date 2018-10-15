@@ -21,10 +21,23 @@ export class RawMaterialInwardService {
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    const request = {};
-    // request['Title'] = rawMaterial.name;
-    // request['MeasureType'] = rawMaterial.measurementType;
-    return this.http.post(url, [request], { headers: headers });
+    const request = [];
+    const rawMaterialInwardJson = {};
+    rawMaterialInwardJson['InwardDate'] = rawMaterialInward.InwardDate.month 
+                          + '-' + rawMaterialInward.InwardDate.day 
+                          + '-' + rawMaterialInward.InwardDate.year;
+    
+    rawMaterialInwardJson['RawMaterialId'] = rawMaterialInward.RawMaterialId;
+    rawMaterialInwardJson['SupplierId'] = rawMaterialInward.SupplierId;
+    rawMaterialInwardJson['VechicalNumber'] = rawMaterialInward.VechicalNumber;
+    rawMaterialInwardJson['ChallanNumber'] = rawMaterialInward.ChallanNumber;
+    rawMaterialInwardJson['Quantity'] = rawMaterialInward.Quantity;
+    rawMaterialInwardJson['UnloadingDetails'] = rawMaterialInward.UnloadingDetails;
+    rawMaterialInwardJson['Remarks'] = rawMaterialInward.Remarks;
+    request.push(rawMaterialInwardJson);
+    return this.http.post(url, [rawMaterialInwardJson], {
+       headers: headers 
+    });
   }
 
   editRawMaterialInward(rawMaterialInward: RawMaterialInward): Observable<any> {
@@ -36,7 +49,9 @@ export class RawMaterialInwardService {
      request['Id'] = rawMaterialInward.id;
     // request['Title'] = rawMaterial.name;
     // request['MeasureType'] = rawMaterial.measurementType;
-    return this.http.put(url, [request], { headers: headers });
+    return this.http.put(url, [request], { 
+      headers: headers 
+    });
   }
 
 

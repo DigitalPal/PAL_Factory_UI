@@ -5,29 +5,34 @@
 
   <div fxFlex class="table-component-holder mat-elevation-z4">
     <mat-toolbar class="table-header">
-      <h1 class="mat-headline center-align">Raw Material Consumption</h1>
+      <h1 class="mat-headline center-align">Production Entry</h1>
       <button style="margin-left: auto;" class="btn btn-primary float-right" (click)="open(content, null)">New
-        Consumption Entry</button>
+        Production Entry</button>
     </mat-toolbar>
     <div class="table-container">
-      <mat-table #table [dataSource]="rawMaterialConsumptions">
+      <mat-table #table [dataSource]="productionEntries">
 
         <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
+                  The actual rendered columns are set as a property on the row definition" -->
 
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="material">
-          <mat-header-cell *matHeaderCellDef> Material </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.materialname}} </mat-cell>
+        <ng-container matColumnDef="product">
+          <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.productname}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
           <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="breakage">
+          <mat-header-cell *matHeaderCellDef> Breakage </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.breakage}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="remark">
@@ -39,7 +44,7 @@
           <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <button style="margin-left:5px;" type="button" (click)="open(content, row)" class="btn btn-info btn-sm">Edit</button>
-            <button style="margin-left:5px;" type="button" (click)="deleteRawMaterialInward(row)" class="btn btn-info btn-sm">Delete</button>
+            <button style="margin-left:5px;" type="button" (click)="deleteProductionEntry(row)" class="btn btn-info btn-sm">Delete</button>
           </mat-cell>
         </ng-container>
 
@@ -74,7 +79,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="txtmaterial" class="col-sm-2 col-form-label">Material</label>
+        <label for="txtmaterial" class="col-sm-2 col-form-label">Product</label>
         <div class="col-sm-10">
           <div class="md-form mt-0">
             <select class="form-control" [(ngModel)]="model.material" #adminUser="ngModel" name="material">
@@ -90,6 +95,16 @@
         <div class="col-sm-10">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.quantity" #name="ngModel" name="quantity" class="form-control" id="txtquantity"
+              placeholder="Quantity">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="txtbreakage" class="col-sm-2 col-form-label">Breakage</label>
+        <div class="col-sm-10">
+          <div class="md-form mt-0">
+            <input type="text" [(ngModel)]="model.breakage" #name="ngModel" name="breakage" class="form-control" id="txtbreakage"
               placeholder="Quantity">
           </div>
         </div>

@@ -52,9 +52,23 @@ import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
 import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
 import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
+
 import { SizeDetailsService } from './Services/sizeDetails.service';
 import { PriceDetailsService } from './Services/priceDetails.service';
 import { ProductsService } from './Services/products.service';
+
+import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
+import { ProductionEntryService } from './Services/productionEntry.service';
+import { OrderDetailsComponent } from './Orders/orderDetails.component';
+import { OrderListComponent } from './Orders/orderList.component';
+import { OrderService } from './Services/order.service';
+import { DispatchDetailsComponent } from './Dispatch/dispatchDetails.component';
+import { DispatchListComponent } from './Dispatch/dispatchList.component';
+import { DispatchService } from './Services/disptach.service';
+import { InvoiceListComponent } from './Invoice/invoiceList.component';
+import { InvoiceService } from './Services/invoice.service';
+import { RouterModule } from '@angular/router';
+
 
 
 @NgModule({
@@ -69,7 +83,16 @@ import { ProductsService } from './Services/products.service';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+
     ProductsListComponent,
+
+    ProductionEntryListComponent,
+    OrderDetailsComponent,
+    OrderListComponent,
+    DispatchDetailsComponent,
+    DispatchListComponent,
+    InvoiceListComponent
+
   ],
 
   imports: [
@@ -97,15 +120,23 @@ import { ProductsService } from './Services/products.service';
     MatChipsModule,
     MatButtonToggleModule,
     NgbModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RouterModule
   ],
   providers: [
     PlantsService,
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
+
     SizeDetailsService,
     ProductsService,
+
+    ProductionEntryService,
+    OrderService,
+    DispatchService,
+    InvoiceService
+
   ],
   exports: [
     PlantsListComponent,
@@ -117,7 +148,16 @@ import { ProductsService } from './Services/products.service';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
+
     ProductsListComponent,
+
+    ProductionEntryListComponent,
+    OrderDetailsComponent,
+    OrderListComponent,
+    DispatchListComponent,
+    DispatchDetailsComponent,
+    InvoiceListComponent
+
   ],
 })
 export class FactoryManagementModule {}
