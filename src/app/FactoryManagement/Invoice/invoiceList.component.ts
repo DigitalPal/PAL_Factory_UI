@@ -5,6 +5,7 @@ import { Invoice } from '../Entities/Invoice';
 import { DispatchService } from '../Services/disptach.service';
 import { InvoiceService } from '../Services/invoice.service';
 import { OrderService } from '../Services/order.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoiceList.component.html',
@@ -35,7 +36,7 @@ export class InvoiceListComponent implements OnInit {
   dispatchMaster = [];
   dispatchMasterOriginal = [];
 
-  constructor(private modalService: NgbModal, private service: InvoiceService
+  constructor(private modalService: NgbModal, private service: InvoiceService, private router: Router
     , private spinner: NgxSpinnerService, private orderService: OrderService, private disptachService: DispatchService) {}
 
   open(content, row) {
@@ -207,7 +208,7 @@ export class InvoiceListComponent implements OnInit {
     this.filterDispatches();
   }
 
-  openPayments() {
-
+  openPayments(row) {
+    this.router.navigate(['/auth/paymentList'], {fragment: row.id});
   }
 }

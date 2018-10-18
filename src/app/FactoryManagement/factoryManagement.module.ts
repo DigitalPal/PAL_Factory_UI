@@ -1,75 +1,42 @@
-import {
-  CommonModule
-} from '@angular/common';
-import {
-  NgModule
-} from '@angular/core';
-import {
-  PlantsListComponent
-} from './Plants/plants.component';
-import {
-  ProductsListComponent
-} from './Product/products.component';
-import {
-  FormsRouterModule
-} from '../forms/forms.router';
-import {
-  FlexLayoutModule
-} from '@angular/flex-layout';
-import { NgbActiveModal, NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  MatButtonModule,
-  MatToolbarModule,
-  MatCardModule,
-  MatTabsModule,
-  MatIconModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatExpansionModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatCheckboxModule,
-  MatTooltipModule,
-  MatChipsModule,
-  MatButtonToggleModule,
-} from '@angular/material';
-import {
-  FormsModule
-} from '@angular/forms';
-import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
-import { CustomerListComponent } from './Customer/customer.component';
-import { PriceDetailListComponent } from './Price/priceDetails.component';
-import { SizeDetailListComponent } from './Size/sizeDetails.component';
-import { SupplierListComponent } from './Supplier/supplier.component';
-import { PlantsService } from './Services/plants.service';
-import { RawMaterialService } from './Services/rawMaterial.service';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule
+  , MatChipsModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatIconModule
+  , MatInputModule, MatNativeDateModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTabsModule
+  , MatToolbarModule, MatTooltipModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
-import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
-import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
-import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
-
-import { SizeDetailsService } from './Services/sizeDetails.service';
-import { PriceDetailsService } from './Services/priceDetails.service';
-import { ProductsService } from './Services/products.service';
-
-import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
-import { ProductionEntryService } from './Services/productionEntry.service';
-import { OrderDetailsComponent } from './Orders/orderDetails.component';
-import { OrderListComponent } from './Orders/orderList.component';
-import { OrderService } from './Services/order.service';
+import { CustomerListComponent } from './Customer/customer.component';
 import { DispatchDetailsComponent } from './Dispatch/dispatchDetails.component';
 import { DispatchListComponent } from './Dispatch/dispatchList.component';
-import { DispatchService } from './Services/disptach.service';
 import { InvoiceListComponent } from './Invoice/invoiceList.component';
+import { OrderDetailsComponent } from './Orders/orderDetails.component';
+import { OrderListComponent } from './Orders/orderList.component';
+import { PaymentListComponent } from './Payments/paymentList.component';
+import { PlantsListComponent } from './Plants/plants.component';
+import { PriceDetailListComponent } from './Price/priceDetails.component';
+import { ProductsListComponent } from './Product/products.component';
+import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
+import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
+import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
+import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
+import { DispatchService } from './Services/disptach.service';
 import { InvoiceService } from './Services/invoice.service';
-import { RouterModule } from '@angular/router';
-
-
+import { OrderService } from './Services/order.service';
+import { PlantsService } from './Services/plants.service';
+import { ProductionEntryService } from './Services/productionEntry.service';
+import { ProductsService } from './Services/products.service';
+import { RawMaterialService } from './Services/rawMaterial.service';
+import { RawMaterialConsumptionService } from './Services/rawMaterialConsumptionService';
+import { RawMaterialInwardService } from './Services/rawMaterialInwardService';
+import { SizeDetailsService } from './Services/sizeDetails.service';
+import { SizeDetailListComponent } from './Size/sizeDetails.component';
+import { SupplierListComponent } from './Supplier/supplier.component';
+import { PaymentsService } from './Services/payments.service';
 
 @NgModule({
 
@@ -83,16 +50,14 @@ import { RouterModule } from '@angular/router';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
-
     ProductsListComponent,
-
     ProductionEntryListComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchDetailsComponent,
     DispatchListComponent,
-    InvoiceListComponent
-
+    InvoiceListComponent,
+    PaymentListComponent
   ],
 
   imports: [
@@ -128,15 +93,13 @@ import { RouterModule } from '@angular/router';
     RawMaterialService,
     RawMaterialInwardService,
     RawMaterialConsumptionService,
-
     SizeDetailsService,
     ProductsService,
-
     ProductionEntryService,
     OrderService,
     DispatchService,
-    InvoiceService
-
+    InvoiceService,
+    PaymentsService
   ],
   exports: [
     PlantsListComponent,
@@ -148,16 +111,14 @@ import { RouterModule } from '@angular/router';
     RawMaterialListComponent,
     RawMaterialInwardListComponent,
     RawMaterialConsumptionListComponent,
-
     ProductsListComponent,
-
     ProductionEntryListComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchListComponent,
     DispatchDetailsComponent,
-    InvoiceListComponent
-
+    InvoiceListComponent,
+    PaymentListComponent
   ],
 })
 export class FactoryManagementModule {}

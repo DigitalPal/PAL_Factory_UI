@@ -22,7 +22,7 @@ export class PaymentsService {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     const request = {};
-    request['PaymentDate'] = payment.date;
+    request['PaymentDate'] = payment.date.month + '-' + payment.date.day + '-' + payment.date.year;
     request['InvoiceNumber'] = payment.invoiceNumber;
     request['InvoiceId'] = payment.invoiceId;
     request['OrderNumber'] = payment.orderNumber;
@@ -42,7 +42,7 @@ export class PaymentsService {
     };
     const request = {};
     request['Id'] = payment.id;
-    request['PaymentDate'] = payment.date;
+    request['PaymentDate'] = payment.date.month + '-' + payment.date.day + '-' + payment.date.year;
     request['InvoiceNumber'] = payment.invoiceNumber;
     request['InvoiceId'] = payment.invoiceId;
     request['OrderNumber'] = payment.orderNumber;
