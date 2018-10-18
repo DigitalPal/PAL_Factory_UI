@@ -34,7 +34,7 @@
             <label for="txtcustomerName" class="col-sm-6 col-form-label">Customer Name</label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
-                <select class="form-control" [(ngModel)]="model.customerId" #adminUser="ngModel" name="customerId">
+                <select class="form-control" [(ngModel)]="model.customerId" #customerId="ngModel" name="customerId">
                   <option value="" disabled [selected]="model.customerId === ''">Choose your option</option>
                   <option *ngFor="let customer of customerMaster" [selected]="model.customerId === customer.id" [value]="customer.id">{{customer.name}}</option>
                 </select>

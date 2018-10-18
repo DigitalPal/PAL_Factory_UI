@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DispatchService } from '../Services/disptach.service';
+import { OrderService } from '../Services/order.service';
 @Component({
   selector: 'app-dispatch-details',
   templateUrl: './dispatchDetails.component.html',
@@ -13,7 +14,7 @@ export class DispatchDetailsComponent implements OnInit {
     dispatchNumber: '',
     orderNumber: '',
     orderId: '',
-    date: '',
+    date: null,
     remark: '',
     loading: '',
     unloading: '',
@@ -25,67 +26,84 @@ export class DispatchDetailsComponent implements OnInit {
   };
 
   productMaster = [];
+  orderMaster = [];
   productMasterOriginal = [];
 
-  constructor(private service: DispatchService, private spinner: NgxSpinnerService
-    , private route: ActivatedRoute, private router: Router) {}
+  constructor(private service: DispatchService, private spinner: NgxSpinnerService,
+    private route: ActivatedRoute, private router: Router, private orderService: OrderService) {}
 
   ngOnInit() {
-    this.getProducts();
-    // this.spinner.show();
+    this.spinner.show();
+    this.getOrders();
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
-        this.service.getDispatch('').subscribe(details => {
-          this.model.id = details.id;
-          this.model.orderNumber = details.orderNumber;
-          this.model.dispatchNumber = details.dispatchNumber;
-          this.model.orderId = details.orderId;
-          this.model.date = details.date;
-          this.model.loading = details.loading;
-          this.model.unloading = details.unloading;
-          this.model.transportName = details.transportName;
-          this.model.remark = details.remark;
-          this.model.products = [{
-            productId: '1',
-            productName: '250X250X250',
-            quantity: 120
-          }, {
-            productId: '2',
-            productName: '200X200X200',
-            quantity: 100
-          }];
+        this.service.getDispatch(fragment).subscribe(details => {
+          this.model.id = details.Id;
+          this.model.orderNumber = details.OrderNumber;
+          this.model.dispatchNumber = details.DispatchNumber;
+          this.model.orderId = details.OrderId;
+          const dateHere = new Date(details.DispatchDate);
+          this.model.date = {
+            day: dateHere.getDate(),
+            month: dateHere.getMonth() + 1,
+            year: dateHere.getFullYear()
+          };
+          this.model.loading = details.Loading;
+          this.model.unloading = details.Unloading;
+          this.model.transportName = details.TransportName;
+          this.model.remark = details.Remark;
+          const products = [];
+          details.DispatchDetails.forEach(fe => {
+            products.push({
+              productId: fe.ProductId,
+              productName: fe.ProductName,
+              quantity: fe.Quantity
+            });
+          });
+          this.getProducts();
+          this.spinner.hide();
+          this.model.products = products;
           this.model.productId = '';
           this.model.productName = '';
           this.model.quantity = 0;
         });
       } else {
-        this.model.id = '';
-        this.model.orderNumber = '';
-        this.model.dispatchNumber = '';
-        this.model.orderId = '';
-        this.model.date = '';
-        this.model.loading = '';
-        this.model.unloading = '';
-        this.model.transportName = '';
-        this.model.remark = '';
-        this.model.productId = '';
-        this.model.productName = '';
-        this.model.quantity = 0;
-        this.model.products = [{
-            productId: '1',
-            productName: '250X250X250',
-            quantity: 120
-          }, {
-            productId: '2',
-            productName: '200X200X200',
-            quantity: 100
-          }];
+
+        this.orderService.getMaxNumbers('').subscribe(s => {
+          this.getProducts();
+          this.spinner.hide();
+          let newDispatchNo = 1;
+          if (s.DispatchNumber) {
+            newDispatchNo = (+s.DispatchNumber.split('-')[2]) + 1;
+          }
+          const dispatchNumber = 'DPT-' + new Date().getDate().toString() +
+          (new Date().getMonth() + 1).toString() +
+          new Date().getFullYear().toString() +
+          '-' + newDispatchNo;
+
+          this.model.id = null;
+          this.model.orderNumber = '';
+          this.model.dispatchNumber = dispatchNumber;
+          this.model.orderId = '';
+          this.model.date = null;
+          this.model.loading = '';
+          this.model.unloading = '';
+          this.model.transportName = '';
+          this.model.remark = '';
+          this.model.productId = '';
+          this.model.productName = '';
+          this.model.quantity = 0;
+          this.model.products = [];
+        });
       }
     });
   }
 
-  saveDispatch() {
-    // this.service.addOrder({}).subscribe(s => s);
+  saveData() {
+    console.log(this.model);
+    this.service.addDispatch(this.model).subscribe(s => {
+      this.router.navigate(['/auth/dispatchList']);
+    });
   }
 
   editDispatch() {
@@ -114,9 +132,23 @@ export class DispatchDetailsComponent implements OnInit {
   }
 
   getProducts() {
-    this.service.getProducts('').subscribe(s => {
+    this.orderService.getProducts('').subscribe(s => {
       this.productMasterOriginal = s;
       this.filterProductMaster();
+      this.spinner.hide();
+    });
+  }
+
+  getOrders() {
+    this.orderService.getOrders('').subscribe(element => {
+      const localOrders = [];
+      element.forEach(fe => {
+        localOrders.push({
+          orderId: fe.Id,
+          orderNumber: fe.OrderNumber.toString().trim(),
+        });
+      });
+      this.orderMaster = localOrders;
       this.spinner.hide();
     });
   }
@@ -129,7 +161,7 @@ export class DispatchDetailsComponent implements OnInit {
         if (!productHere) {
           localProducts.push({
             id: element.Id,
-            name: element.Size.toString().trim(),
+            name: element.Name.toString().trim(),
           });
         }
       });
@@ -138,10 +170,6 @@ export class DispatchDetailsComponent implements OnInit {
   }
 
   backToListView() {
-    this.router.navigate(['/auth/dispatchList']);
-  }
-
-  saveData() {
     this.router.navigate(['/auth/dispatchList']);
   }
 }
