@@ -74,7 +74,10 @@ export class OrderDetailsComponent implements OnInit {
         this.service.getMaxNumbers('').subscribe(s => {
           this.getProducts();
           this.spinner.hide();
-          const newOrderNo = (+s.OrderNumber.split('-')[2]) + 1;
+          let newOrderNo = 1;
+          if (s.OrderNumber) {
+            newOrderNo = (+s.OrderNumber.split('-')[2]) + 1;
+          }
 
           const orderNumber = 'ORD-' + new Date().getDate().toString() +
             (new Date().getMonth() + 1).toString() +
@@ -85,7 +88,7 @@ export class OrderDetailsComponent implements OnInit {
           this.model.orderNumber = orderNumber;
           this.model.customerPONumber = '';
           this.model.customerName = '';
-          this.model.date = '';
+          this.model.date = null;
           this.model.price = 0;
           this.model.remark = '';
           this.model.status = '';

@@ -5,9 +5,9 @@ export interface Invoice {
     orderId: string;
     customerId: string;
     customerName: string;
-    date: string;
-    disptachNumber: string;
-    disptachId: string;
+    date: any;
+    dispatchNumber: string;
+    dispatchId: string;
     transportCharges: number;
     loadingCharges: number;
     unloadingCharges: number;

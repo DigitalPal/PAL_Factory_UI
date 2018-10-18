@@ -49,7 +49,7 @@ export class OrderListComponent implements OnInit {
   }
 
   invoiceClicked(row) {
-    this.router.navigate(['/auth/orderDetails'], {fragment: row.id});
+    this.router.navigate(['/auth/invoiceList'], {fragment: row.id});
   }
 
 }

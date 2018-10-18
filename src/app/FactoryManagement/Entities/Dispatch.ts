@@ -1,6 +1,6 @@
 export interface Dispatch {
     id?: string;
-    date: string;
+    date: any;
     orderNumber: string;
     orderId: string;
     dispatchNumber: string;
@@ -10,7 +10,7 @@ export interface Dispatch {
     remark: string;
     products: ProductQuantity[];
   }
-  
+
   export interface ProductQuantity {
       productId: string;
       productName: string;

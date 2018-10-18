@@ -29,19 +29,19 @@
           <mat-cell *matCellDef="let row"> {{row.contact}} </mat-cell>
         </ng-container> -->
 
-        <ng-container matColumnDef="customerName">
+        <!-- <ng-container matColumnDef="customerName">
           <mat-header-cell *matHeaderCellDef> Customer Name </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.customerName}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.date | date:'MM/dd/yyyy'}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="disptachNumber">
-          <mat-header-cell *matHeaderCellDef> Disptach Number </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.disptachNumber}} </mat-cell>
+        <ng-container matColumnDef="dispatchNumber">
+          <mat-header-cell *matHeaderCellDef> Dispatch Number </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.dispatchNumber}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="transportCharges">
@@ -100,10 +100,10 @@
     <form>
       <div class="form-group row">
         <!-- Material input -->
-        <label for="txtinvoiceNumber" class="col-sm-2 col-form-label">Invoice Number</label>
-        <div class="col-sm-10">
+        <label for="txtinvoiceNumber" class="col-sm-3 col-form-label">Invoice Number</label>
+        <div class="col-sm-6">
           <div class="md-form mt-0">
-            <input type="text" [(ngModel)]="model.invoiceNumber" #name="ngModel" name="invoiceNumber" class="form-control"
+            <input disabled type="text" [(ngModel)]="model.invoiceNumber" #name="ngModel" name="invoiceNumber" class="form-control"
               id="txtinvoiceNumber" placeholder="Invoice Number">
           </div>
         </div>
@@ -111,12 +111,12 @@
 
       <div class="form-group row">
         <!-- Material input -->
-        <label for="orderId" class="col-sm-2 col-form-label">Order Number</label>
-        <div class="col-sm-10">
+        <label for="orderId" class="col-sm-3 col-form-label">Order Number</label>
+        <div class="col-sm-6">
           <div class="md-form mt-0">
-            <select class="form-control" [(ngModel)]="model.orderId" #adminUser="ngModel" name="orderId">
+            <select (change)="orderSelectionChange()"  class="form-control" [(ngModel)]="model.orderId" #orderId="ngModel" name="orderId">
               <option value="" disabled [selected]="model.orderId === ''">Choose your option</option>
-              <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.id" [value]="order.id">{{order.orderNumber}}</option>
+              <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.orderId" [value]="order.orderId">{{order.orderNumber}}</option>
             </select>
           </div>
         </div>
@@ -124,19 +124,19 @@
 
       <div class="form-group row">
         <!-- Material input -->
-        <label for="disptachId" class="col-sm-2 col-form-label">Dispatch Number</label>
-        <div class="col-sm-10">
+        <label for="dispatchId" class="col-sm-3 col-form-label">Dispatch Number</label>
+        <div class="col-sm-6">
           <div class="md-form mt-0">
-            <select class="form-control" [(ngModel)]="model.disptachId" #adminUser="ngModel" name="disptachId">
-              <option value="" disabled [selected]="model.disptachId === ''">Choose your option</option>
-              <option *ngFor="let disptach of dispatchMaster" [selected]="model.disptachId === disptach.id" [value]="disptach.id">{{disptach.dispatchNumber}}</option>
+            <select class="form-control" [(ngModel)]="model.dispatchId" #dispatchId="ngModel" name="dispatchId">
+              <option value="" disabled [selected]="model.dispatchId === ''">Choose your option</option>
+              <option *ngFor="let dispatch of dispatchMaster" [selected]="model.dispatchId === dispatch.dispatchId" [value]="dispatch.dispatchId">{{dispatch.dispatchNumber}}</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="txtdate" class="col-sm-6 col-form-label">Date</label>
+        <label for="txtdate" class="col-sm-3 col-form-label">Date</label>
         <div class="col-sm-6">
           <div class="md-form form-sm">
             <input type="text" (click)="d.toggle()" [(ngModel)]="model.date" #name="ngModel" name="date" class="form-control"
@@ -146,7 +146,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="txttransportCharges" class="col-sm-6 col-form-label">Transport Charges</label>
+        <label for="txttransportCharges" class="col-sm-3 col-form-label">Transport Charges</label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.transportCharges" #name="ngModel" name="transportCharges" class="form-control"
@@ -155,7 +155,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="txtloadingCharges" class="col-sm-6 col-form-label">Loading Charges</label>
+        <label for="txtloadingCharges" class="col-sm-3 col-form-label">Loading Charges</label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.loadingCharges" #name="ngModel" name="loadingCharges" class="form-control"
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="txtunloadingCharges" class="col-sm-6 col-form-label">Unloading Charges</label>
+        <label for="txtunloadingCharges" class="col-sm-3 col-form-label">Unloading Charges</label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.unloadingCharges" #name="ngModel" name="unloadingCharges" class="form-control"
@@ -173,7 +173,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="txtprice" class="col-sm-6 col-form-label">Price</label>
+        <label for="txtprice" class="col-sm-3 col-form-label">Price</label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.price" #name="ngModel" name="price" class="form-control" id="txtprice"
@@ -182,7 +182,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="txtremark" class="col-sm-6 col-form-label">Remark</label>
+        <label for="txtremark" class="col-sm-3 col-form-label">Remark</label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
             <input type="text" [(ngModel)]="model.remark" #name="ngModel" name="remark" class="form-control" id="txtremark"
