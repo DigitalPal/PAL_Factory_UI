@@ -54,6 +54,13 @@ export const menus = [
                 'icon': 'list',
                 'chip': false,
                 'open': true,
+            },
+            {
+                'name': 'Manage Products',
+                'link': '/auth/products',
+                'icon': 'list',
+                'chip': false,
+                'open': true,
             }
         ]
     },
