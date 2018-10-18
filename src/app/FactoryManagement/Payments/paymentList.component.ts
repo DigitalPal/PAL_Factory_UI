@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Payments } from '../Entities/Payments';
+import { InvoiceService } from '../Services/invoice.service';
+import { OrderService } from '../Services/order.service';
 import { PaymentsService } from '../Services/payments.service';
 @Component({
   selector: 'app-payment-list',
@@ -9,12 +11,11 @@ import { PaymentsService } from '../Services/payments.service';
   styleUrls: ['./paymentList.component.scss']
 })
 export class PaymentListComponent implements OnInit {
-  public displayedColumns = ['invoiceNumber', 'orderNumber'
-  , 'customerName', 'date', 'amount', 'remark', 'actions'];
+  public displayedColumns = ['invoiceNumber', 'orderNumber', 'customerName', 'date', 'amount', 'remark', 'actions'];
   payments: Payments[] = [];
   model = {
     id: null,
-    date: '',
+    date: null,
     orderNumber: '',
     orderId: '',
     customerId: '',
@@ -24,10 +25,15 @@ export class PaymentListComponent implements OnInit {
     amount: 0,
     remark: '',
   };
-  constructor(private modalService: NgbModal, private service: PaymentsService, private spinner: NgxSpinnerService) {}
+  constructor(private modalService: NgbModal, private invoiceService: InvoiceService
+    , private orderService: OrderService, private service: PaymentsService, private spinner: NgxSpinnerService) {}
+
+  orderMaster = [];
+  invoiceMaster = [];
+  invoiceMasterOriginal = [];
 
   open(content, row) {
-    if (!row) {
+    if (row) {
       this.model.id = row.id;
       this.model.invoiceNumber = row.invoiceNumber;
       this.model.invoiceId = row.invoiceId;
@@ -35,7 +41,12 @@ export class PaymentListComponent implements OnInit {
       this.model.orderId = row.orderId;
       this.model.customerId = row.customerId;
       this.model.customerName = row.customerName;
-      this.model.date = row.date;
+      const dateHere = new Date(row.date);
+      this.model.date = {
+        day: dateHere.getDate(),
+        month: dateHere.getMonth() + 1,
+        year: dateHere.getFullYear()
+      };
       this.model.amount = row.amount;
       this.model.remark = row.remark;
     } else {
@@ -46,7 +57,7 @@ export class PaymentListComponent implements OnInit {
       this.model.orderId = '';
       this.model.customerId = '';
       this.model.customerName = '';
-      this.model.date = '';
+      this.model.date = null;
       this.model.amount = 0;
       this.model.remark = '';
     }
@@ -72,6 +83,8 @@ export class PaymentListComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.getPayments();
+    this.getOrders();
+    this.getInvoices();
   }
 
   savePayment() {
@@ -111,5 +124,54 @@ export class PaymentListComponent implements OnInit {
       this.payments = localPayments;
       this.spinner.hide();
     });
+  }
+
+
+  getInvoices() {
+    this.invoiceService.getInvoices('').subscribe(element => {
+      const localInvoices = [];
+      element.forEach(fe => {
+        localInvoices.push({
+          invoiceId: fe.Id,
+          invoiceNumber: fe.DispatchNumber.toString().trim(),
+          orderId: fe.OrderId,
+        });
+      });
+      this.invoiceMasterOriginal = localInvoices;
+      this.spinner.hide();
+    });
+  }
+
+  getOrders() {
+    this.orderService.getOrders('').subscribe(element => {
+      const localOrders = [];
+      element.forEach(fe => {
+        localOrders.push({
+          orderId: fe.Id,
+          orderNumber: fe.OrderNumber.toString().trim(),
+        });
+      });
+      this.orderMaster = localOrders;
+      this.spinner.hide();
+    });
+  }
+
+  filterInvoices() {
+    const localInvoices = [];
+    this.invoiceMasterOriginal.forEach(fe => {
+
+      if (fe.orderId === this.model.orderId) {
+        localInvoices.push({
+          invoiceId: fe.invoiceId,
+          invoiceNumber: fe.invoiceNumber.toString().trim(),
+        });
+      }
+
+    });
+    this.invoiceMaster = localInvoices;
+  }
+
+  orderSelectionChange() {
+    this.filterInvoices();
   }
 }

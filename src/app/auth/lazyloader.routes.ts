@@ -20,6 +20,7 @@ import { OrderDetailsComponent } from '../FactoryManagement/Orders/orderDetails.
 import { DispatchListComponent } from '../FactoryManagement/Dispatch/dispatchList.component';
 import { DispatchDetailsComponent } from '../FactoryManagement/Dispatch/dispatchDetails.component';
 import { InvoiceListComponent } from '../FactoryManagement/Invoice/invoiceList.component';
+import { PaymentListComponent } from '../FactoryManagement/Payments/paymentList.component';
 
 
 export const appRoutes: Routes = [{
@@ -39,6 +40,7 @@ export const appRoutes: Routes = [{
         { path: 'dispatchList', component:  DispatchListComponent},
         { path: 'dispatchDetails', component:  DispatchDetailsComponent},
         { path: 'invoiceList', component:  InvoiceListComponent},
+        { path: 'paymentList', component:  PaymentListComponent},
         { path: 'material-widgets', loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule' },
         { path: 'tables', loadChildren: '../tables/tables.module#TablesModule' },
         { path: 'maps', loadChildren: '../maps/maps.module#MapsModule' },

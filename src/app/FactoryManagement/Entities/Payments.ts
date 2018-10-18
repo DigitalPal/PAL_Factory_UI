@@ -1,6 +1,6 @@
 export interface Payments {
     id?: string;
-    date: string;
+    date: any;
     orderNumber: string;
     orderId: string;
     invoiceNumber: string;
