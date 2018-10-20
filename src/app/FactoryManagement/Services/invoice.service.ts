@@ -7,6 +7,18 @@ import { Invoice } from '../Entities/Invoice';
 @Injectable()
 export class InvoiceService {
   constructor(private http: HttpClient) {}
+
+  getInvoice(invoiceId): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Invoice';
+    const request = null;
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.get(url + '/' + invoiceId, {
+      headers: headers
+    });
+  }
+
   getInvoices(logedInUser): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Invoice';
     const request = null;

@@ -37,6 +37,8 @@ import { SizeDetailsService } from './Services/sizeDetails.service';
 import { SizeDetailListComponent } from './Size/sizeDetails.component';
 import { SupplierListComponent } from './Supplier/supplier.component';
 import { PaymentsService } from './Services/payments.service';
+import { InvoicePrintComponent } from './Invoice/printInvoice.component';
+import { AmountCalculatorService } from './Services/amountCalculator.service';
 
 @NgModule({
 
@@ -57,7 +59,8 @@ import { PaymentsService } from './Services/payments.service';
     DispatchDetailsComponent,
     DispatchListComponent,
     InvoiceListComponent,
-    PaymentListComponent
+    PaymentListComponent,
+    InvoicePrintComponent
   ],
 
   imports: [
@@ -99,7 +102,8 @@ import { PaymentsService } from './Services/payments.service';
     OrderService,
     DispatchService,
     InvoiceService,
-    PaymentsService
+    PaymentsService,
+    AmountCalculatorService
   ],
   exports: [
     PlantsListComponent,
@@ -118,7 +122,8 @@ import { PaymentsService } from './Services/payments.service';
     DispatchListComponent,
     DispatchDetailsComponent,
     InvoiceListComponent,
-    PaymentListComponent
+    PaymentListComponent,
+    InvoicePrintComponent
   ],
 })
 export class FactoryManagementModule {}

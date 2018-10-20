@@ -31,7 +31,7 @@
           </div>
 
           <div class="form-group row">
-            <label for="txtcustomerName" class="col-sm-6 col-form-label">Customer Name</label>
+            <label for="txtcustomerName" class="col-sm-6 col-form-label">Customer Name<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
                 <select class="form-control" [(ngModel)]="model.customerId" #customerId="ngModel" name="customerId">
@@ -44,7 +44,7 @@
 
 
           <div class="form-group row">
-            <label for="txtdate" class="col-sm-6 col-form-label">Date</label>
+            <label for="txtdate" class="col-sm-6 col-form-label">Date<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form form-sm">
                 <input type="text" (click)="d.toggle()" [(ngModel)]="model.date" #name="ngModel" name="date" class="form-control"
@@ -55,7 +55,7 @@
 
 
           <div class="form-group row">
-            <label for="txtprice" class="col-sm-6 col-form-label">Price</label>
+            <label for="txtprice" class="col-sm-6 col-form-label">Rate per Meter cube<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
                 <input type="text" [(ngModel)]="model.price" #name="ngModel" name="price" class="form-control" id="txtprice"
@@ -80,8 +80,8 @@
             </div>
             <table class="product-table">
               <tr>
-                <th>Product</th>
-                <th>Quantity</th>
+                <th>Product<span style="color:red">*</span></th>
+                <th>Quantity<span style="color:red">*</span></th>
                 <th>Action</th>
               </tr>
               <tr *ngFor="let row of model.products">

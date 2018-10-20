@@ -23,6 +23,7 @@ import { ProductionEntryService } from './FactoryManagement/Services/productionE
 import { OrderService } from './FactoryManagement/Services/order.service';
 import { DispatchService } from './FactoryManagement/Services/disptach.service';
 import { InvoiceService } from './FactoryManagement/Services/invoice.service';
+import { AmountCalculatorService } from './FactoryManagement/Services/amountCalculator.service';
 
 
 
@@ -55,7 +56,8 @@ import { InvoiceService } from './FactoryManagement/Services/invoice.service';
     ProductionEntryService,
     OrderService,
     DispatchService,
-    InvoiceService
+    InvoiceService,
+    AmountCalculatorService
 
   ],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { DispatchService } from '../Services/disptach.service';
   styleUrls: ['./dispatchList.component.scss']
 })
 export class DispatchListComponent implements OnInit {
-  public displayedColumns = ['orderNumber', 'dispatchNumber', 'transportName', 'loading', 'unloading', 'remark', 'actions'];
+  public displayedColumns = ['orderNumber', 'dispatchNumber', 'transportName', 'loading', 'unloading', 'remark'];
   dispatches: Dispatch[] = [];
   constructor(private service: DispatchService
     , private spinner: NgxSpinnerService

@@ -1,19 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Invoice } from '../Entities/Invoice';
-import { DispatchService } from '../Services/disptach.service';
-import { InvoiceService } from '../Services/invoice.service';
-import { OrderService } from '../Services/order.service';
-import { Router } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
+import {
+  NgbModal
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgxSpinnerService
+} from 'ngx-spinner';
+import {
+  Invoice
+} from '../Entities/Invoice';
+import {
+  DispatchService
+} from '../Services/disptach.service';
+import {
+  InvoiceService
+} from '../Services/invoice.service';
+import {
+  OrderService
+} from '../Services/order.service';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoiceList.component.html',
   styleUrls: ['./invoiceList.component.scss']
 })
 export class InvoiceListComponent implements OnInit {
-  public displayedColumns = ['invoiceNumber', 'orderNumber', 'date'
-  , 'dispatchNumber', 'transportCharges', 'loadingCharges', 'unloadingCharges', 'price', 'remark', 'actions'];
+  public displayedColumns = ['invoiceNumber', 'orderNumber', 'date', 'dispatchNumber'
+  , 'transportCharges', 'loadingCharges', 'unloadingCharges', 'price', 'remark', 'actions'];
   invoices: Invoice[] = [];
   model = {
     id: null,
@@ -35,9 +53,12 @@ export class InvoiceListComponent implements OnInit {
   orderMaster = [];
   dispatchMaster = [];
   dispatchMasterOriginal = [];
-
-  constructor(private modalService: NgbModal, private service: InvoiceService, private router: Router
-    , private spinner: NgxSpinnerService, private orderService: OrderService, private disptachService: DispatchService) {}
+  selectedOrderId = null;
+  selectedOrderNumber = null;
+  modal1 = null;
+  constructor(private modalService: NgbModal, private service: InvoiceService
+    , private router: Router, private spinner: NgxSpinnerService, private orderService: OrderService
+    , private disptachService: DispatchService, private route: ActivatedRoute) {}
 
   open(content, row) {
 
@@ -57,7 +78,6 @@ export class InvoiceListComponent implements OnInit {
         this.model.invoiceNumber = row.invoiceNumber;
         this.model.orderNumber = row.orderNumber;
         this.model.orderId = row.orderId;
-        this.filterDispatches();
         // this.model.customerId = row.customerId;
         // this.model.customerName = row.customerName;
         const dateHere = new Date(row.date);
@@ -77,7 +97,7 @@ export class InvoiceListComponent implements OnInit {
         this.model.id = null;
         this.model.invoiceNumber = invoiceNumber;
         this.model.orderNumber = '';
-        this.model.orderId = '';
+        this.model.orderId = this.selectedOrderId;
         this.model.customerId = '';
         this.model.customerName = '';
         this.model.date = null;
@@ -89,31 +109,58 @@ export class InvoiceListComponent implements OnInit {
         this.model.price = 0;
         this.model.remark = '';
       }
-      this.modalService.open(content, {
+      this.filterDispatches();
+      this.modal1 = this.modalService.open(content, {
         size: 'lg',
         ariaLabelledBy: 'modal-basic-title'
-      }).result.then((result) => {
-        this.spinner.show();
-        if (result === 'SAVE') {
-          if (this.model.id) {
-            this.editInvoice();
-          } else {
-            this.saveInvoice();
-          }
-        } else {
-          this.spinner.hide();
-        }
-      }, (reason) => {
-        // handle close exception
       });
-
+      this.modal1.result.then((result) => {
+          this.spinner.show();
+          if (result === 'SAVE') {
+            if (this.model.id) {
+              this.editInvoice();
+            } else {
+              this.saveInvoice();
+            }
+          } else {
+            this.spinner.hide();
+          }
+        },
+        (reason) => {
+          // handle close exception
+        });
     });
+  }
 
-
+  modalButtonClick(button) {
+    switch (button) {
+      case 'SAVE':
+        const msg = this.validate();
+        if (msg === '') {
+          this.modal1.close('SAVE');
+        } else {
+          alert(msg);
+        }
+        break;
+      case 'CANCEL':
+        this.modal1.close('CANCEL');
+        break;
+    }
   }
 
   ngOnInit() {
     this.spinner.show();
+
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        this.selectedOrderId = fragment;
+        this.model.orderId = this.selectedOrderId;
+      }
+      this.initialLoad();
+    });
+  }
+
+  initialLoad() {
     this.getDispatches();
     this.getOrders();
     this.getInvoices();
@@ -139,20 +186,22 @@ export class InvoiceListComponent implements OnInit {
       const localInvoices = [];
       if (s && s.length > 0) {
         s.forEach(element => {
-          localInvoices.push({
-            id: element.Id,
-            invoiceNumber: element.InvoiceNumber,
-            orderNumber: element.OrderNumber,
-            orderId: element.OrderId,
-            date: element.InvoiceDate,
-            dispatchNumber: element.DispatchNumber,
-            dispatchId: element.DispatchId,
-            transportCharges: element.TransportCharges,
-            loadingCharges: element.LoadingCharges,
-            unloadingCharges: element.UnloadingCharges,
-            price: element.Amount,
-            remark: element.Remark,
-          });
+          if ((!this.selectedOrderId) || element.OrderId === this.selectedOrderId) {
+            localInvoices.push({
+              id: element.Id,
+              invoiceNumber: element.InvoiceNumber,
+              orderNumber: element.OrderNumber,
+              orderId: element.OrderId,
+              date: element.InvoiceDate,
+              dispatchNumber: element.DispatchNumber,
+              dispatchId: element.DispatchId,
+              transportCharges: element.TransportCharges,
+              loadingCharges: element.LoadingCharges,
+              unloadingCharges: element.UnloadingCharges,
+              price: element.Amount,
+              remark: element.Remark,
+            });
+          }
         });
       }
       this.invoices = localInvoices;
@@ -164,9 +213,13 @@ export class InvoiceListComponent implements OnInit {
     this.orderService.getOrders('').subscribe(element => {
       const localOrders = [];
       element.forEach(fe => {
+        if (this.selectedOrderId && this.selectedOrderId === fe.Id) {
+          this.selectedOrderNumber = fe.OrderNumber.toString().trim();
+        }
         localOrders.push({
           orderId: fe.Id,
           orderNumber: fe.OrderNumber.toString().trim(),
+          price: fe.Price,
         });
       });
       this.orderMaster = localOrders;
@@ -182,6 +235,7 @@ export class InvoiceListComponent implements OnInit {
           dispatchId: fe.Id,
           dispatchNumber: fe.DispatchNumber.toString().trim(),
           orderId: fe.OrderId,
+          products: fe.DispatchDetails
         });
       });
       this.dispatchMasterOriginal = localDispatches;
@@ -197,6 +251,8 @@ export class InvoiceListComponent implements OnInit {
         localDispatches.push({
           dispatchId: fe.dispatchId,
           dispatchNumber: fe.dispatchNumber.toString().trim(),
+          orderId: fe.orderId,
+          products: fe.products
         });
       }
 
@@ -209,6 +265,35 @@ export class InvoiceListComponent implements OnInit {
   }
 
   openPayments(row) {
-    this.router.navigate(['/auth/paymentList'], {fragment: row.id});
+    this.router.navigate(['/auth/paymentList'], {
+      fragment: row.id
+    });
+  }
+
+  printInvoice(row) {
+    this.router.navigate(['/auth/invoicePrint'], {
+      fragment: row.id
+    });
+  }
+
+  dispatchSelected() {
+    const dispatch = this.dispatchMaster.find(f => f.dispatchId === this.model.dispatchId);
+    const order = this.orderMaster.find(f => f.orderId === this.model.orderId);
+  }
+
+  validate() {
+    if (this.model.orderId == null || this.model.orderId === '') {
+      return 'Please select customer for order';
+    }
+    if (this.model.dispatchId == null || this.model.dispatchId === '') {
+      return 'Please select dispatch details';
+    }
+    if (this.model.date == null || this.model.date === 0) {
+      return 'Please select date';
+    }
+    if (this.model.price == null || this.model.price === 0) {
+      return 'Please enter amount';
+    }
+    return '';
   }
 }

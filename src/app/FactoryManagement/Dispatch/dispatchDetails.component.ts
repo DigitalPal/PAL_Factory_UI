@@ -77,9 +77,9 @@ export class DispatchDetailsComponent implements OnInit {
             newDispatchNo = (+s.DispatchNumber.split('-')[2]) + 1;
           }
           const dispatchNumber = 'DPT-' + new Date().getDate().toString() +
-          (new Date().getMonth() + 1).toString() +
-          new Date().getFullYear().toString() +
-          '-' + newDispatchNo;
+            (new Date().getMonth() + 1).toString() +
+            new Date().getFullYear().toString() +
+            '-' + newDispatchNo;
 
           this.model.id = null;
           this.model.orderNumber = '';
@@ -100,10 +100,14 @@ export class DispatchDetailsComponent implements OnInit {
   }
 
   saveData() {
-    console.log(this.model);
-    this.service.addDispatch(this.model).subscribe(s => {
-      this.router.navigate(['/auth/dispatchList']);
-    });
+    const msg = this.validate();
+    if (msg === '') {
+      this.service.addDispatch(this.model).subscribe(s => {
+        this.router.navigate(['/auth/dispatchList']);
+      });
+    } else {
+      alert(msg);
+    }
   }
 
   editDispatch() {
@@ -111,17 +115,22 @@ export class DispatchDetailsComponent implements OnInit {
   }
 
   addProduct() {
-    const associatedProducts = this.model.products;
-    const productName = this.productMaster.find(f => f.id === this.model.productId).name;
-    associatedProducts.push({
-      productId: this.model.productId,
-      productName: productName,
-      quantity: this.model.quantity
-    });
-    this.model.products = associatedProducts;
-    this.model.quantity = 0;
-    this.model.productId = '';
-    this.filterProductMaster();
+    const validationMsg = this.validateProductAdd();
+    if (validationMsg === '') {
+      const associatedProducts = this.model.products;
+      const productName = this.productMaster.find(f => f.id === this.model.productId).name;
+      associatedProducts.push({
+        productId: this.model.productId,
+        productName: productName,
+        quantity: this.model.quantity
+      });
+      this.model.products = associatedProducts;
+      this.model.quantity = 0;
+      this.model.productId = '';
+      this.filterProductMaster();
+    } else {
+      alert(validationMsg);
+    }
   }
 
   deleteProductClicked(row) {
@@ -152,6 +161,36 @@ export class DispatchDetailsComponent implements OnInit {
       this.spinner.hide();
     });
   }
+
+  validate() {
+    if (this.model.orderId == null || this.model.orderId === '') {
+      return 'Please select customer for order';
+    }
+    if (this.model.transportName == null || this.model.transportName === '') {
+      return 'Please add a transport name';
+    }
+    if (this.model.loading == null || this.model.loading === '') {
+      return 'Please select loading details';
+    }
+    if (this.model.unloading == null || this.model.unloading === '') {
+      return 'Please select unloading details';
+    }
+    if (this.model.date == null || this.model.date === '') {
+      return 'Please select date';
+    }
+    return '';
+  }
+
+  validateProductAdd() {
+    if (this.model.productId == null || this.model.productId === '') {
+      return 'Please select atleast 1 product';
+    }
+    if (this.model.quantity == null || this.model.quantity === 0) {
+      return 'Quantity should be greater than 0';
+    }
+    return '';
+  }
+
 
   filterProductMaster() {
     const localProducts = [];
