@@ -30,8 +30,7 @@ export class OrderDetailsComponent implements OnInit {
   customerMaster = [];
 
   constructor(private service: OrderService, private spinner: NgxSpinnerService
-    , private route: ActivatedRoute, private customerService: CustomersService
-    , private router: Router) {}
+    , private route: ActivatedRoute, private customerService: CustomersService, private router: Router) {}
 
   ngOnInit() {
 
@@ -103,9 +102,40 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   saveData() {
-    this.service.addOrder(this.model).subscribe(s => {
-      this.router.navigate(['/auth/orderList']);
-    });
+    const msg = this.validate();
+    if (msg === '') {
+      this.service.addOrder(this.model).subscribe(s => {
+        this.router.navigate(['/auth/orderList']);
+      });
+    } else {
+      alert(msg);
+    }
+  }
+
+  validate() {
+    if (this.model.customerId == null || this.model.customerId === '') {
+      return 'Please select customer for order';
+    }
+    if (this.model.date == null || this.model.date === '') {
+      return 'Please select date';
+    }
+    if (this.model.price == null || this.model.price === 0) {
+      return 'Please enter rate for order';
+    }
+    if (this.model.products == null || this.model.products.length === 0) {
+      return 'Please select atleast 1 product';
+    }
+    return '';
+  }
+
+  validateProductAdd() {
+    if (this.model.productId == null || this.model.productId === '') {
+      return 'Please select atleast 1 product';
+    }
+    if (this.model.quantity == null || this.model.quantity === 0) {
+      return 'Quantity should be greater than 0';
+    }
+    return '';
   }
 
   editOrder() {
@@ -114,17 +144,22 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   addProduct() {
-    const associatedProducts = this.model.products;
-    const productName = this.productMaster.find(f => f.id === this.model.productId).name;
-    associatedProducts.push({
-      productId: this.model.productId,
-      productName: productName,
-      quantity: this.model.quantity
-    });
-    this.model.products = associatedProducts;
-    this.model.quantity = 0;
-    this.model.productId = '';
-    this.filterProductMaster();
+    const validationMsg = this.validateProductAdd();
+    if (validationMsg === '') {
+      const associatedProducts = this.model.products;
+      const productName = this.productMaster.find(f => f.id === this.model.productId).name;
+      associatedProducts.push({
+        productId: this.model.productId,
+        productName: productName,
+        quantity: this.model.quantity
+      });
+      this.model.products = associatedProducts;
+      this.model.quantity = 0;
+      this.model.productId = '';
+      this.filterProductMaster();
+    } else {
+      alert(validationMsg);
+    }
   }
 
   deleteProductClicked(row) {

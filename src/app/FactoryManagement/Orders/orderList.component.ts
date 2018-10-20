@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
     , private router: Router) {}
 
   ngOnInit() {
-    // this.spinner.show();
+    this.spinner.show();
     this.getOrders();
   }
 
