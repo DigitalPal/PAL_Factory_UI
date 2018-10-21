@@ -79,8 +79,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.authenticationService.userAuthentication(this.userForm.controls.email.value
       , this.userForm.controls.password.value).subscribe((data: any) => {
-      localStorage.setItem('userToken', data.access_token);
-      this.router.navigate(['/auth/rawMaterial']);
+      localStorage.setItem('DigitalPalToken', data.access_token);
+      this.router.navigate(['/auth/orderList']);
     });
     this.router.navigate(['/']);
   }

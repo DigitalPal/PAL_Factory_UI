@@ -57,7 +57,7 @@ import { AuthGuard } from './auth/auth.guard';
     OrderService,
     DispatchService,
     InvoiceService,
-    AmountCalculatorService
+    AmountCalculatorService,
     ProductionEntryService,
     AuthGuard
   ],
