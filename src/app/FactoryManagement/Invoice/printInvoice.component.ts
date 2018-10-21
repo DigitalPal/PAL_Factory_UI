@@ -16,7 +16,6 @@ export class InvoicePrintComponent implements OnInit {
 
   todaysDate = new Date();
 
-
   supplierName = '';
   supplierAddress = '';
   supplierContact = '';
@@ -122,20 +121,17 @@ export class InvoicePrintComponent implements OnInit {
             margin: 20px;
             float: left;
           }
-          
           .print-invoice-header {
             border-bottom: 1px solid black;
             float: left;
             width: 100%;
             height: 60px;
           }
-          
           .print-invoice-subtitle {
             float: right;
             margin-top: -40px;
             margin-right: 40px;
           }
-          
           .print-invoice-title {
             text-align: center;
             float: left;
@@ -144,79 +140,64 @@ export class InvoicePrintComponent implements OnInit {
             font-size: x-large;
             font-weight: bold;
           }
-          
           .print-invoice-partyname-container {
             border-bottom: 1px solid black;
             float: left;
             width: 100%;
           }
-          
           .supplier-name {
             width: 40%;
             float: left;
             margin-left: 10px;
             margin-right: 60px;
           }
-          
           .purchaser-name {
             width: 40%;
             float: left;
             margin-left: 10px;
           }
-          
           .print-invoice-PO-container {
             border-bottom: 1px solid black;
             float: left;
             width: 100%;
           }
-          
           .print-invoice-detail-table-container {
               float: left;
-              width: 100%; 
+              width: 100%;
           }
-          
           .print-invoice-detail-table {
-              width: 100%; 
+              width: 100%;
           }
-          
           .print-invoice-detail-table tr th {
               border: 1px solid black;
               padding-left: 5px;
           }
-          
           .print-invoice-detail-table tr td {
               border: 1px solid black;
               padding-left: 5px;
-          
           }
-          
           .print-invoice-amount-words {
               border-bottom: 1px solid black;
               float: left;
               width: 100%;
           }
-          
           .print-invoice-amount-words-content {
             margin-left: 10px;
           }
-          
           .print-invoice-bank-details {
               border-bottom: 1px solid black;
               float: left;
               width: 100%;
           }
-          
           .print-invoice-bank-details-content {
             margin-left: 10px;
           }
-          
           .print-invoice-declaration{
             border-bottom: 1px solid black;
             float: left;
             width: 100%;
             height: 100px;
           }
-          
           .print-invoice-declaration-content {
             width: 55%;
             float: left;
@@ -224,26 +205,22 @@ export class InvoicePrintComponent implements OnInit {
             border-right: 1px solid black;
             margin-left: 10px;
           }
-          
           .print-invoice-declaration-sign {
             width: 38%;
             float: left;
             margin-left: 5px;
           }
-          
           .print-invoice-terms-title {
             width: 100%;
             text-align: center;
             font-size: 16px;
           }
-          
           .supply-date {
             width: 40%;
             float: left;
             margin-left: 10px;
             margin-right: 60px;
           }
-          
           .invoice-number {
             width: 40%;
             float: left;

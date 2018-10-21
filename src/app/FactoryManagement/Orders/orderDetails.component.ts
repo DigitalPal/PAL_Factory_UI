@@ -122,6 +122,9 @@ export class OrderDetailsComponent implements OnInit {
     if (this.model.price == null || this.model.price === 0) {
       return 'Please enter rate for order';
     }
+    if (isNaN(this.model.price)) {
+      return 'Rate per order should be a number';
+    }
     if (this.model.products == null || this.model.products.length === 0) {
       return 'Please select atleast 1 product';
     }
@@ -134,6 +137,9 @@ export class OrderDetailsComponent implements OnInit {
     }
     if (this.model.quantity == null || this.model.quantity === 0) {
       return 'Quantity should be greater than 0';
+    }
+    if (isNaN(this.model.quantity)) {
+      return 'Quantity should be numeric';
     }
     return '';
   }

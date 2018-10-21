@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="dispatchNumber">
           <mat-header-cell *matHeaderCellDef> #Dispatch </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.dispatchNumber}} </mat-cell>
+          <mat-cell *matCellDef="let row"> <a routerLinkActive="active" routerLink="/auth/dispatchDetails" [fragment]= "row.id">{{row.dispatchNumber}}</a> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="date">

@@ -188,6 +188,9 @@ export class DispatchDetailsComponent implements OnInit {
     if (this.model.quantity == null || this.model.quantity === 0) {
       return 'Quantity should be greater than 0';
     }
+    if (isNaN(this.model.quantity)) {
+      return 'Quantity should be numeric';
+    }
     return '';
   }
 
