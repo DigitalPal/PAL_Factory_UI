@@ -1,6 +1,5 @@
 .print-invoice-container {
   width: 90%;
-  height: 700px;
   border: 1px solid black;
   margin: 20px;
   float: left;
@@ -118,4 +117,18 @@
   width: 100%;
   text-align: center;
   font-size: 16px;
+}
+
+
+.supply-date {
+  width: 40%;
+  float: left;
+  margin-left: 10px;
+  margin-right: 60px;
+}
+
+.invoice-number {
+  width: 40%;
+  float: left;
+  margin-left: 10px;
 }

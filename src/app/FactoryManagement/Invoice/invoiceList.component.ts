@@ -24,6 +24,7 @@ import {
 import {
   OrderService
 } from '../Services/order.service';
+import { AmountCalculatorService } from '../Services/amountCalculator.service';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoiceList.component.html',
@@ -58,7 +59,7 @@ export class InvoiceListComponent implements OnInit {
   modal1 = null;
   constructor(private modalService: NgbModal, private service: InvoiceService
     , private router: Router, private spinner: NgxSpinnerService, private orderService: OrderService
-    , private disptachService: DispatchService, private route: ActivatedRoute) {}
+    , private disptachService: DispatchService, private route: ActivatedRoute, private amountCalculator: AmountCalculatorService) {}
 
   open(content, row) {
 
@@ -279,6 +280,10 @@ export class InvoiceListComponent implements OnInit {
   dispatchSelected() {
     const dispatch = this.dispatchMaster.find(f => f.dispatchId === this.model.dispatchId);
     const order = this.orderMaster.find(f => f.orderId === this.model.orderId);
+    const productsToSend = [];
+    dispatch.products.forEach(fe => productsToSend.push({length: fe.Length, width: fe.Width, height: fe.Height, quantity: fe.Quantity}));
+    const amount = this.amountCalculator.calculateAmount(productsToSend, order.price);
+    this.model.price = amount;
   }
 
   validate() {

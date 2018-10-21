@@ -6,20 +6,20 @@ export const menus = [
         'open': false,
         'chip': null,
         'sub': [
-            {
-                'name': 'Manage Plants',
-                'link': '/auth/plants',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Manage Users',
-                'link': '/auth/plants',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Plants',
+            //     'link': '/auth/plants',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Manage Users',
+            //     'link': '/auth/plants',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Raw Material',
                 'link': '/auth/rawMaterial',
@@ -27,13 +27,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Manage Sizes',
-                'link': '/auth/sizes',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Sizes',
+            //     'link': '/auth/sizes',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Customers',
                 'link': '/auth/customers',
@@ -48,13 +48,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Manage Prices',
-                'link': '/auth/prices',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Prices',
+            //     'link': '/auth/prices',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Products',
                 'link': '/auth/products',
