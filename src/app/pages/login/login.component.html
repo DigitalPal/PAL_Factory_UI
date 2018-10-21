@@ -13,7 +13,7 @@ background-size: cover; ">
                 <mat-card-content>
                     <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm" (ngSubmit)="login()">
                         <mat-form-field class="full-width">
-                          <input type="email" id="email" class="input" placeholder="Please enter your email"
+                          <input type="input" id="email" class="input" placeholder="Please enter your username"
                                  formControlName="email" required matInput>
                         </mat-form-field>
                         <div *ngIf="formErrors.email" class="help is-danger">

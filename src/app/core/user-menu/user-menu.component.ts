@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cdk-user-menu',
@@ -25,8 +26,12 @@ export class UserMenuComponent implements OnInit {
     	}
   	}
   	
-    
-  	constructor(private elementRef: ElementRef) { }
+	Logout() {
+		localStorage.removeItem('userToken');
+		this.router.navigate(['/login']);
+	}
+
+  	constructor(private elementRef: ElementRef, private router: Router) { }
 
 
   	ngOnInit() {
