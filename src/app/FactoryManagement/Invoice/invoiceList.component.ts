@@ -299,6 +299,9 @@ export class InvoiceListComponent implements OnInit {
     if (this.model.price == null || this.model.price === 0) {
       return 'Please enter amount';
     }
+    if (isNaN(this.model.price)) {
+      return 'Amount should be a number';
+    }
     return '';
   }
 }

@@ -233,6 +233,9 @@ export class PaymentListComponent implements OnInit {
     if (this.model.amount == null || this.model.amount === 0) {
       return 'Please enter amount';
     }
+    if (isNaN(this.model.amount)) {
+      return 'Amount should be a number';
+    }
     return '';
   }
 }
