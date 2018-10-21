@@ -15,6 +15,7 @@ import { RawMaterialConsumptionListComponent } from '../FactoryManagement/RawMat
 import { ProductsListComponent } from '../FactoryManagement/Product/products.component';
 
 import { ProductionEntryListComponent } from '../FactoryManagement/ProductionEntry/productionEntry.component';
+
 import { OrderListComponent } from '../FactoryManagement/Orders/orderList.component';
 import { OrderDetailsComponent } from '../FactoryManagement/Orders/orderDetails.component';
 import { DispatchListComponent } from '../FactoryManagement/Dispatch/dispatchList.component';
@@ -22,19 +23,19 @@ import { DispatchDetailsComponent } from '../FactoryManagement/Dispatch/dispatch
 import { InvoiceListComponent } from '../FactoryManagement/Invoice/invoiceList.component';
 import { PaymentListComponent } from '../FactoryManagement/Payments/paymentList.component';
 import { InvoicePrintComponent } from '../FactoryManagement/Invoice/printInvoice.component';
-
+import { AuthGuard } from '../auth/auth.guard';
 
 export const appRoutes: Routes = [{
     path: '', component: AuthComponent, children: [
-        { path: 'plants', component: PlantsListComponent },
-        { path: 'rawMaterial', component: RawMaterialListComponent },
-        { path: 'customers', component: CustomerListComponent },
-        { path: 'prices', component: PriceDetailListComponent },
-        { path: 'sizes', component: SizeDetailListComponent },
-        { path: 'suppliers', component: SupplierListComponent },
-        { path: 'rawMaterialInward', component: RawMaterialInwardListComponent },
-        { path: 'rawMaterialConsumption', component: RawMaterialConsumptionListComponent },
-        { path: 'productionEntry', component: ProductionEntryListComponent },
+        { path: 'plants', component: PlantsListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterial', component: RawMaterialListComponent,canActivate:[AuthGuard] },
+        { path: 'customers', component: CustomerListComponent,canActivate:[AuthGuard] },
+        { path: 'prices', component: PriceListComponent,canActivate:[AuthGuard] },
+        { path: 'sizes', component: SizeListComponent,canActivate:[AuthGuard] },
+        { path: 'suppliers', component: SupplierListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterialInward', component: RawMaterialInwardListComponent,canActivate:[AuthGuard] },
+        { path: 'rawMaterialConsumption', component: RawMaterialConsumptionListComponent,canActivate:[AuthGuard] },
+        { path: 'productionEntry', component: ProductionEntryListComponent,canActivate:[AuthGuard] },
         { path: 'dashboard', component: DashboardCrmComponent },
         { path: 'orderList', component: OrderListComponent },
         { path: 'orderDetails', component:  OrderDetailsComponent},

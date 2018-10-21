@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { AuthService } from '../../core/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../FactoryManagement/Services/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private fb: FormBuilder) {
+              private fb: FormBuilder, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -39,11 +40,12 @@ export class LoginComponent implements OnInit {
     this.userForm = this.fb.group({
       'email': ['', [
         Validators.required,
-        Validators.email
+        // Validators.email
       ]
       ],
       'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.required,
+        // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(6),
         Validators.maxLength(25)
       ]
@@ -75,6 +77,11 @@ export class LoginComponent implements OnInit {
     // }
   }
   login() {
+    this.authenticationService.userAuthentication(this.userForm.controls.email.value
+      , this.userForm.controls.password.value).subscribe((data: any) => {
+      localStorage.setItem('userToken', data.access_token);
+      this.router.navigate(['/auth/rawMaterial']);
+    });
     this.router.navigate(['/']);
   }
 }
