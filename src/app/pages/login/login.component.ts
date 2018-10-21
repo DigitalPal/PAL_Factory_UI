@@ -40,11 +40,12 @@ export class LoginComponent implements OnInit {
     this.userForm = this.fb.group({
       'email': ['', [
         Validators.required,
-        Validators.email
+        // Validators.email
       ]
       ],
       'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.required,
+        // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
         Validators.minLength(6),
         Validators.maxLength(25)
       ]
@@ -76,11 +77,10 @@ export class LoginComponent implements OnInit {
     // }
   }
   login() {
-    console.log(this.userForm);
     this.authenticationService.userAuthentication(this.userForm.controls.email.value
       , this.userForm.controls.password.value).subscribe((data: any) => {
       localStorage.setItem('userToken', data.access_token);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/auth/rawMaterial']);
     });
     this.router.navigate(['/']);
   }
