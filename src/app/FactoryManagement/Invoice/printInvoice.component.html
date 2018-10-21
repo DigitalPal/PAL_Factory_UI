@@ -13,7 +13,7 @@
       <div class="print-invoice-container">
         <diV class="print-invoice-header">
           <div class="print-invoice-title">Invoice</div>
-          <div class="print-invoice-subtitle">Dated: {{ todaysDate | date:'MM/dd/yyyy' }}</div>
+          <div class="print-invoice-subtitle"><b>Dated:</b> {{ todaysDate | date:'MM/dd/yyyy' }}</div>
         </diV>
         <div class="print-invoice-partyname-container">
           <div id="supplierName" class="supplier-name">
@@ -21,23 +21,23 @@
             <div>{{supplierName}}</div>
             <div>{{supplierAddress}}</div>
             <div>{{supplierContact}}</div>
-            <div>GST No: {{ supplierGST }}</div>
+            <div><b>GST No:</b> {{ supplierGST }}</div>
           </div>
           <div id="purchaserrName" class="purchaser-name">
             <div><b>Purchaser:</b></div>
             <div>{{purchaserName}}</div>
             <div>{{purchaserAddress}}</div>
             <div>{{purchaserContact}}</div>
-            <div>GST No: {{ purchaserGST }}</div>
+            <div><b>GST No:</b> {{ purchaserGST }}</div>
           </div>
         </div>
         <div class="print-invoice-PO-container">
-          <div id="supplyDate" class="supplier-name">
-            <div>Supply Date: {{ supplyDate | date:'MM/dd/yyyy' }}</div>
+          <div id="supplyDate" class="supply-date">
+            <div><b>Supply Date:</b> {{ supplyDate | date:'MM/dd/yyyy' }}</div>
           </div>
-          <div id="POContainer" class="purchaser-name">
-            <div>Invoice No - {{ invoiceNumber }} (Challan No: {{ challanNumber }})</div>
-            <div>PO No - {{ PONumber }}</div>
+          <div id="POContainer" class="invoice-number">
+            <div><b>Invoice No -</b> {{ invoiceNumber }} <br/>(Challan No: {{ challanNumber }})</div>
+            <div><b>PO No -</b> {{ PONumber }}</div>
           </div>
         </div>
 
@@ -57,26 +57,26 @@
               <td>{{product.item}}</td>
               <td>{{product.hsnCode}}</td>
               <td>{{product.quantity}}</td>
-              <td>{{product.rate}}</td>
+              <td>{{ product.rate | number : '1.2-2'}}</td>
               <td>{{product.per}}</td>
-              <td>{{product.amount}}</td>
+              <td>{{ product.amount | number : '1.2-2'}}</td>
             </tr>
             <tr>
               <td colspan="4" rowspan="4"></td>
-              <td colspan="2">Sub Total</td>
-              <td>{{ subTotal }}</td>
+              <td colspan="2"><b>Sub Total</b></td>
+              <td>{{ subTotal | number : '1.2-2' }}</td>
             </tr>
             <tr>
-              <td colspan="2">CGST 6%</td>
-              <td>{{ cGST }}</td>
+              <td colspan="2"><b>CGST 6%</b></td>
+              <td>{{ cGST | number : '1.2-2' }}</td>
             </tr>
             <tr>
-              <td colspan="2">SGST 6%</td>
-              <td>{{ sGST }}</td>
+              <td colspan="2"><b>SGST 6%</b></td>
+              <td>{{ sGST | number : '1.2-2' }}</td>
             </tr>
             <tr>
-              <td colspan="2">Grand Total</td>
-              <td>{{ grandTotal }}</td>
+              <td colspan="2"><b>Grand Total</b></td>
+              <td>{{ grandTotal | number : '1.2-2' }}</td>
             </tr>
           </table>
         </div>
@@ -84,7 +84,7 @@
         <div class="print-invoice-amount-words">
           <div id="amountInwords" class="print-invoice-amount-words-content">
             <div>Amount Chargable (in words) - </div>
-            <div>{{ amountInWords }} Only</div>
+            <div><b>Indian Rupees - {{ amountInWords }} Only</b></div>
           </div>
         </div>
 

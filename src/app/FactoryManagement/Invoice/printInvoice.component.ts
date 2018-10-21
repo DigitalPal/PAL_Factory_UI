@@ -44,82 +44,59 @@ export class InvoicePrintComponent implements OnInit {
     , private amountCalculator: AmountCalculatorService) {}
 
   ngOnInit() {
-    // this.spinner.show();
+    this.spinner.show();
 
     this.route.fragment.subscribe(fragment => {
 
       if (fragment) {
-        this.invoiceService.getInvoice(fragment).subscribe(invoice => {
-          if (invoice) {
-            this.orderService.getOrder(invoice.OrderId).subscribe(order => {
-              if (order) {
-                this.disptachService.getDispatch(invoice.DispatchId).subscribe(disptach => {
-                  if (disptach) {
-                    const rate = order.Price;
-                    console.log(order);
-                    const products = disptach.DispatchDetails;
-                  }
-                });
-              }
+        this.invoiceService.getInvoiceInformationForPrint(fragment).subscribe(invoice => {
+          // console.log(invoice);
+          this.purchaserName = invoice.CustomerName;
+          this.purchaserAddress = invoice.Address;
+          this.purchaserContact = invoice.CustomerName;
+          this.purchaserGST = invoice.CustomerGST;
+          this.PONumber = invoice.CustomerPONumber;
+          this.supplyDate = invoice.DispatchDate;
+          this.invoiceNumber = invoice.InvoiceNumber;
+          this.challanNumber = invoice.DispatchNumber;
+          this.grandTotal = invoice.Price;
+          const tempSubTotal = Math.round(this.grandTotal / 1.12);
+          this.cGST = this.sGST = Math.round((tempSubTotal * 0.06));
+          this.subTotal = (this.grandTotal - this.sGST - this.cGST);
+
+          const productsHere = [];
+          let totalMeterCube = 0;
+          invoice.Products.forEach(element => {
+            totalMeterCube = totalMeterCube +
+            this.amountCalculator.getMeterCube(element.Length, element.Width, element.Height, element.Quantity);
+          });
+
+          const newRateAfterGST = this.subTotal / totalMeterCube;
+
+          for (let i = 1; i <= invoice.Products.length; i++) {
+            const amount = (this.amountCalculator.getMeterCube(invoice.Products[i - 1].Length
+              , invoice.Products[i - 1].Width
+              , invoice.Products[i - 1].Height
+              , invoice.Products[i - 1].Quantity) * newRateAfterGST);
+            productsHere.push({
+              srNo: i,
+              item: invoice.Products[i - 1].ProductName,
+              hsnCode: 'test',
+              quantity: invoice.Products[i - 1].Quantity,
+              amount: amount,
+              rate: amount / invoice.Products[i - 1].Quantity,
+              per: 'Block'
             });
           }
+
+          this.productsArray = productsHere;
+          const converter = new Converter();
+          this.amountInWords = converter.transformToWord(this.grandTotal);
+          this.spinner.hide();
         });
       }
 
     });
-    const meterCubeRate = 3250;
-
-
-    this.productsArray = [{
-        srNo: 1,
-        width: 600,
-        breadth: 250,
-        height: 125,
-        item: '600X250X125mm',
-        hsnCode: '68159910',
-        quantity: 800,
-        rate: 0,
-        per: 'Block',
-        amount: 0
-      },
-      {
-        srNo: 2,
-        width: 600,
-        breadth: 250,
-        height: 100,
-        item: '600X250X100mm',
-        hsnCode: '68159911',
-        quantity: 200,
-        rate: 0,
-        per: 'Block',
-        amount: 0
-      }
-    ];
-
-    // let _grandTotal = 0;
-    // for (let i = 0; i < this.productsArray.length; i++) {
-    //   const totalmm3 = this.productsArray[i].width * this.productsArray[i].breadth
-    //                   * this.productsArray[i].height * this.productsArray[i].quantity;
-    //   const totalm3 = totalmm3 / m3_To_mm3;
-    //   const priceForThisSize = totalm3 * meterCubeRate;
-    //   const ratePerBlock = priceForThisSize / this.productsArray[i].quantity;
-
-    //   this.productsArray[i].rate = ratePerBlock;
-    //   this.productsArray[i].amount = priceForThisSize;
-
-    //   _grandTotal = _grandTotal + priceForThisSize;
-    // }
-
-    this.grandTotal = this.amountCalculator.calculateAmount(this.productsArray, meterCubeRate);
-
-    const tempSubTotal = Math.round(this.grandTotal / 1.12);
-    this.cGST = this.sGST = Math.round((tempSubTotal * 0.06));
-    this.subTotal = (this.grandTotal - this.sGST - this.cGST);
-
-
-
-    const converter = new Converter();
-    this.amountInWords = converter.transformToWord(this.grandTotal);
 
     this.supplierName = 'Astracon Industries';
     this.supplierAddress = 'Ground Floor, Office No 90A, K. K. Market, Dhankawadi, Pune - 411043';
@@ -141,7 +118,6 @@ export class InvoicePrintComponent implements OnInit {
           <style>
           .print-invoice-container {
             width: 90%;
-            height: 700px;
             border: 1px solid black;
             margin: 20px;
             float: left;
@@ -176,13 +152,14 @@ export class InvoicePrintComponent implements OnInit {
           }
           
           .supplier-name {
-            width: 45%;
+            width: 40%;
             float: left;
             margin-left: 10px;
+            margin-right: 60px;
           }
           
           .purchaser-name {
-            width: 45%;
+            width: 40%;
             float: left;
             margin-left: 10px;
           }
@@ -258,6 +235,19 @@ export class InvoicePrintComponent implements OnInit {
             width: 100%;
             text-align: center;
             font-size: 16px;
+          }
+          
+          .supply-date {
+            width: 40%;
+            float: left;
+            margin-left: 10px;
+            margin-right: 60px;
+          }
+          
+          .invoice-number {
+            width: 40%;
+            float: left;
+            margin-left: 10px;
           }
           </style>
         </head>
