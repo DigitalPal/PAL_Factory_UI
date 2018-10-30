@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   Authenticate(userName, password) {
     console.log('here');
     this.authenticationService.userAuthentication(userName, password).subscribe((data: any) => {
-      localStorage.setItem('userToken', data.access_token);
+      localStorage.setItem('DigitalPalToken', data.access_token);
       this.router.navigate(['/home']);
     });
   }
