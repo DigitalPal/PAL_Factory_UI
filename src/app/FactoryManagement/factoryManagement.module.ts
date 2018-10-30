@@ -39,6 +39,7 @@ import { SupplierListComponent } from './Supplier/supplier.component';
 import { PaymentsService } from './Services/payments.service';
 import { InvoicePrintComponent } from './Invoice/printInvoice.component';
 import { AmountCalculatorService } from './Services/amountCalculator.service';
+import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.component';
 
 @NgModule({
 
@@ -60,7 +61,8 @@ import { AmountCalculatorService } from './Services/amountCalculator.service';
     DispatchListComponent,
     InvoiceListComponent,
     PaymentListComponent,
-    InvoicePrintComponent
+    InvoicePrintComponent,
+    DispatchReportComponent
   ],
 
   imports: [
@@ -123,7 +125,8 @@ import { AmountCalculatorService } from './Services/amountCalculator.service';
     DispatchDetailsComponent,
     InvoiceListComponent,
     PaymentListComponent,
-    InvoicePrintComponent
+    InvoicePrintComponent,
+    DispatchReportComponent
   ],
 })
 export class FactoryManagementModule {}
