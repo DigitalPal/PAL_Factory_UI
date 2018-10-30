@@ -101,64 +101,64 @@ export const menus = [
             }
         ]
     },
-    // {
-    //     'name': 'Reports',
-    //     'icon': 'local_laundry_service',
-    //     'link': false,
-    //     'open': false,
-    //     'chip': null,
-    //     'sub': [
-    //         {
-    //             'name': 'Raw Material Inward',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Raw Material Consumption',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Production Details',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Dispatch Details',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Loading/Unloading',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Remaining Raw Material',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         },
-    //         {
-    //             'name': 'Remaining Stock',
-    //             'link': '/auth/dashboard',
-    //             'icon': 'pie_chart',
-    //             'chip': false,
-    //             'open': true,
-    //         }
-    //     ]
-    // },
+    {
+        'name': 'Reports',
+        'icon': 'local_laundry_service',
+        'link': false,
+        'open': false,
+        'chip': null,
+        'sub': [
+            // {
+            //     'name': 'Raw Material Inward',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Raw Material Consumption',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Production Details',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            {
+                'name': 'Dispatch Report',
+                'link': '/auth/dispatchReport',
+                'icon': 'pie_chart',
+                'chip': false,
+                'open': true,
+            },
+            // {
+            //     'name': 'Loading/Unloading',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Remaining Raw Material',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Remaining Stock',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // }
+        ]
+    },
     {
         'name': 'PO Generation',
         'icon': 'mode_edit',

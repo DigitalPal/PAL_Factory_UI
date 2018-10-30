@@ -52,13 +52,13 @@ export class InvoicePrintComponent implements OnInit {
           // console.log(invoice);
           this.purchaserName = invoice.CustomerName;
           this.purchaserAddress = invoice.Address;
-          this.purchaserContact = invoice.CustomerName;
+          this.purchaserContact = ''; // invoice.CustomerName;
           this.purchaserGST = invoice.CustomerGST;
           this.PONumber = invoice.CustomerPONumber;
           this.supplyDate = invoice.DispatchDate;
           this.invoiceNumber = invoice.InvoiceNumber;
           this.challanNumber = invoice.DispatchNumber;
-          this.grandTotal = invoice.Price;
+          this.grandTotal = Math.round(invoice.Price);
           const tempSubTotal = Math.round(this.grandTotal / 1.12);
           this.cGST = this.sGST = Math.round((tempSubTotal * 0.06));
           this.subTotal = (this.grandTotal - this.sGST - this.cGST);
@@ -80,7 +80,7 @@ export class InvoicePrintComponent implements OnInit {
             productsHere.push({
               srNo: i,
               item: invoice.Products[i - 1].ProductName,
-              hsnCode: 'test',
+              hsnCode: 'HSN Code',
               quantity: invoice.Products[i - 1].Quantity,
               amount: amount,
               rate: amount / invoice.Products[i - 1].Quantity,

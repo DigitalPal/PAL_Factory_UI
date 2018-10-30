@@ -106,4 +106,14 @@ export class DispatchService {
     });
   }
 
+  getDispatchReport(orderId, customerId, startDate, endDate): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.get(url + '/' + orderId, {
+      headers: headers
+    });
+  }
+
 }

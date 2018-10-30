@@ -19,6 +19,7 @@ import { SupplierListComponent } from '../FactoryManagement/Supplier/supplier.co
 import { AuthComponent } from './auth.component';
 import { PriceDetailListComponent } from '../FactoryManagement/Price/priceDetails.component';
 import { SizeDetailListComponent } from '../FactoryManagement/Size/sizeDetails.component';
+import { DispatchReportComponent } from '../FactoryManagement/Reports/Disptach/dispatchReport.component';
 
 
 
@@ -110,6 +111,7 @@ export const appRoutes: Routes = [{
       component: PaymentListComponent,
       canActivate: [AuthGuard]
     },
+    { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
     {
       path: 'material-widgets',
       loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule'
