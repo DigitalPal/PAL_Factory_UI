@@ -9,7 +9,7 @@ import { DispatchService } from '../Services/disptach.service';
   styleUrls: ['./dispatchList.component.scss']
 })
 export class DispatchListComponent implements OnInit {
-  public displayedColumns = ['orderNumber', 'dispatchNumber', 'transportName', 'loading', 'unloading', 'remark', 'actions'];
+  public displayedColumns = ['orderNumber', 'dispatchNumber', 'transportName', 'loading', 'unloading', 'remark'];
   dispatches: Dispatch[] = [];
   constructor(private service: DispatchService
     , private spinner: NgxSpinnerService
@@ -30,9 +30,15 @@ export class DispatchListComponent implements OnInit {
       if (s && s.length > 0) {
         s.forEach(element => {
             localDispatches.push({
-            // id: element.Id,
-            // name: element.Title,
-            // measurementType: element.MeasureType,
+            id: element.Id,
+            orderNumber: element.OrderNumber,
+            date: element.DispatchDate,
+            orderId: element.OrderId,
+            dispatchNumber: element.DispatchNumber,
+            transportName: element.TransportName,
+            loading: element.Loading,
+            unloading: element.Unloading,
+            remark: element.Remark,
           });
         });
       }

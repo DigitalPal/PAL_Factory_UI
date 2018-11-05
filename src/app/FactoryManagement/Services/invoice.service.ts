@@ -7,6 +7,29 @@ import { Invoice } from '../Entities/Invoice';
 @Injectable()
 export class InvoiceService {
   constructor(private http: HttpClient) {}
+
+  getInvoiceInformationForPrint(invoiceId): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Invoice/InvoiceDetailInformation';
+    const request = null;
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.get(url + '/' + invoiceId, {
+      headers: headers
+    });
+  }
+
+  getInvoice(invoiceId): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Invoice';
+    const request = null;
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+    return this.http.get(url + '/' + invoiceId, {
+      headers: headers
+    });
+  }
+
   getInvoices(logedInUser): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Invoice';
     const request = null;
@@ -25,15 +48,16 @@ export class InvoiceService {
     };
     const request = {};
     request['InvoiceNumber'] = invoice.invoiceNumber;
-    request['InvoiceDate'] = invoice.date;
+    request['InvoiceDate'] = invoice.date.month + '-' + invoice.date.day + '-' + invoice.date.year;
     request['OrderId'] = invoice.orderId;
     request['OrderNumber'] = invoice.orderNumber;
-    request['DispatchId'] = invoice.disptachId;
-    request['DispatchNumber'] = invoice.disptachNumber;
+    request['DispatchId'] = invoice.dispatchId;
+    request['DispatchNumber'] = invoice.dispatchNumber;
     request['TransportCharges'] = invoice.transportCharges;
-    request['LaodingUnloadingCharges'] = invoice.loadingCharges;
+    request['LoadingCharges'] = invoice.loadingCharges;
+    request['UnloadingCharges'] = invoice.loadingCharges;
     request['Amount'] = invoice.price;
-    request['InvoiceStatus'] = '';
+    request['Remark'] = invoice.remark;
     return this.http.post(url, [request], {
       headers: headers
     });
@@ -47,15 +71,16 @@ export class InvoiceService {
     const request = {};
     request['Id'] = invoice.id;
     request['InvoiceNumber'] = invoice.invoiceNumber;
-    request['InvoiceDate'] = invoice.date;
+    request['InvoiceDate'] = invoice.date.month + '-' + invoice.date.day + '-' + invoice.date.year;
     request['OrderId'] = invoice.orderId;
     request['OrderNumber'] = invoice.orderNumber;
-    request['DispatchId'] = invoice.disptachId;
-    request['DispatchNumber'] = invoice.disptachNumber;
+    request['DispatchId'] = invoice.dispatchId;
+    request['DispatchNumber'] = invoice.dispatchNumber;
     request['TransportCharges'] = invoice.transportCharges;
-    request['LaodingUnloadingCharges'] = invoice.loadingCharges;
+    request['LoadingCharges'] = invoice.loadingCharges;
+    request['UnloadingCharges'] = invoice.loadingCharges;
     request['Amount'] = invoice.price;
-    request['InvoiceStatus'] = '';
+    request['Remark'] = invoice.remark;
     return this.http.put(url, [request], {
       headers: headers
     });

@@ -6,20 +6,20 @@ export const menus = [
         'open': false,
         'chip': null,
         'sub': [
-            {
-                'name': 'Manage Plants',
-                'link': '/auth/plants',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Manage Users',
-                'link': '/auth/plants',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Plants',
+            //     'link': '/auth/plants',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Manage Users',
+            //     'link': '/auth/plants',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Raw Material',
                 'link': '/auth/rawMaterial',
@@ -27,13 +27,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Manage Sizes',
-                'link': '/auth/sizes',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Sizes',
+            //     'link': '/auth/sizes',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Customers',
                 'link': '/auth/customers',
@@ -48,13 +48,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Manage Prices',
-                'link': '/auth/prices',
-                'icon': 'list',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Manage Prices',
+            //     'link': '/auth/prices',
+            //     'icon': 'list',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Manage Products',
                 'link': '/auth/products',
@@ -78,20 +78,20 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Raw Material Consumption',
-                'link': '/auth/rawMaterialConsumption',
-                'icon': 'select_all',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Production Entry',
-                'link': '/auth/productionEntry',
-                'icon': 'select_all',
-                'chip': false,
-                'open': true,
-            },
+            // {
+            //     'name': 'Raw Material Consumption',
+            //     'link': '/auth/rawMaterialConsumption',
+            //     'icon': 'select_all',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Production Entry',
+            //     'link': '/auth/productionEntry',
+            //     'icon': 'select_all',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
                 'name': 'Dispatch Entry',
                 'link': '/auth/dispatchList',
@@ -108,55 +108,55 @@ export const menus = [
         'open': false,
         'chip': null,
         'sub': [
+            // {
+            //     'name': 'Raw Material Inward',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Raw Material Consumption',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Production Details',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
             {
-                'name': 'Raw Material Inward',
-                'link': '/auth/dashboard',
+                'name': 'Dispatch Report',
+                'link': '/auth/dispatchReport',
                 'icon': 'pie_chart',
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Raw Material Consumption',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Production Details',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Dispatch Details',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Loading/Unloading',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Remaining Raw Material',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            },
-            {
-                'name': 'Remaining Stock',
-                'link': '/auth/dashboard',
-                'icon': 'pie_chart',
-                'chip': false,
-                'open': true,
-            }
+            // {
+            //     'name': 'Loading/Unloading',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Remaining Raw Material',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // },
+            // {
+            //     'name': 'Remaining Stock',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'pie_chart',
+            //     'chip': false,
+            //     'open': true,
+            // }
         ]
     },
     {
@@ -173,13 +173,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            {
-                'name': 'Enter PO for Customer',
-                'link': '/auth/dashboard',
-                'icon': 'keyboard_tab',
-                'chip': false,
-                'open': true,
-            }
+            // {
+            //     'name': 'Enter PO for Customer',
+            //     'link': '/auth/dashboard',
+            //     'icon': 'keyboard_tab',
+            //     'chip': false,
+            //     'open': true,
+            // }
         ]
     },
     // {

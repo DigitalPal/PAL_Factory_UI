@@ -12,13 +12,14 @@
         <div class="col-sm-7" style="padding: 30px;">
 
           <div class="form-group row">
-            <label for="txtorderNumber" class="col-sm-6 col-form-label">Order Number</label>
+            <label for="txtorderNumber" class="col-sm-6 col-form-label">Order Number<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
-                <select class="form-control" [(ngModel)]="model.orderId" #adminUser="ngModel" name="orderId">
+                <select class="form-control" [(ngModel)]="model.orderId" #orderId="ngModel" name="orderId">
                   <option value="" disabled [selected]="model.orderId === ''">Choose your option</option>
-                  <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.id" [value]="order.id">{{order.orderNumber}}</option>
+                  <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.orderId" [value]="order.orderId">{{order.orderNumber}}</option>
                 </select>
+
               </div>
             </div>
           </div>
@@ -26,14 +27,14 @@
             <label for="txtdispatchNumber" class="col-sm-6 col-form-label">Dispatch Number</label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
-                <input type="text" [(ngModel)]="model.dispatchNumber" #name="ngModel" name="dispatchNumber" class="form-control"
+                <input disabled type="text" [(ngModel)]="model.dispatchNumber" #name="ngModel" name="dispatchNumber" class="form-control"
                   id="txtdispatchNumber" placeholder="Dispatch Number">
               </div>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="txttransportName" class="col-sm-6 col-form-label">Transport Name</label>
+            <label for="txttransportName" class="col-sm-6 col-form-label">Transport Name<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
                 <input type="text" [(ngModel)]="model.transportName" #name="ngModel" name="transportName" class="form-control"
@@ -43,26 +44,26 @@
           </div>
 
           <div class="form-group row">
-            <label for="txtloading" class="col-sm-6 col-form-label">Loading</label>
+            <label for="txtloading" class="col-sm-6 col-form-label">Loading<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
-                <select class="form-control" [(ngModel)]="model.loading" #adminUser="ngModel" name="loading">
+                <select class="form-control" [(ngModel)]="model.loading" #loading="ngModel" name="loading">
                   <option value="" disabled [selected]="model.loading === ''">Choose your option</option>
-                  <option [selected]="model.loading === 'YES'" [value]="YES">YES</option>
-                  <option [selected]="model.loading === 'NO'" [value]="NO">NO</option>
+                  <option [selected]="model.loading === 'YES'" [value]="'YES'">YES</option>
+                  <option [selected]="model.loading === 'NO'" [value]="'NO'">NO</option>
                 </select>
               </div>
             </div>
           </div>
 
           <div class="form-group row">
-            <label for="txtunloading" class="col-sm-6 col-form-label">Unloading</label>
+            <label for="txtunloading" class="col-sm-6 col-form-label">Unloading<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form mt-0">
-                <select class="form-control" [(ngModel)]="model.unloading" #adminUser="ngModel" name="unloading">
+                <select class="form-control" [(ngModel)]="model.unloading" #unloading="ngModel" name="unloading">
                   <option value="" disabled [selected]="model.unloading === ''">Choose your option</option>
-                  <option [selected]="model.loading === 'YES'" [value]="YES">YES</option>
-                  <option [selected]="model.loading === 'NO'" [value]="NO">NO</option>
+                  <option [selected]="model.unloading === 'YES'" [value]="'YES'">YES</option>
+                  <option [selected]="model.unloading === 'NO'" [value]="'NO'">NO</option>
                 </select>
               </div>
             </div>
@@ -70,7 +71,7 @@
 
 
           <div class="form-group row">
-            <label for="txtdate" class="col-sm-6 col-form-label">Date</label>
+            <label for="txtdate" class="col-sm-6 col-form-label">Date<span style="color:red">*</span></label>
             <div class="col-sm-6">
               <div class="md-form form-sm">
                 <input type="text" (click)="d.toggle()" [(ngModel)]="model.date" #name="ngModel" name="date" class="form-control"
@@ -96,8 +97,8 @@
             </div>
             <table class="product-table">
               <tr>
-                <th>Product</th>
-                <th>Quantity</th>
+                <th>Product<span style="color:red">*</span></th>
+                <th>Quantity<span style="color:red">*</span></th>
                 <th>Action</th>
               </tr>
               <tr *ngFor="let row of model.products">

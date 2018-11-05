@@ -17,7 +17,7 @@
 
         <ng-container matColumnDef="dispatchNumber">
           <mat-header-cell *matHeaderCellDef> #Dispatch </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.dispatchNumber}} </mat-cell>
+          <mat-cell *matCellDef="let row"> <a routerLinkActive="active" routerLink="/auth/dispatchDetails" [fragment]= "row.id">{{row.dispatchNumber}}</a> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="date">
@@ -48,8 +48,8 @@
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <button style="margin-left:5px;" type="button" (click)="editDispatch(row)" class="btn btn-info btn-sm">Status</button>
-            <button style="margin-left:5px;" type="button" (click)="deleteDispatch(row)" class="btn btn-info btn-sm">Delete</button>
+            <!-- <button style="margin-left:5px;" type="button" (click)="editDispatch(row)" class="btn btn-info btn-sm">Edit</button>
+            <button style="margin-left:5px;" type="button" (click)="deleteDispatch(row)" class="btn btn-info btn-sm">Delete</button> -->
           </mat-cell>
         </ng-container>
 

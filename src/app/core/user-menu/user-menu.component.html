@@ -33,7 +33,8 @@
       			<!-- <mat-divider></mat-divider> -->
 
       			<mat-list-item>
-      				<a matLine [routerLink]="['/login']">Logout</a>
+					<button mat-button (click)="Logout()">Logout</button>
+      				<!-- <a matLine [routerLink]="['/login']" >Logout</a> -->
 				    <button mat-icon-button>
 				       <mat-icon>exit_to_app</mat-icon>
 				    </button>

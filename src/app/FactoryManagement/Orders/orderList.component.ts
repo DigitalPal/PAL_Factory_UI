@@ -17,7 +17,7 @@ export class OrderListComponent implements OnInit {
     , private router: Router) {}
 
   ngOnInit() {
-    // this.spinner.show();
+    this.spinner.show();
     this.getOrders();
   }
 
@@ -49,7 +49,7 @@ export class OrderListComponent implements OnInit {
   }
 
   invoiceClicked(row) {
-    this.router.navigate(['/auth/orderDetails'], {fragment: row.id});
+    this.router.navigate(['/auth/invoiceList'], {fragment: row.id});
   }
 
 }
