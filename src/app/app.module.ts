@@ -26,6 +26,8 @@ import { DispatchService } from './FactoryManagement/Services/disptach.service';
 import { InvoiceService } from './FactoryManagement/Services/invoice.service';
 import { AmountCalculatorService } from './FactoryManagement/Services/amountCalculator.service';
 import { AuthGuard } from './auth/auth.guard';
+import { SupplierPOService } from './FactoryManagement/Services/supplierPO.service';
+import { SummaryReportService } from './FactoryManagement/Services/summaryReport.service';
 
 
 
@@ -59,7 +61,9 @@ import { AuthGuard } from './auth/auth.guard';
     InvoiceService,
     AmountCalculatorService,
     ProductionEntryService,
-    AuthGuard
+    AuthGuard,
+    SupplierPOService,
+    SummaryReportService
   ],
   bootstrap: [AppComponent]
 })
