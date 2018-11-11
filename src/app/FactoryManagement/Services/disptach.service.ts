@@ -106,12 +106,30 @@ export class DispatchService {
     });
   }
 
-  getDispatchReport(orderId, customerId, startDate, endDate): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch';
+  getDispatchReport(orderNumber, customerName, startDate, endDate): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Dispatch/Search';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url + '/' + orderId, {
+
+    const request = {};
+    if (orderNumber) {
+      request['OrderNumber'] = orderNumber;
+    }
+
+    if (customerName) {
+      request['CustomerName'] = customerName;
+    }
+
+    if (startDate) {
+      request['StartDate'] = startDate.month + '-' + startDate.day + '-' + startDate.year;
+    }
+
+    if (endDate) {
+      request['EndDate'] = endDate.month + '-' + endDate.day + '-' + endDate.year;
+    }
+
+    return this.http.post(url, request, {
       headers: headers
     });
   }

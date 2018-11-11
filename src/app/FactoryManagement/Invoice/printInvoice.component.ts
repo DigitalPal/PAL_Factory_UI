@@ -226,6 +226,9 @@ export class InvoicePrintComponent implements OnInit {
             float: left;
             margin-left: 10px;
           }
+          .print-invoice-terms-content {
+            font-size: 10px;
+          }
           </style>
         </head>
             <body onload="window.print();window.close()">${printContents}</body>

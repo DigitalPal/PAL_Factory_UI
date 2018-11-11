@@ -12,7 +12,7 @@ export class DispatchReportComponent implements OnInit {
   public displayedColumns = ['srNumber', 'orderNumber'
   , 'dispatchNumber', 'customerName', 'date', 'productName'
   , 'orderQuantity', 'dispatchQuantity', 'transportName', 'loading'
-  , 'unloading', 'remark', 'orderStatus'];
+  , 'unloading'];
   dispatches = [];
   model = {
     orderId: '',
@@ -27,26 +27,38 @@ export class DispatchReportComponent implements OnInit {
     , private customerService: CustomersService) {}
 
   ngOnInit() {
-    this.refreshReport();
     this.getCustomers();
     this.getOrders();
+
+    setTimeout(() => {
+      this.refreshReport();
+    }, 2000);
   }
 
   getDispatch() {
-    this.service.getDispatchReport(this.model.orderId, this.model.customerId, this.model.startDate, this.model.endDate).subscribe(s => {
+
+    const orderNumber = (this.model.orderId === '' || this.model.orderId === 'ALL') ? ''
+    : this.orderMaster.find(f => f.orderId === this.model.orderId).orderNumber;
+
+    const customerName = (this.model.customerId === '' || this.model.customerId === 'ALL') ? ''
+    : this.customerMaster.find(f => f.id === this.model.customerId).name;
+
+    this.service.getDispatchReport(orderNumber, customerName, this.model.startDate, this.model.endDate).subscribe(s => {
       const localDispatches = [];
       if (s && s.length > 0) {
         s.forEach(element => {
           localDispatches.push({
-            id: element.Id,
+            srno: element.SrNum,
             orderNumber: element.OrderNumber,
+            dispatchNumber: element.ChallanNumber,
+            customerName: element.CustomerName,
             date: element.DispatchDate,
-            orderId: element.OrderId,
-            dispatchNumber: element.DispatchNumber,
+            productName: element.ProductName,
+            orderQuantity: element.OrderQuantity,
+            dispatchQuantity: element.DispatchQuantity,
             transportName: element.TransportName,
             loading: element.Loading,
             unloading: element.Unloading,
-            remark: element.Remark,
           });
         });
       }
