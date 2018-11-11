@@ -9,7 +9,7 @@ import { SuppliersService } from '../../Services/suppliers.service';
   styleUrls: ['./supplierPOReport.component.scss']
 })
 export class SupplierPOReportComponent implements OnInit {
-  public displayedColumns = ['srNumber', 'supplierPONumber', 'supplierName', 'date', 'rawMaterialName', 'POQuantity', 'remark'];
+  public displayedColumns = ['srNumber', 'supplierPONumber', 'supplierName', 'date', 'rawMaterialName', 'POQuantity'];
   supplierPOs = [];
   model = {
     supplierPOId: '',
@@ -25,28 +25,37 @@ export class SupplierPOReportComponent implements OnInit {
     , private rawMaterialService: RawMaterialService, private supplierService: SuppliersService) {}
 
   ngOnInit() {
-    this.refreshReport();
     this.getSuppliers();
     this.getSupplierPOs();
     this.getRawMaterials();
+    setTimeout(() => {
+      this.refreshReport();
+    }, 2000);
   }
 
   getSupplierPOReport() {
-    this.service.getSupplierPOReport(this.model.supplierId, this.model.supplierPOId, this.model.rawMaterialId
+
+    const supplierName = (this.model.supplierId === '' || this.model.supplierId === 'ALL') ? ''
+    : this.supplierMaster.find(f => f.id === this.model.supplierId).name;
+
+    const supplierPONumber = (this.model.supplierPOId === '' || this.model.supplierPOId === 'ALL') ? ''
+    : this.supplierPOMaster.find(f => f.supplierPOId === this.model.supplierPOId).supplierPONumber;
+
+    const rawMaterial = (this.model.rawMaterialId === '' || this.model.rawMaterialId === 'ALL') ? ''
+    : this.rawMaterialMaster.find(f => f.rawMaterialId === this.model.rawMaterialId).name;
+
+    this.service.getSupplierPOReport(supplierName, supplierPONumber, rawMaterial
         , this.model.startDate, this.model.endDate).subscribe(s => {
       const localSupplierPOs = [];
       if (s && s.length > 0) {
         s.forEach(element => {
           localSupplierPOs.push({
-            id: element.Id,
-            orderNumber: element.OrderNumber,
-            date: element.DispatchDate,
-            orderId: element.OrderId,
-            dispatchNumber: element.DispatchNumber,
-            transportName: element.TransportName,
-            loading: element.Loading,
-            unloading: element.Unloading,
-            remark: element.Remark,
+            srno: element.SrNum,
+            supplierPONumber: element.SupplierOrderNumber,
+            supplierName: element.SupplierName,
+            date: element.SupplierOrderDate,
+            rawMaterialName: element.RawMaterialName.toString().trim(),
+            POQuantity: element.Quantity,
           });
         });
       }
@@ -62,7 +71,7 @@ export class SupplierPOReportComponent implements OnInit {
         s.forEach(element => {
           localSuppliers.push({
             id: element.Id,
-            name: element.Name.toString().trim(),
+            name: element.SupplierName.toString().trim(),
           });
         });
       }
@@ -77,7 +86,7 @@ export class SupplierPOReportComponent implements OnInit {
       element.forEach(fe => {
         localSupplierPOs.push({
           supplierPOId: fe.Id,
-          supplierPONumber: fe.SupplierPONumber.toString().trim(),
+          supplierPONumber: fe.SupplierOrderNumber.toString().trim(),
         });
       });
       this.supplierPOMaster = localSupplierPOs;

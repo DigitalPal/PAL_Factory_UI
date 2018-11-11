@@ -15,7 +15,7 @@
           <div class="col-sm-4">
             <div class="md-form mt-0">
               <select class="form-control" [(ngModel)]="model.supplierPOId" #orderId="ngModel" name="supplierPOId">
-                <option value="" disabled [selected]="model.supplierPOId === ''">ALL</option>
+                <option value="" [selected]="model.supplierPOId === ''">ALL</option>
                 <option *ngFor="let supplierPO of supplierPOMaster" [selected]="model.supplierPOId === supplierPO.supplierPOId"
                   [value]="supplierPO.supplierPOId">{{supplierPO.supplierPONumber}}</option>
               </select>
@@ -26,7 +26,7 @@
           <div class="col-sm-4">
             <div class="md-form mt-0">
               <select class="form-control" [(ngModel)]="model.supplierId" #customerId="ngModel" name="supplierId">
-                <option value="" disabled [selected]="model.supplierId === ''">ALL</option>
+                <option value="" [selected]="model.supplierId === ''">ALL</option>
                 <option *ngFor="let supplier of supplierMaster" [selected]="model.supplierId === supplier.id" [value]="supplier.id">{{supplier.name}}</option>
               </select>
             </div>
@@ -38,7 +38,7 @@
           <div class="col-sm-4">
             <div class="md-form mt-0">
               <select class="form-control" [(ngModel)]="model.rawMaterialId" #orderId="ngModel" name="rawMaterialId">
-                <option value="" disabled [selected]="model.rawMaterialId === ''">ALL</option>
+                <option value="" [selected]="model.rawMaterialId === ''">ALL</option>
                 <option *ngFor="let rawMaterial of rawMaterialMaster" [selected]="model.rawMaterialId === rawMaterial.rawMaterialId"
                   [value]="rawMaterial.rawMaterialId">{{rawMaterial.name}}</option>
               </select>
@@ -111,10 +111,10 @@
           <mat-cell *matCellDef="let row"> {{row.POQuantity}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="remark">
+        <!-- <ng-container matColumnDef="remark">
           <mat-header-cell *matHeaderCellDef> Remark </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.remark}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
         <!--       
               <ng-container matColumnDef="orderStatus">
                 <mat-header-cell *matHeaderCellDef> Order Status </mat-header-cell>

@@ -47,7 +47,10 @@ export class SupplierPOService {
     request['Remark'] = supplierPO.remark;
     const rawMaterials = [];
     supplierPO.rawMaterials.forEach(fe => {
-      rawMaterials.push({ 'RawMaterialId': fe.rawMaterialId, 'Quantity': +fe.quantity});
+      rawMaterials.push({
+        'RawMaterialId': fe.rawMaterialId,
+        'Quantity': +fe.quantity
+      });
     });
     request['RawMaterial'] = rawMaterials;
     request['CreatedBy'] = environment.userId;
@@ -73,7 +76,10 @@ export class SupplierPOService {
     request['Remark'] = supplierPO.remark;
     const rawMaterials = [];
     supplierPO.rawMaterials.forEach(fe => {
-      rawMaterials.push({ 'RawMaterialId': fe.rawMaterialId, 'Quantity': +fe.quantity});
+      rawMaterials.push({
+        'RawMaterialId': fe.rawMaterialId,
+        'Quantity': +fe.quantity
+      });
     });
     request['RawMaterial'] = rawMaterials;
     request['CreatedBy'] = environment.userId;
@@ -95,22 +101,42 @@ export class SupplierPOService {
     });
   }
 
-  getSupplierPOReport(supplierId, supplierPOId, rawMaterialId, startDate, endDate): Observable < any > {
-    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/SupplierPOReport';
+  getSupplierPOReport(supplierName, supplierPONumber, rawMaterial, startDate, endDate): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/SupplierOrder/Search';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url + '/' + supplierPOId, {
+
+    const request = {};
+    if (supplierName) {
+      request['SupplierName'] = supplierName;
+    }
+
+    if (supplierPONumber) {
+      request['SupplierOrderNumber'] = supplierPONumber;
+    }
+
+    if (startDate) {
+      request['StartDate'] = startDate.month + '-' + startDate.day + '-' + startDate.year;
+    }
+
+    if (endDate) {
+      request['EndDate'] = endDate.month + '-' + endDate.day + '-' + endDate.year;
+    }
+
+    return this.http.post(url, request, {
       headers: headers
     });
   }
 
-  getMaxNumbers(logedInUser): Observable<any> {
+  getMaxNumbers(logedInUser): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/SupplierOrder/maxNumbers';
     const request = null;
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url, { headers: headers });
+    return this.http.get(url, {
+      headers: headers
+    });
   }
 }

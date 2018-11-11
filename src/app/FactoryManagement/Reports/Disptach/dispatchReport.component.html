@@ -15,7 +15,7 @@
           <div class="col-sm-4">
             <div class="md-form mt-0">
               <select class="form-control" [(ngModel)]="model.orderId" #orderId="ngModel" name="orderId">
-                <option value="" disabled [selected]="model.orderId === ''">ALL</option>
+                <option value="" [selected]="model.orderId === ''">ALL</option>
                 <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.orderId" [value]="order.orderId">{{order.orderNumber}}</option>
               </select>
             </div>
@@ -25,7 +25,7 @@
           <div class="col-sm-4">
             <div class="md-form mt-0">
               <select class="form-control" [(ngModel)]="model.customerId" #customerId="ngModel" name="customerId">
-                <option value="" disabled [selected]="model.customerId === ''">ALL</option>
+                <option value="" [selected]="model.customerId === ''">ALL</option>
                 <option *ngFor="let customer of customerMaster" [selected]="model.customerId === customer.id" [value]="customer.id">{{customer.name}}</option>
               </select>
             </div>
@@ -122,7 +122,7 @@
           <mat-cell *matCellDef="let row"> {{row.unloading}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="remark">
+        <!-- <ng-container matColumnDef="remark">
           <mat-header-cell *matHeaderCellDef> Remark </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.remark}} </mat-cell>
         </ng-container>
@@ -130,7 +130,7 @@
         <ng-container matColumnDef="orderStatus">
           <mat-header-cell *matHeaderCellDef> Order Status </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.orderStatus}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
