@@ -85,13 +85,13 @@ export const menus = [
             //     'chip': false,
             //     'open': true,
             // },
-            // {
-            //     'name': 'Production Entry',
-            //     'link': '/auth/productionEntry',
-            //     'icon': 'select_all',
-            //     'chip': false,
-            //     'open': true,
-            // },
+            {
+                'name': 'Production Entry',
+                'link': '/auth/productionEntry',
+                'icon': 'select_all',
+                'chip': false,
+                'open': true,
+            },
             {
                 'name': 'Dispatch Entry',
                 'link': '/auth/dispatchList',
@@ -132,6 +132,13 @@ export const menus = [
             {
                 'name': 'Dispatch Report',
                 'link': '/auth/dispatchReport',
+                'icon': 'pie_chart',
+                'chip': false,
+                'open': true,
+            },
+            {
+                'name': 'Production Report',
+                'link': '/auth/productionReport',
                 'icon': 'pie_chart',
                 'chip': false,
                 'open': true,

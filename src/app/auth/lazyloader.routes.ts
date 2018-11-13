@@ -12,6 +12,7 @@ import { PaymentListComponent } from '../FactoryManagement/Payments/paymentList.
 import { PlantsListComponent } from '../FactoryManagement/Plants/plants.component';
 import { ProductsListComponent } from '../FactoryManagement/Product/products.component';
 import { ProductionEntryListComponent } from '../FactoryManagement/ProductionEntry/productionEntry.component';
+import { ProductionDetailsComponent } from '../FactoryManagement/ProductionEntry/productionDetails.component';
 import { RawMaterialListComponent } from '../FactoryManagement/RawMaterial/rawmaterial.component';
 import { RawMaterialConsumptionListComponent } from '../FactoryManagement/RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialInwardListComponent } from '../FactoryManagement/RawMaterialInward/rawMaterialInward.component';
@@ -20,7 +21,7 @@ import { AuthComponent } from './auth.component';
 import { PriceDetailListComponent } from '../FactoryManagement/Price/priceDetails.component';
 import { SizeDetailListComponent } from '../FactoryManagement/Size/sizeDetails.component';
 import { DispatchReportComponent } from '../FactoryManagement/Reports/Disptach/dispatchReport.component';
-
+import { ProductionReportComponent } from '../FactoryManagement/Reports/Production/productionReport.component';
 
 
 
@@ -73,6 +74,11 @@ export const appRoutes: Routes = [{
       canActivate: [AuthGuard]
     },
     {
+      path: 'productionDetails',
+      component: ProductionDetailsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
       path: 'dashboard',
       component: DashboardCrmComponent
     },
@@ -112,6 +118,7 @@ export const appRoutes: Routes = [{
       canActivate: [AuthGuard]
     },
     { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
+    { path: 'productionReport', component:  ProductionReportComponent, canActivate: [AuthGuard]},
     {
       path: 'material-widgets',
       loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule'

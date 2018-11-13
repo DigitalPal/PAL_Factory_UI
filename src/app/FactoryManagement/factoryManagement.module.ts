@@ -21,6 +21,7 @@ import { PlantsListComponent } from './Plants/plants.component';
 import { PriceDetailListComponent } from './Price/priceDetails.component';
 import { ProductsListComponent } from './Product/products.component';
 import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
+import { ProductionDetailsComponent } from './ProductionEntry/productionDetails.component';
 import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
 import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
@@ -40,6 +41,7 @@ import { PaymentsService } from './Services/payments.service';
 import { InvoicePrintComponent } from './Invoice/printInvoice.component';
 import { AmountCalculatorService } from './Services/amountCalculator.service';
 import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.component';
+import { ProductionReportComponent } from './Reports/Production/productionReport.component';
 
 @NgModule({
 
@@ -55,6 +57,7 @@ import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.compo
     RawMaterialConsumptionListComponent,
     ProductsListComponent,
     ProductionEntryListComponent,
+    ProductionDetailsComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchDetailsComponent,
@@ -62,7 +65,8 @@ import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.compo
     InvoiceListComponent,
     PaymentListComponent,
     InvoicePrintComponent,
-    DispatchReportComponent
+    DispatchReportComponent,
+    ProductionReportComponent
   ],
 
   imports: [
@@ -119,6 +123,7 @@ import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.compo
     RawMaterialConsumptionListComponent,
     ProductsListComponent,
     ProductionEntryListComponent,
+    ProductionDetailsComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchListComponent,
@@ -126,7 +131,8 @@ import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.compo
     InvoiceListComponent,
     PaymentListComponent,
     InvoicePrintComponent,
-    DispatchReportComponent
+    DispatchReportComponent,
+    ProductionReportComponent
   ],
 })
 export class FactoryManagementModule {}
