@@ -21,6 +21,7 @@ import { PlantsListComponent } from './Plants/plants.component';
 import { PriceDetailListComponent } from './Price/priceDetails.component';
 import { ProductsListComponent } from './Product/products.component';
 import { ProductionEntryListComponent } from './ProductionEntry/productionEntry.component';
+import { ProductionDetailsComponent } from './ProductionEntry/productionDetails.component';
 import { RawMaterialListComponent } from './RawMaterial/rawmaterial.component';
 import { RawMaterialConsumptionListComponent } from './RawMaterialConsumption/rawMaterialConsumption.component';
 import { RawMaterialInwardListComponent } from './RawMaterialInward/rawMaterialInward.component';
@@ -40,6 +41,7 @@ import { PaymentsService } from './Services/payments.service';
 import { InvoicePrintComponent } from './Invoice/printInvoice.component';
 import { AmountCalculatorService } from './Services/amountCalculator.service';
 import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.component';
+import { ProductionReportComponent } from './Reports/Production/productionReport.component';
 import { SupplierPOService } from './Services/supplierPO.service';
 import { SupplierPODetailsComponent } from './SupplierPO/supplierPODetails.component';
 import { SupplierPOListComponent } from './SupplierPO/supplierPOList.component';
@@ -47,6 +49,7 @@ import { SupplierPOPrintComponent } from './SupplierPO/printPO.component';
 import { SupplierPOReportComponent } from './Reports/SupplierPO/supplierPOReport.component';
 import { SummaryReportComponent } from './Reports/Summary/summaryReport.component';
 import { SummaryReportService } from './Services/summaryReport.service';
+
 
 @NgModule({
 
@@ -62,6 +65,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     RawMaterialConsumptionListComponent,
     ProductsListComponent,
     ProductionEntryListComponent,
+    ProductionDetailsComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchDetailsComponent,
@@ -70,11 +74,15 @@ import { SummaryReportService } from './Services/summaryReport.service';
     PaymentListComponent,
     InvoicePrintComponent,
     DispatchReportComponent,
+
+    ProductionReportComponent
+
     SupplierPODetailsComponent,
     SupplierPOListComponent,
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
+
   ],
 
   imports: [
@@ -133,6 +141,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     RawMaterialConsumptionListComponent,
     ProductsListComponent,
     ProductionEntryListComponent,
+    ProductionDetailsComponent,
     OrderDetailsComponent,
     OrderListComponent,
     DispatchListComponent,
@@ -141,11 +150,15 @@ import { SummaryReportService } from './Services/summaryReport.service';
     PaymentListComponent,
     InvoicePrintComponent,
     DispatchReportComponent,
+
+    ProductionReportComponent
+
     SupplierPODetailsComponent,
     SupplierPOListComponent,
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
+
   ],
 })
 export class FactoryManagementModule {}
