@@ -21,7 +21,16 @@ import { AuthComponent } from './auth.component';
 import { PriceDetailListComponent } from '../FactoryManagement/Price/priceDetails.component';
 import { SizeDetailListComponent } from '../FactoryManagement/Size/sizeDetails.component';
 import { DispatchReportComponent } from '../FactoryManagement/Reports/Disptach/dispatchReport.component';
+
 import { ProductionReportComponent } from '../FactoryManagement/Reports/Production/productionReport.component';
+
+import { SupplierPOListComponent } from '../FactoryManagement/SupplierPO/supplierPOList.component';
+import { SupplierPODetailsComponent } from '../FactoryManagement/SupplierPO/supplierPODetails.component';
+import { SupplierPOPrintComponent } from '../FactoryManagement/SupplierPO/printPO.component';
+import { SupplierPOReportComponent } from '../FactoryManagement/Reports/SupplierPO/supplierPOReport.component';
+import { SummaryReportComponent } from '../FactoryManagement/Reports/Summary/summaryReport.component';
+
+
 
 
 
@@ -118,7 +127,36 @@ export const appRoutes: Routes = [{
       canActivate: [AuthGuard]
     },
     { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
+
     { path: 'productionReport', component:  ProductionReportComponent, canActivate: [AuthGuard]},
+
+
+    {
+      path: 'supplierPOList',
+      component: SupplierPOListComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'supplierPODetails',
+      component: SupplierPODetailsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'printPO',
+      component: SupplierPOPrintComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'supplierPOReport',
+      component: SupplierPOReportComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'summaryReport',
+      component: SummaryReportComponent,
+      canActivate: [AuthGuard]
+    },
+
     {
       path: 'material-widgets',
       loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule'

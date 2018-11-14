@@ -137,8 +137,22 @@ export const menus = [
                 'open': true,
             },
             {
+                'name': 'Supplier PO Report',
+                'link': '/auth/supplierPOReport',
+                'icon': 'pie_chart',
+                'chip': false,
+                'open': true,
+            },
+            {
                 'name': 'Production Report',
                 'link': '/auth/productionReport',
+                'icon': 'pie_chart',
+                'chip': false,
+                'open': true,
+            },
+            {
+                'name': 'Summary Report',
+                'link': '/auth/summaryReport',
                 'icon': 'pie_chart',
                 'chip': false,
                 'open': true,
@@ -180,13 +194,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            // {
-            //     'name': 'Enter PO for Customer',
-            //     'link': '/auth/dashboard',
-            //     'icon': 'keyboard_tab',
-            //     'chip': false,
-            //     'open': true,
-            // }
+            {
+                'name': 'Supplier PO',
+                'link': '/auth/supplierPOList',
+                'icon': 'keyboard_tab',
+                'chip': false,
+                'open': true,
+            }
         ]
     },
     // {
