@@ -9,7 +9,7 @@ import { ProductsService } from '../Services/products.service';
     styleUrls: ['./products.component.scss']
   })
   export class ProductsListComponent implements OnInit {
-    public displayedColumns = ['name', 'length', 'width', 'height', 'price',  'actions'];
+    public displayedColumns = ['name', 'hsnCode', 'length', 'width', 'height', 'price',  'actions'];
     products: Product[] = [];
     model = {
       id: null,
@@ -17,7 +17,8 @@ import { ProductsService } from '../Services/products.service';
       length: '',
       width: '',
       height: '',
-      price: ''
+      price: '',
+      hsnCode: ''
     };
 
     constructor(private modalService: NgbModal, private service: ProductsService, private spinner: NgxSpinnerService) {}
@@ -30,6 +31,7 @@ import { ProductsService } from '../Services/products.service';
           this.model.width = '';
           this.model.height = '';
           this.model.price = '';
+          this.model.hsnCode = '';
         } else {
           this.model.id = row.id;
           this.model.name = row.name;
@@ -37,6 +39,7 @@ import { ProductsService } from '../Services/products.service';
           this.model.length = row.length;
           this.model.height = row.height;
           this.model.price = row.price;
+          this.model.hsnCode = row.hsnCode;
         }
         this.modalService.open(content, {
           size: 'lg',
@@ -69,6 +72,7 @@ import { ProductsService } from '../Services/products.service';
           width: this.model.width,
           height: this.model.height,
           price: this.model.price,
+          hsnCode: this.model.hsnCode,
         }).subscribe(s => this.getProducts());
       }
 
@@ -85,6 +89,7 @@ import { ProductsService } from '../Services/products.service';
           width: this.model.width,
           height: this.model.height,
           price: this.model.price,
+          hsnCode: this.model.hsnCode,
         }).subscribe(s => this.getProducts());
       }
 
@@ -99,7 +104,8 @@ import { ProductsService } from '../Services/products.service';
                 length: element.Length,
                 width: element.Width,
                 height: element.Height,
-                price: element.Price
+                price: element.Price,
+                hsnCode: element.HSNCode
               });
             });
           }

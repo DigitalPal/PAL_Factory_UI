@@ -5,4 +5,5 @@ export interface Product {
     width: string;
     height: string;
     price: string;
+    hsnCode: string;
 }
