@@ -23,7 +23,7 @@ import { SizeDetailListComponent } from '../FactoryManagement/Size/sizeDetails.c
 import { DispatchReportComponent } from '../FactoryManagement/Reports/Disptach/dispatchReport.component';
 
 import { ProductionReportComponent } from '../FactoryManagement/Reports/Production/productionReport.component';
-
+import { ConsumptionReportComponent } from '../FactoryManagement/Reports/Consumption/consumptionReport.component';
 import { SupplierPOListComponent } from '../FactoryManagement/SupplierPO/supplierPOList.component';
 import { SupplierPODetailsComponent } from '../FactoryManagement/SupplierPO/supplierPODetails.component';
 import { SupplierPOPrintComponent } from '../FactoryManagement/SupplierPO/printPO.component';
@@ -129,7 +129,7 @@ export const appRoutes: Routes = [{
     { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
 
     { path: 'productionReport', component:  ProductionReportComponent, canActivate: [AuthGuard]},
-
+    { path: 'consumptionReport', component:  ConsumptionReportComponent, canActivate: [AuthGuard]},
 
     {
       path: 'supplierPOList',

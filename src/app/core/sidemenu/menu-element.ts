@@ -78,13 +78,13 @@ export const menus = [
                 'chip': false,
                 'open': true,
             },
-            // {
-            //     'name': 'Raw Material Consumption',
-            //     'link': '/auth/rawMaterialConsumption',
-            //     'icon': 'select_all',
-            //     'chip': false,
-            //     'open': true,
-            // },
+            {
+                'name': 'Raw Material Consumption',
+                'link': '/auth/rawMaterialConsumption',
+                'icon': 'select_all',
+                'chip': false,
+                'open': true,
+            },
             {
                 'name': 'Production Entry',
                 'link': '/auth/productionEntry',
@@ -115,13 +115,13 @@ export const menus = [
             //     'chip': false,
             //     'open': true,
             // },
-            // {
-            //     'name': 'Raw Material Consumption',
-            //     'link': '/auth/dashboard',
-            //     'icon': 'pie_chart',
-            //     'chip': false,
-            //     'open': true,
-            // },
+            {
+                'name': 'Raw Material Consumption',
+                'link': '/auth/consumptionReport',
+                'icon': 'pie_chart',
+                'chip': false,
+                'open': true,
+            },
             // {
             //     'name': 'Production Details',
             //     'link': '/auth/dashboard',

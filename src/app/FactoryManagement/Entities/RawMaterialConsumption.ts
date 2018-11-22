@@ -1,8 +1,8 @@
 export interface RawMaterialConsumption {
     id?: string;
-    date: string;
-    materialId: string;
-    materialname: string;
+    consumptionDate: any;
+    rawMaterialId: string;
+    RawMaterial: string;
     quantity: number;
     remark: string;
   }

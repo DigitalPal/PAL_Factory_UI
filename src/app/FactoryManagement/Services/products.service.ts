@@ -28,6 +28,7 @@ export class ProductsService {
         request['Width'] = product.width;
         request['Height'] = product.height;
         request['Price'] = product.price;
+        request['HSNCode'] = product.hsnCode;
         return this.http.post(url, [request], { headers: headers });
       }
 
@@ -44,6 +45,7 @@ export class ProductsService {
         request['Width'] = product.width;
         request['Height'] = product.height;
         request['Price'] = product.price;
+        request['HSNCode'] = product.hsnCode;
         return this.http.put(url, [request], { headers: headers });
       }
 

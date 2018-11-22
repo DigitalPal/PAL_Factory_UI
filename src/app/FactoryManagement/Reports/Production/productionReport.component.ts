@@ -29,6 +29,9 @@ model = {
   }
 
   getProduction() {
+    console.log('selected prod is');
+    console.log(this.model.productId);
+    console.log('done');
     const productName = (this.model.productId === '' || this.model.productId === 'ALL') ? ''
     : this.productMaster.find(f => f.id === this.model.productId).name;
 
