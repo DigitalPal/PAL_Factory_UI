@@ -5,7 +5,7 @@
 
   <div fxFlex class="table-component-holder mat-elevation-z4">
     <mat-toolbar class="table-header">
-      <h1 class="mat-headline center-align">Payments <span *ngIf="selectedInvoiceNumber"> For Invoice Number: {{ selectedInvoiceNumber }}</span></h1>
+      <h1 class="mat-headline center-align">Payments <span *ngIf="selectedInvoiceNumber"> For Invoice Number: {{ selectedInvoiceNumber }}</span><span *ngIf="selectedSupplierOrderId"> For Supplier</span></h1>
       <button style="margin-left: auto;" class="btn btn-primary float-right" (click)="open(content, null)">Add Payment</button>
     </mat-toolbar>
     <div class="table-container">
@@ -25,7 +25,7 @@
         </ng-container>
 
         <ng-container matColumnDef="customerName">
-          <mat-header-cell *matHeaderCellDef> Customer Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{mode === 'CUSTOMER_ORDER'? 'Customer Name': 'Supplier Name'}} </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.customerName}} </mat-cell>
         </ng-container>
 
@@ -39,10 +39,15 @@
           <mat-cell *matCellDef="let row"> {{row.amount}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="remark">
+        <ng-container matColumnDef="paymentMode">
+          <mat-header-cell *matHeaderCellDef> Mode Of Payment </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.paymentMode}} </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="remark">
           <mat-header-cell *matHeaderCellDef> Remark </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.remark}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
@@ -77,7 +82,7 @@
         <label for="orderId" class="col-sm-3 col-form-label">Order Number<span style="color:red">*</span></label>
         <div class="col-sm-6">
           <div class="md-form mt-0">
-            <select [disabled]="selectedInvoiceId" (change)="orderSelectionChange()" class="form-control" [(ngModel)]="model.orderId" #adminUser="ngModel" name="orderId">
+            <select [disabled]="selectedInvoiceId || selectedSupplierOrderId" (change)="orderSelectionChange()" class="form-control" [(ngModel)]="model.orderId" #adminUser="ngModel" name="orderId">
               <option value="" disabled [selected]="model.orderId === ''">Choose your option</option>
               <option *ngFor="let order of orderMaster" [selected]="model.orderId === order.orderId" [value]="order.orderId">{{order.orderNumber}}</option>
             </select>
@@ -85,7 +90,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="form-group row" *ngIf="mode === 'CUSTOMER_ORDER'">
         <!-- Material input -->
         <label for="invoiceId" class="col-sm-3 col-form-label">Invoice Number<span style="color:red">*</span></label>
         <div class="col-sm-6">
@@ -116,6 +121,50 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group row">
+        <label for="paymentMode" class="col-sm-3 col-form-label">Mode Of Payment<span style="color:red">*</span></label>
+        <div class="col-sm-6">
+          <div class="md-form mt-0">
+            <select class="form-control" [(ngModel)]="model.paymentMode" #paymentMode="ngModel" name="paymentMode">
+              <option value="CASH"  [selected]="model.paymentMode === 'CASH'">CASH</option>
+              <option value="CHEQUE"  [selected]="model.paymentMode === 'CHEQUE'">CHEQUE</option>
+              <!-- <option value="DD"  [selected]="model.paymentMode === 'DD'">DD</option> -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="model.paymentMode === 'CHEQUE'">
+        <label for="txtbank" class="col-sm-3 col-form-label">Bank<span style="color:red">*</span></label>
+        <div class="col-sm-6">
+          <div class="md-form mt-0">
+            <input type="text" [(ngModel)]="model.bank" #name="ngModel" name="bank" class="form-control" id="txtbank"
+              placeholder="Bank Name">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="model.paymentMode === 'CHEQUE'">
+        <label for="txtchequeNumber" class="col-sm-3 col-form-label">Cheque Number<span style="color:red">*</span></label>
+        <div class="col-sm-6">
+          <div class="md-form mt-0">
+            <input type="text" [(ngModel)]="model.chequeNumber" #name="ngModel" name="chequeNumber" class="form-control" id="txtchequeNumber"
+              placeholder="Cheque Number">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="model.paymentMode === 'CHEQUE'">
+        <label for="txtchequeDate" class="col-sm-3 col-form-label">Cheque Date<span style="color:red">*</span></label>
+        <div class="col-sm-6">
+          <div class="md-form form-sm">
+            <input type="text" (click)="d.toggle()" [(ngModel)]="model.chequeDate" #name="ngModel" name="chequeDate" class="form-control"
+              id="txtchequeDate" placeholder="Cheque Date" ngbDatepicker #d="ngbDatepicker" />
+          </div>
+        </div>
+      </div>
+
       <div class="form-group row">
         <label for="txtremark" class="col-sm-3 col-form-label">Remark</label>
         <div class="col-sm-6">

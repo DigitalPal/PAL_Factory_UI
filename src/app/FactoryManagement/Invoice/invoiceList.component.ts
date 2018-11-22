@@ -1,30 +1,12 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  ActivatedRoute,
-  Router
-} from '@angular/router';
-import {
-  NgbModal
-} from '@ng-bootstrap/ng-bootstrap';
-import {
-  NgxSpinnerService
-} from 'ngx-spinner';
-import {
-  Invoice
-} from '../Entities/Invoice';
-import {
-  DispatchService
-} from '../Services/disptach.service';
-import {
-  InvoiceService
-} from '../Services/invoice.service';
-import {
-  OrderService
-} from '../Services/order.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Invoice } from '../Entities/Invoice';
 import { AmountCalculatorService } from '../Services/amountCalculator.service';
+import { DispatchService } from '../Services/disptach.service';
+import { InvoiceService } from '../Services/invoice.service';
+import { OrderService } from '../Services/order.service';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoiceList.component.html',
@@ -267,7 +249,7 @@ export class InvoiceListComponent implements OnInit {
 
   openPayments(row) {
     this.router.navigate(['/auth/paymentList'], {
-      fragment: row.id
+      fragment: 'CUSTOMER_ORDER+' + row.id
     });
   }
 

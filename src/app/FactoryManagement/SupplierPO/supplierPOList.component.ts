@@ -51,4 +51,10 @@ export class SupplierPOListComponent implements OnInit {
     });
   }
 
+  openPayments(row) {
+    this.router.navigate(['/auth/paymentList'], {
+      fragment: 'SUPPLIER_ORDER+' + row.id
+    });
+  }
+
 }
