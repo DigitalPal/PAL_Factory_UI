@@ -47,6 +47,6 @@ export class ProductionEntryListComponent implements OnInit {
   }
 
   deleteProductionEntry(row) {
-    this.service.deleteProductionEntry(row);
+    this.service.deleteProductionEntry(row).subscribe(s => this.getProductionEntry());
   }
 }

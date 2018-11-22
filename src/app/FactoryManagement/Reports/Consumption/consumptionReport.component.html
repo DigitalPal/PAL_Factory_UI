@@ -9,21 +9,15 @@
         <div class="table-container">
             <div class="col-sm-10" style="padding: 20px;">
                 <div class="form-group row">
-                    <label for="txtproductName" class="col-sm-2 col-form-label">Products</label>
+                    <label for="txtrawMaterialName" class="col-sm-2 col-form-label">Raw Material</label>
                     <div class="col-sm-4">
                         <div class="md-form mt-0">
-                        <select class="form-control" [(ngModel)]="model.productId" #productId="ngModel" name="productId">
-                            <option value="" disabled [selected]="model.productId === ''">ALL</option>
-                            <option *ngFor="let product of productMaster" [selected]="model.productId === product.id" [value]="product.id">{{product.name}}</option>
+                        <select class="form-control" [(ngModel)]="model.rawMaterialId" #rawMaterialId="ngModel" name="rawMaterialId">
+                            <option value="" disabled [selected]="model.rawMaterialId === ''">ALL</option>
+                            <option *ngFor="let rawMaterial of rawMaterialMaster" [selected]="model.rawMaterialId === rawMaterial.id" [value]="rawMaterial.id">{{rawMaterial.name}}</option>
                         </select>
                         </div>
                     </div>
-                    <!-- <label for="txtcustomerName" class="col-sm-2 col-form-label">Customer Name</label>
-                    <div class="col-sm-4">
-                        <div class="md-form mt-0">
-                        test
-                        </div>
-                    </div> -->
                 </div>
                 <div class="form-group row">
                     <label for="txtstartDate" class="col-sm-2 col-form-label">Start Date</label>
@@ -52,39 +46,34 @@
 <div fxLayout="column" class="components-container-gt-xs" fxLayoutGap="20px">
     <div fxFlex class="table-component-holder mat-elevation-z4">
         <mat-toolbar class="table-header">
-            <h1 class="mat-headline center-align">Production Report</h1>
+            <h1 class="mat-headline center-align">Consumption Report</h1>
         </mat-toolbar>
         <div class="table-container">
-            <mat-table #table [dataSource]="productions">
+            <mat-table #table [dataSource]="consumptions">
                 <ng-container matColumnDef="srNum">
                     <mat-header-cell *matHeaderCellDef> Sr. No. </mat-header-cell>
                     <mat-cell style="width:100px;" *matCellDef="let row"> {{row.srNum}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="productionDate">
-                    <mat-header-cell *matHeaderCellDef> productionDate </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.date | date: 'dd/MM/yyyy'}} </mat-cell>
+                <ng-container matColumnDef="consumptionDate">
+                    <mat-header-cell *matHeaderCellDef> consumption Date </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.consumptionDate | date: 'dd/MM/yyyy'}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="productionNumber">
-                    <mat-header-cell *matHeaderCellDef> #Production </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> <a routerLinkActive="active" routerLink="/auth/productionDetails" [fragment]="row.id">{{row.productionNumber}}</a>
-                    </mat-cell>
+                <ng-container matColumnDef="rawMaterial">
+                    <mat-header-cell *matHeaderCellDef> Raw Material </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.rawMaterial}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="noOfMouldsCasted">
+                <ng-container matColumnDef="quantity">
+                    <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
                     <mat-header-cell *matHeaderCellDef> Moulds Casted </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.noOfMouldsCasted}} </mat-cell>
+                    <mat-cell *matCellDef="let row"> {{row.quantity}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="breakage">
-                        <mat-header-cell *matHeaderCellDef> Breakage </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.breakage}} </mat-cell>
-                    </ng-container>
-                <ng-container matColumnDef="productName">
-                    <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
-                    <mat-cell *matCellDef="let row"> {{row.productName}} </mat-cell>
+                <ng-container matColumnDef="measureType">
+                    <mat-header-cell *matHeaderCellDef> UoM </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.measureType}} </mat-cell>
                 </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
-            <div class="example-no-results" style="display: block; text-align: center; margin: 10px" *ngIf="dispatches?.length == 0">
+            <div class="example-no-results" style="display: block; text-align: center; margin: 10px" *ngIf="consumptions?.length == 0">
                 No Data 
             </div>
         </div>
