@@ -75,7 +75,6 @@ import { SummaryReportService } from './Services/summaryReport.service';
     PaymentListComponent,
     InvoicePrintComponent,
     DispatchReportComponent,
-
     ProductionReportComponent,
     ConsumptionReportComponent,
     SupplierPODetailsComponent,
