@@ -29,9 +29,6 @@ import { RawMaterialConsumptionService } from '../../Services/rawMaterialConsump
   }
 
   getConsumption() {
-    console.log('selected prod');
-    console.log(this.model.rawMaterialId);
-    console.log('done');
     const rawMaterialName = (this.model.rawMaterialId === '' || this.model.rawMaterialId === 'ALL') ? ''
     : this.rawMaterialMaster.find(f => f.id === this.model.rawMaterialId).name;
 

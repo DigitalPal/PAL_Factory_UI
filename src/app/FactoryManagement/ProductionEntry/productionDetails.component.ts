@@ -69,7 +69,7 @@ import { OrderService } from '../Services/order.service';
                         if (s.ProductionNumber) {
                             newProductionNumber = (+s.ProductionNumber.split('-')[2]) + 1;
                         }
-                        const productionNumber = 'PROD-' + new Date().getDate().toString() +
+                        const productionNumber = 'MLD-' + new Date().getDate().toString() +
                             (new Date().getMonth() + 1).toString() +
                             new Date().getFullYear().toString() +
                             '-' + newProductionNumber;
@@ -93,7 +93,7 @@ import { OrderService } from '../Services/order.service';
             const msg = this.validate();
             if (msg === '') {
               this.service.addProductionEntry(this.model).subscribe(s => {
-                this.router.navigate(['/auth/productionEntryList']);
+                this.router.navigate(['/auth/productionEntry']);
               });
             } else {
               alert(msg);
@@ -107,7 +107,7 @@ import { OrderService } from '../Services/order.service';
             const msg = this.validate();
             if (msg === '') {
              this.service.editProductionEntry(this.model).subscribe(s => {
-               this.router.navigate(['/auth/productionEntryList']);
+               this.router.navigate(['/auth/productionEntry']);
              });
             } else {
               alert(msg);
@@ -154,9 +154,9 @@ import { OrderService } from '../Services/order.service';
             if (this.model.productionDate == null || this.model.productionDate === '') {
               return 'Please select date';
             }
-            if (this.model.noOfMouldsCasted == null || this.model.noOfMouldsCasted === '') {
-                return 'Please enter number of moulds';
-              }
+            // if (this.model.noOfMouldsCasted == null || this.model.noOfMouldsCasted === '') {
+            //     return 'Please enter number of moulds';
+            //   }
             return '';
           }
 
@@ -194,6 +194,6 @@ import { OrderService } from '../Services/order.service';
           }
 
           backToListView() {
-            this.router.navigate(['/auth/productionEntryList']);
+            this.router.navigate(['/auth/productionEntry']);
           }
   }

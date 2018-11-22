@@ -10,7 +10,7 @@
             <form>
                 <div class="col-sm-7" style="padding: 30px;">
                     <div class="form-group row">
-                        <label for="txtproductionNumber" class="col-sm-6 col-form-label">Production Number</label>
+                        <label for="txtproductionNumber" class="col-sm-6 col-form-label">Mould Number<span style="color:red">*</span></label>
                         <div class="col-sm-6">
                             <div class="md-form mt-0">
                             <input disabled type="text" [(ngModel)]="model.productionNumber" #name="ngModel" name="productionNumber" class="form-control"
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="txtnoOfMouldsCasted" class="col-sm-6 col-form-label">Moulds Casted<span style="color:red">*</span></label>
                         <div class="col-sm-6">
                             <div class="md-form form-sm">
@@ -44,7 +44,7 @@
                                 id="txtnoOfMouldsCasted" placeholder="Number of moulds casted">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group row">
                         <label for="txtremark" class="col-sm-6 col-form-label">Remark<span style="color:red">*</span></label>
                         <div class="col-sm-6">
@@ -71,10 +71,10 @@
                                 <td>{{row.quantity}}</td>
                                 <td>{{row.breakage}}</td>
                                 <td>
-                                <button type="button" class="btn btn-outline-dark" (click)="deleteProductClicked(row)">Delete</button>
+                                <button *ngIf="!model.id" type="button" class="btn btn-outline-dark" (click)="deleteProductClicked(row)">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="!model.id">
                                 <td> <select class="form-control" [(ngModel)]="model.productId" #adminUser="ngModel" name="productId">
                                     <option value="" disabled [selected]="model.productId === ''">Choose your option</option>
                                     <option *ngFor="let product of productMaster" [selected]="model.productId === product.id" [value]="product.id">{{product.name}}</option>
@@ -90,7 +90,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="form-group row" style="margin-top:20px;">
+                    <div class="form-group row" style="margin-top:20px;" *ngIf="!model.id">
                         <button mat-raised-button color="primary" (click)="saveData()">SAVE</button>
                         <button mat-raised-button style="margin-left:20px;" (click)="backToListView()">CANCEL</button>
                     </div>

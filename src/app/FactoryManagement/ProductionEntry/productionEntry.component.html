@@ -21,15 +21,15 @@
         </ng-container>
 
         <ng-container matColumnDef="productionNumber">
-          <mat-header-cell *matHeaderCellDef> Production Number </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Mould Number </mat-header-cell>
           <!-- <mat-cell *matCellDef="let row"> {{row.productionNumber}} </mat-cell> -->
           <mat-cell *matCellDef="let row"> <a routerLinkActive="active" routerLink="/auth/productionDetails" [fragment]= "row.id">{{row.productionNumber}}</a> </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="noOfMouldsCasted">
+        <!-- <ng-container matColumnDef="noOfMouldsCasted">
           <mat-header-cell *matHeaderCellDef> Moulds Casted </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.noOfMouldsCasted}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <ng-container matColumnDef="breakage">
           <mat-header-cell *matHeaderCellDef> Breakage </mat-header-cell>
