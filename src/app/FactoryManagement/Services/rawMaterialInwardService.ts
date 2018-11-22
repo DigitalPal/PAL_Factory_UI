@@ -8,44 +8,74 @@ import { RawMaterialInward } from '../Entities/RawMaterialInward';
 @Injectable()
 export class RawMaterialInwardService {
   constructor(private http: HttpClient) {}
-  getRawMaterialInwards(logedInUser): Observable<any> {
+  getRawMaterialInwards(logedInUser): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialInward';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.get(url, { headers: headers });
+    return this.http.get(url, {
+      headers: headers
+    });
   }
 
-  addRawMaterialInward(rawMaterialInward: RawMaterialInward): Observable<any> {
+  addRawMaterialInward(rawMaterialInward: RawMaterialInward): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialInward';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    const request = {};
-    // request['Title'] = rawMaterial.name;
-    // request['MeasureType'] = rawMaterial.measurementType;
-    return this.http.post(url, [request], { headers: headers });
+    const request = [];
+    const rawMaterialInwardJson = {};
+    rawMaterialInwardJson['InwardDate'] = rawMaterialInward.InwardDate.month +
+    '-' + rawMaterialInward.InwardDate.day +
+    '-' + rawMaterialInward.InwardDate.year;
+
+    rawMaterialInwardJson['RawMaterialId'] = rawMaterialInward.RawMaterialId;
+    rawMaterialInwardJson['SupplierId'] = rawMaterialInward.SupplierId;
+    rawMaterialInwardJson['VechicalNumber'] = rawMaterialInward.VechicalNumber;
+    rawMaterialInwardJson['ChallanNumber'] = rawMaterialInward.ChallanNumber;
+    rawMaterialInwardJson['Quantity'] = rawMaterialInward.Quantity;
+    rawMaterialInwardJson['UnloadingDetails'] = rawMaterialInward.UnloadingDetails;
+    rawMaterialInwardJson['Remarks'] = rawMaterialInward.Remarks;
+    request.push(rawMaterialInwardJson);
+    return this.http.post(url, [rawMaterialInwardJson], {
+      headers: headers
+    });
   }
 
-  editRawMaterialInward(rawMaterialInward: RawMaterialInward): Observable<any> {
+  editRawMaterialInward(rawMaterialInward: RawMaterialInward): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialInward';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    const request = {};
-     request['Id'] = rawMaterialInward.id;
-    // request['Title'] = rawMaterial.name;
-    // request['MeasureType'] = rawMaterial.measurementType;
-    return this.http.put(url, [request], { headers: headers });
+    const request = [];
+    const rawMaterialInwardJson = {};
+    rawMaterialInwardJson['Id'] = rawMaterialInward.id;
+    rawMaterialInwardJson['InwardDate'] = rawMaterialInward.InwardDate.month +
+    '-' + rawMaterialInward.InwardDate.day +
+    '-' + rawMaterialInward.InwardDate.year;
+
+    rawMaterialInwardJson['RawMaterialId'] = rawMaterialInward.RawMaterialId;
+    rawMaterialInwardJson['SupplierId'] = rawMaterialInward.SupplierId;
+    rawMaterialInwardJson['VechicalNumber'] = rawMaterialInward.VechicalNumber;
+    rawMaterialInwardJson['ChallanNumber'] = rawMaterialInward.ChallanNumber;
+    rawMaterialInwardJson['Quantity'] = rawMaterialInward.Quantity;
+    rawMaterialInwardJson['UnloadingDetails'] = rawMaterialInward.UnloadingDetails;
+    rawMaterialInwardJson['Remarks'] = rawMaterialInward.Remarks;
+    request.push(rawMaterialInwardJson);
+    return this.http.put(url, [rawMaterialInwardJson], {
+      headers: headers
+    });
   }
 
 
-  deleteRawMaterialInward(plant: Plant): Observable<any> {
+  deleteRawMaterialInward(plant: Plant): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialInward';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
     };
-    return this.http.delete(url + '/' + plant.id, { headers: headers });
+    return this.http.delete(url + '/' + plant.id, {
+      headers: headers
+    });
   }
 
 }

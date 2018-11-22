@@ -3,42 +3,44 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RawMaterialConsumption } from '../Entities/RawMaterialConsumption';
 import { RawMaterialConsumptionService } from '../Services/rawMaterialConsumptionService';
+import { RawMaterialService } from '../Services/rawMaterial.service';
+import { RawMaterial } from '../Entities/RawMaterial';
 @Component({
   selector: 'app-rawmaterial-consumption-list',
   templateUrl: './rawMaterialConsumption.component.html',
   styleUrls: ['./rawMaterialConsumption.component.scss']
 })
 export class RawMaterialConsumptionListComponent implements OnInit {
-  public displayedColumns = ['date', 'material', 'quantity', 'remark', 'actions'];
-  rawMaterialConsumptions: RawMaterialConsumption[] = [{
-    date: '02/10/2018',
-    id: null,
-    materialId: null,
-    materialname: 'PONDASH',
-    quantity: 50,
-    remark: 'NA'
-  }];
+  public displayedColumns = ['ConsumptionDate', 'RawMaterial', 'Quantity', 'Remark', 'actions'];
+  rawMaterialConsumptions: RawMaterialConsumption[] = [];
+  rawMaterials: RawMaterial[] = [];
   model = {
     id: null,
-    date: '',
-    material: '',
+    consumptionDate: null,
+    rawMaterialId: '',
     quantity: 0,
     remark: '',
   };
-  constructor(private modalService: NgbModal, private service: RawMaterialConsumptionService, private spinner: NgxSpinnerService) {}
+  constructor(private modalService: NgbModal, private service: RawMaterialConsumptionService,
+    private spinner: NgxSpinnerService, private rawMaterialService: RawMaterialService) {}
 
   open(content, row) {
     console.log(row);
     if (!row) {
       this.model.id = null;
-      this.model.date = '';
-      this.model.material = '';
+      this.model.consumptionDate = null;
+      this.model.rawMaterialId = '';
       this.model.quantity = 0;
       this.model.remark = '';
     } else {
       this.model.id = row.id;
-      this.model.date = row.date;
-      this.model.material = row.material;
+      const dateHere = new Date(row.consumptionDate);
+      this.model.consumptionDate = {
+        day: dateHere.getDate(),
+        month: dateHere.getMonth() + 1,
+        year: dateHere.getFullYear()
+      };
+      this.model.rawMaterialId = row.rawMaterialId;
       this.model.quantity = row.quantity;
       this.model.remark = row.remark;
     }
@@ -62,47 +64,91 @@ export class RawMaterialConsumptionListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.spinner.show();
+    this.spinner.show();
+    this.getRawMaterials();
     this.getRawMaterialConsumption();
   }
 
   saveRawMaterialConsumption() {
-    // this.service.addRawMaterial({
-    //   name: this.model.name,
-    //   measurementType: this.model.measurementType,
-    // }).subscribe(s => this.getRawMaterial());
+    const msg = this.validate();
+    console.log(msg);
+    if (msg === '') {
+    this.service.addRawMaterialConsumption({
+      id: this.model.id,
+      consumptionDate: this.model.consumptionDate,
+      rawMaterialId: this.model.rawMaterialId,
+      RawMaterial: this.model.rawMaterialId,
+      quantity: this.model.quantity,
+      remark: this.model.remark
+    }).subscribe(s => this.getRawMaterialConsumption());
+  } else {
+    alert(msg);
+  }
   }
 
   deleteRawMaterialConsumption(row) {
-    // this.spinner.show();
-    // this.service.deleteRawMaterial(row).subscribe(s => this.getRawMaterial());
+    this.spinner.show();
+    this.service.deleteRawMaterialConsumption(row).subscribe(s => this.getRawMaterialConsumption());
   }
 
 
   editRawMaterialConsumption() {
-    // this.service.editRawMaterial({
-    //   id: this.model.id,
-    //   name: this.model.name,
-    //   measurementType: this.model.measurementType,
-    // }).subscribe(s => this.getRawMaterial());
+    this.service.editRawMaterialConsumption({
+      id: this.model.id,
+      consumptionDate: this.model.consumptionDate,
+      rawMaterialId: this.model.rawMaterialId,
+      RawMaterial: this.model.rawMaterialId,
+      quantity: this.model.quantity,
+      remark: this.model.remark
+    }).subscribe(s => this.getRawMaterialConsumption());
   }
 
+  getRawMaterials() {
+    this.rawMaterialService.getRawMaterials('').subscribe(s => {
+      const localRawMaterials = [];
+      if (s && s.length > 0) {
+        s.forEach(element => {
+          localRawMaterials.push({
+            id: element.Id,
+            name: element.Title,
+            measurementType: element.MeasureType,
+          });
+        });
+      }
+      this.rawMaterials = localRawMaterials;
+    });
+  }
 
   getRawMaterialConsumption() {
-    // this.service.getRawMaterials('').subscribe(s => {
-    //   const localRawMaterials = [];
-    //   if (s && s.length > 0) {
-    //     s.forEach(element => {
-    //       localRawMaterials.push({
-    //         id: element.Id,
-    //         name: element.Title,
-    //         measurementType: element.MeasureType,
-    //       });
-    //     });
-    //   }
-    //   this.rawMaterials = localRawMaterials;
-    //   this.spinner.hide();
-    // });
+    this.service.getRawMaterialConsumptions('').subscribe(s => {
+      const localRawMaterialConsumption = [];
+      if (s && s.length > 0) {
+        s.forEach(element => {
+          localRawMaterialConsumption.push({
+            id: element.Id,
+            rawMaterialId: element.RawMaterialId,
+            RawMaterial: element.RawMaterial,
+            consumptionDate: element.ConsumptionDate,
+            quantity: element.Quantity,
+            remark: element.Remark.trim()
+          });
+        });
+      }
+      this.rawMaterialConsumptions = localRawMaterialConsumption;
+      this.spinner.hide();
+    });
   }
 
+  validate() {
+    if (this.model.consumptionDate == null || this.model.consumptionDate === '') {
+      return 'Please select consumption date';
+    }
+    if (this.model.rawMaterialId === '0' || this.model.rawMaterialId === '') {
+      return 'Please select raw material';
+    }
+    if (this.model.quantity === 0) {
+      return 'Please enter quantity';
+    }
+    return '';
+  }
 }

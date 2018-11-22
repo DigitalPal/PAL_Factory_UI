@@ -1,13 +1,13 @@
 export interface RawMaterialInward {
-    id?: string;
-    date: string;
-    materialId: string;
-    materialname: string;
-    supplierId: string;
-    supplierName: string;
-    vehicleNumber: string;
-    challanNumber: string;
-    quantity: number;
-    unloadingDetails: string;
-    remark: string;
-  }
+  id ?: string;
+  RawMaterialId: string;
+  RawMaterial?: string;
+  InwardDate: any;
+  SupplierId: string;
+  Supplier?: string;
+  VechicalNumber: string;
+  ChallanNumber: string;
+  Quantity: number;
+  UnloadingDetails: string;
+  Remarks: string;
+}

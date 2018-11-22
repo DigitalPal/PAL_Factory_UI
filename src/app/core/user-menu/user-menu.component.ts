@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,34 +7,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-menu.component.scss']
 })
 export class UserMenuComponent implements OnInit {
-	isOpen: boolean = false;
+  isOpen = false;
 
-  	//currentUser = null;
-  	Hari;
-  	
-
-  	@Input() currentUser = null;
-  	@HostListener('document:click', ['$event', '$event.target'])
-  	onClick(event: MouseEvent, targetElement: HTMLElement) {
-    	if (!targetElement) {
-     		return;
-    	}
-
-    	const clickedInside = this.elementRef.nativeElement.contains(targetElement);
-    	if (!clickedInside) {
-      		this.isOpen = false;
-    	}
-  	}
-  	
-	Logout() {
-		localStorage.removeItem('userToken');
-		this.router.navigate(['/login']);
-	}
-
-  	constructor(private elementRef: ElementRef, private router: Router) { }
+  // currentUser = null;
+  Hari;
 
 
-  	ngOnInit() {
-  	}
+  @Input() currentUser = null;
+  @HostListener('document:click', ['$event', '$event.target'])
+  onClick(event: MouseEvent, targetElement: HTMLElement) {
+    if (!targetElement) {
+      return;
+    }
+
+    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.isOpen = false;
+    }
+  }
+
+  Logout() {
+    localStorage.removeItem('DigitalPalToken');
+    this.router.navigate(['/login']);
+  }
+
+  constructor(private elementRef: ElementRef, private router: Router) {}
+
+
+  ngOnInit() {}
 
 }
