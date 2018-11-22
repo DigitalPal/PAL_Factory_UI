@@ -42,6 +42,7 @@ import { InvoicePrintComponent } from './Invoice/printInvoice.component';
 import { AmountCalculatorService } from './Services/amountCalculator.service';
 import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.component';
 import { ProductionReportComponent } from './Reports/Production/productionReport.component';
+import { ConsumptionReportComponent } from './Reports/Consumption/consumptionReport.component';
 import { SupplierPOService } from './Services/supplierPO.service';
 import { SupplierPODetailsComponent } from './SupplierPO/supplierPODetails.component';
 import { SupplierPOListComponent } from './SupplierPO/supplierPOList.component';
@@ -76,7 +77,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     DispatchReportComponent,
 
     ProductionReportComponent,
-
+    ConsumptionReportComponent,
     SupplierPODetailsComponent,
     SupplierPOListComponent,
     SupplierPOPrintComponent,
@@ -152,7 +153,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     DispatchReportComponent,
 
     ProductionReportComponent,
-
+    ConsumptionReportComponent,
     SupplierPODetailsComponent,
     SupplierPOListComponent,
     SupplierPOPrintComponent,

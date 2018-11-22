@@ -75,6 +75,7 @@ export class ProductionEntryService {
 
 
   deleteProductionEntry(productionEntry: ProductionEntry): Observable<any> {
+    console.log(productionEntry);
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Production';
     const headers = {
       'Content-Type': 'application/json;charset=UTF-8',
