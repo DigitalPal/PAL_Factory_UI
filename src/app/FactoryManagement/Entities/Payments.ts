@@ -8,5 +8,9 @@ export interface Payments {
     customerName: string;
     customerId: string;
     amount: number;
-    remark: string;
+    // remark: string;
+    paymentMode: string;
+    bank: string;
+    chequeNumber: string;
+    chequeDate: any;
   }

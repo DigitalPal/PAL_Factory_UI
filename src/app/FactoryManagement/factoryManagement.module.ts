@@ -75,7 +75,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     InvoicePrintComponent,
     DispatchReportComponent,
 
-    ProductionReportComponent
+    ProductionReportComponent,
 
     SupplierPODetailsComponent,
     SupplierPOListComponent,
@@ -151,7 +151,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     InvoicePrintComponent,
     DispatchReportComponent,
 
-    ProductionReportComponent
+    ProductionReportComponent,
 
     SupplierPODetailsComponent,
     SupplierPOListComponent,
