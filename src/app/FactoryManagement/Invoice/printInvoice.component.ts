@@ -80,7 +80,7 @@ export class InvoicePrintComponent implements OnInit {
             productsHere.push({
               srNo: i,
               item: invoice.Products[i - 1].ProductName,
-              hsnCode: 'HSN Code',
+              hsnCode: invoice.Products[i - 1].HSNCode,
               quantity: invoice.Products[i - 1].Quantity,
               amount: amount,
               rate: amount / invoice.Products[i - 1].Quantity,

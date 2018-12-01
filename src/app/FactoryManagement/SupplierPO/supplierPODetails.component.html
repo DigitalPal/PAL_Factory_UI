@@ -79,7 +79,7 @@
                 <td>{{row.rawMaterialName}}</td>
                 <td>{{row.quantity}}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-dark" (click)="deleteRawMaterialClicked(row)">Delete</button>
+                  <button *ngIf="!model.id" type="button" class="btn btn-outline-dark" (click)="deleteRawMaterialClicked(row)">Delete</button>
                 </td>
               </tr>
               <tr *ngIf="model.rawMaterials?.length < 1">
@@ -97,7 +97,7 @@
             </table>
           </div>
 
-          <div class="form-group row" style="margin-top:20px;">
+          <div class="form-group row" style="margin-top:20px;" *ngIf="!model.id">
             <button mat-raised-button color="primary" (click)="saveData()">SAVE</button>
             <button mat-raised-button style="margin-left:20px;" (click)="backToListView()">CANCEL</button>
           </div>

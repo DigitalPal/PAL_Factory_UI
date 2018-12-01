@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./productionEntry.component.scss']
 })
 export class ProductionEntryListComponent implements OnInit {
-  public displayedColumns = ['productionNumber', 'productionDate', 'noOfMouldsCasted', 'remark', 'actions'];
+  public displayedColumns = ['productionNumber', 'productionDate', 'remark', 'actions'];
   productionEntries: ProductionEntry[] = [];
   constructor(private service: ProductionEntryService
     , private spinner: NgxSpinnerService

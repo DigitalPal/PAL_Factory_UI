@@ -25,7 +25,6 @@ export class RawMaterialConsumptionListComponent implements OnInit {
     private spinner: NgxSpinnerService, private rawMaterialService: RawMaterialService) {}
 
   open(content, row) {
-    console.log(row);
     if (!row) {
       this.model.id = null;
       this.model.consumptionDate = null;
@@ -71,7 +70,6 @@ export class RawMaterialConsumptionListComponent implements OnInit {
 
   saveRawMaterialConsumption() {
     const msg = this.validate();
-    console.log(msg);
     if (msg === '') {
     this.service.addRawMaterialConsumption({
       id: this.model.id,
