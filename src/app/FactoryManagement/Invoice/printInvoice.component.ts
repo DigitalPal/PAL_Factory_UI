@@ -36,6 +36,11 @@ export class InvoicePrintComponent implements OnInit {
 
   productsArray = [];
 
+  transportCharges = 0;
+  loadingCharges = 0;
+  unloadingCharges = 0;
+
+  colspan = 4;
 
   constructor(private invoiceService: InvoiceService, private router: Router
     , private spinner: NgxSpinnerService, private orderService: OrderService
@@ -58,6 +63,9 @@ export class InvoicePrintComponent implements OnInit {
           this.supplyDate = invoice.DispatchDate;
           this.invoiceNumber = invoice.InvoiceNumber;
           this.challanNumber = invoice.DispatchNumber;
+
+
+
           this.grandTotal = Math.round(invoice.Price);
           const tempSubTotal = Math.round(this.grandTotal / 1.12);
           this.cGST = this.sGST = Math.round((tempSubTotal * 0.06));
@@ -90,6 +98,25 @@ export class InvoicePrintComponent implements OnInit {
 
           this.productsArray = productsHere;
           const converter = new Converter();
+
+          if (invoice.TransportCharges && +invoice.TransportCharges > 0) {
+            this.transportCharges = Math.round(invoice.TransportCharges);
+            this.grandTotal = this.grandTotal + this.transportCharges;
+            this.colspan = this.colspan + 1;
+          }
+
+          if (invoice.LoadingCharges && +invoice.LoadingCharges > 0) {
+            this.loadingCharges = Math.round(invoice.LoadingCharges);
+            this.grandTotal = this.grandTotal + this.loadingCharges;
+            this.colspan = this.colspan + 1;
+          }
+
+          if (invoice.UnloadingCharges && +invoice.UnloadingCharges > 0) {
+            this.unloadingCharges = Math.round(invoice.UnloadingCharges);
+            this.grandTotal = this.grandTotal + this.unloadingCharges;
+            this.colspan = this.colspan + 1;
+          }
+
           this.amountInWords = converter.transformToWord(this.grandTotal);
           this.spinner.hide();
         });
