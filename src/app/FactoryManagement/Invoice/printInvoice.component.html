@@ -62,7 +62,7 @@
               <td>{{ product.amount | number : '1.2-2'}}</td>
             </tr>
             <tr>
-              <td colspan="4" rowspan="4"></td>
+              <td colspan="4" [attr.rowspan]="colspan"></td>
               <td colspan="2"><b>Sub Total</b></td>
               <td>{{ subTotal | number : '1.2-2' }}</td>
             </tr>
@@ -73,6 +73,18 @@
             <tr>
               <td colspan="2"><b>SGST 6%</b></td>
               <td>{{ sGST | number : '1.2-2' }}</td>
+            </tr>
+            <tr *ngIf="transportCharges > 0">
+              <td colspan="2"><b>Transport Charges</b></td>
+              <td>{{ transportCharges | number : '1.2-2' }}</td>
+            </tr>
+            <tr *ngIf="loadingCharges > 0">
+              <td colspan="2"><b>Loading Charges</b></td>
+              <td>{{ loadingCharges | number : '1.2-2' }}</td>
+            </tr>
+            <tr *ngIf="unloadingCharges > 0">
+              <td colspan="2"><b>Unloading Charges</b></td>
+              <td>{{ unloadingCharges | number : '1.2-2' }}</td>
             </tr>
             <tr>
               <td colspan="2"><b>Grand Total</b></td>
