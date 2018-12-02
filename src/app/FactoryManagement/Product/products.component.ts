@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Product } from '../Entities/Product';
+import { Product } from '../Entities/product';
 import { ProductsService } from '../Services/products.service';
 @Component({
     selector: 'app-products-list',

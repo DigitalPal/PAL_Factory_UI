@@ -43,6 +43,7 @@ import { AmountCalculatorService } from './Services/amountCalculator.service';
 import { DispatchReportComponent } from './Reports/Disptach/dispatchReport.component';
 import { ProductionReportComponent } from './Reports/Production/productionReport.component';
 import { ConsumptionReportComponent } from './Reports/Consumption/consumptionReport.component';
+
 import { SupplierPOService } from './Services/supplierPO.service';
 import { SupplierPODetailsComponent } from './SupplierPO/supplierPODetails.component';
 import { SupplierPOListComponent } from './SupplierPO/supplierPOList.component';
@@ -50,6 +51,7 @@ import { SupplierPOPrintComponent } from './SupplierPO/printPO.component';
 import { SupplierPOReportComponent } from './Reports/SupplierPO/supplierPOReport.component';
 import { SummaryReportComponent } from './Reports/Summary/summaryReport.component';
 import { SummaryReportService } from './Services/summaryReport.service';
+import { inwardReportComponent } from './Reports/inward/inwardReport.component';
 
 
 @NgModule({
@@ -82,6 +84,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
+    inwardReportComponent,
 
   ],
 
@@ -158,6 +161,7 @@ import { SummaryReportService } from './Services/summaryReport.service';
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
+    inwardReportComponent,
 
   ],
 })
