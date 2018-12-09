@@ -13,7 +13,7 @@
       <div class="print-invoice-container">
         <diV class="print-invoice-header">
           <div class="print-invoice-title">Tax Invoice</div>
-          <div class="print-invoice-subtitle"><b>Dated:</b> {{ todaysDate | date:'MM/dd/yyyy' }}</div>
+          <div class="print-invoice-subtitle"><b>Dated:</b> {{ todaysDate | date:'dd/MM/yyyy' }}</div>
         </diV>
         <div class="print-invoice-partyname-container">
           <div id="supplierName" class="supplier-name">
@@ -33,7 +33,7 @@
         </div>
         <div class="print-invoice-PO-container">
           <div id="supplyDate" class="supply-date">
-            <div><b>Supply Date:</b> {{ supplyDate | date:'MM/dd/yyyy' }}</div>
+            <div><b>Supply Date:</b> {{ supplyDate | date:'dd/MM/yyyy' }}</div>
           </div>
           <div id="POContainer" class="invoice-number">
             <div><b>Invoice No -</b> {{ invoiceNumber }} <br/>(Challan No: {{ challanNumber }})</div>

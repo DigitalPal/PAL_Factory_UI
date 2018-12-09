@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RawMaterialService } from '../../Services/rawMaterial.service';
 import { RawMaterialConsumptionService } from '../../Services/rawMaterialConsumptionService';
+import { NgbDateCustomParserFormatter} from '../../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'app-consumption-report',
     templateUrl: './consumptionReport.component.html',
-    styleUrls: ['./consumptionReport.component.scss']
+    styleUrls: ['./consumptionReport.component.scss'],
+    providers: [
+      {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+     ]
   })
   export class ConsumptionReportComponent implements OnInit {
     public displayedColumns = ['srNum', 'consumptionDate', 'rawMaterial', 'quantity', 'measureType'];

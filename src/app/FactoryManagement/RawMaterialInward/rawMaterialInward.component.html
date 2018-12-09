@@ -17,7 +17,7 @@
       <mat-table #table [dataSource]="rawMaterialsInward">
         <ng-container matColumnDef="date">
           <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.InwardDate | date:'MM/dd/yyyy'}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.InwardDate | date:'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="material">
           <mat-header-cell *matHeaderCellDef> Material </mat-header-cell>

@@ -3,10 +3,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductsService } from '../../Services/products.service';
 import { ProductionEntryService } from '../../Services/productionEntry.service';
 import { OrderService } from '../../Services/order.service';
+import { NgbDateCustomParserFormatter} from '../../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'app-production-report',
     templateUrl: './productionReport.component.html',
-    styleUrls: ['./productionReport.component.scss']
+    styleUrls: ['./productionReport.component.scss'],
+    providers: [
+      {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+     ]
   })
   export class ProductionReportComponent implements OnInit {
     public displayedColumns = ['srNum', 'productionDate', 'productionNumber'

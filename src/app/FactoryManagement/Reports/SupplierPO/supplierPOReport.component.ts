@@ -3,10 +3,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RawMaterialService } from '../../Services/rawMaterial.service';
 import { SupplierPOService } from '../../Services/supplierPO.service';
 import { SuppliersService } from '../../Services/suppliers.service';
+import { NgbDateCustomParserFormatter} from '../../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-supplierpo-report',
   templateUrl: './supplierPOReport.component.html',
-  styleUrls: ['./supplierPOReport.component.scss']
+  styleUrls: ['./supplierPOReport.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class SupplierPOReportComponent implements OnInit {
   public displayedColumns = ['srNumber', 'supplierPONumber', 'supplierName', 'date', 'rawMaterialName', 'POQuantity'];

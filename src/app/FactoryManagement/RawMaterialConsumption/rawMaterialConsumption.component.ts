@@ -5,10 +5,16 @@ import { RawMaterialConsumption } from '../Entities/RawMaterialConsumption';
 import { RawMaterialConsumptionService } from '../Services/rawMaterialConsumptionService';
 import { RawMaterialService } from '../Services/rawMaterial.service';
 import { RawMaterial } from '../Entities/RawMaterial';
+import { NgbDateCustomParserFormatter} from '../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-rawmaterial-consumption-list',
   templateUrl: './rawMaterialConsumption.component.html',
-  styleUrls: ['./rawMaterialConsumption.component.scss']
+  styleUrls: ['./rawMaterialConsumption.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class RawMaterialConsumptionListComponent implements OnInit {
   public displayedColumns = ['ConsumptionDate', 'RawMaterial', 'Quantity', 'Remark', 'actions'];

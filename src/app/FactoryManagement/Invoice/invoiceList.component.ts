@@ -7,10 +7,15 @@ import { AmountCalculatorService } from '../Services/amountCalculator.service';
 import { DispatchService } from '../Services/disptach.service';
 import { InvoiceService } from '../Services/invoice.service';
 import { OrderService } from '../Services/order.service';
+import { NgbDateCustomParserFormatter} from '../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-invoice-list',
   templateUrl: './invoiceList.component.html',
-  styleUrls: ['./invoiceList.component.scss']
+  styleUrls: ['./invoiceList.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class InvoiceListComponent implements OnInit {
   public displayedColumns = ['invoiceNumber', 'orderNumber', 'date', 'dispatchNumber'

@@ -5,10 +5,16 @@ import { OrderService } from '../Services/order.service';
 import { RawMaterialService } from '../Services/rawMaterial.service';
 import { SupplierPOService } from '../Services/supplierPO.service';
 import { SuppliersService } from '../Services/suppliers.service';
+import { NgbDateCustomParserFormatter} from '../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-supplierpo-details',
   templateUrl: './supplierPODetails.component.html',
-  styleUrls: ['./supplierPODetails.component.scss']
+  styleUrls: ['./supplierPODetails.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class SupplierPODetailsComponent implements OnInit {
   model = {
