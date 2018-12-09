@@ -130,9 +130,9 @@ export const appRoutes: Routes = [{
     { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
 
     { path: 'productionReport', component:  ProductionReportComponent, canActivate: [AuthGuard]},
-    { 
-      path: 'consumptionReport', 
-      component:  ConsumptionReportComponent, 
+    {
+      path: 'consumptionReport',
+      component:  ConsumptionReportComponent,
       canActivate: [AuthGuard]
     },
 
