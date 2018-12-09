@@ -3,10 +3,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomersService } from '../../Services/customers.service';
 import { DispatchService } from '../../Services/disptach.service';
 import { OrderService } from '../../Services/order.service';
+import { NgbDateCustomParserFormatter} from '../../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-dispatch-report',
   templateUrl: './dispatchReport.component.html',
-  styleUrls: ['./dispatchReport.component.scss']
+  styleUrls: ['./dispatchReport.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class DispatchReportComponent implements OnInit {
   public displayedColumns = ['srNumber', 'orderNumber'

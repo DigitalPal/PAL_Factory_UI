@@ -8,11 +8,17 @@ import { RawMaterialService } from '../Services/rawMaterial.service';
 import { RawMaterialInwardService } from '../Services/rawMaterialInwardService';
 import { SuppliersService } from '../Services/suppliers.service';
 import { NullInjector } from '@angular/core/src/di/injector';
+import { NgbDateCustomParserFormatter} from '../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-rawmaterial-inward-list',
   templateUrl: './rawMaterialInward.component.html',
-  styleUrls: ['./rawMaterialInward.component.scss']
+  styleUrls: ['./rawMaterialInward.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class RawMaterialInwardListComponent implements OnInit {
   public displayedColumns = ['date',

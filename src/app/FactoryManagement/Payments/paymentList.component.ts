@@ -1,35 +1,21 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  ActivatedRoute
-} from '@angular/router';
-import {
-  NgbModal
-} from '@ng-bootstrap/ng-bootstrap';
-import {
-  NgxSpinnerService
-} from 'ngx-spinner';
-import {
-  Payments
-} from '../Entities/Payments';
-import {
-  InvoiceService
-} from '../Services/invoice.service';
-import {
-  OrderService
-} from '../Services/order.service';
-import {
-  PaymentsService
-} from '../Services/payments.service';
-import {
-  SupplierPOService
-} from '../Services/supplierPO.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Payments } from '../Entities/Payments';
+import { NgbDateCustomParserFormatter } from '../Helpers/dateFormatter';
+import { InvoiceService } from '../Services/invoice.service';
+import { OrderService } from '../Services/order.service';
+import { PaymentsService } from '../Services/payments.service';
+import { SupplierPOService } from '../Services/supplierPO.service';
+
 @Component({
   selector: 'app-payment-list',
   templateUrl: './paymentList.component.html',
-  styleUrls: ['./paymentList.component.scss']
+  styleUrls: ['./paymentList.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class PaymentListComponent implements OnInit {
   mode = '';

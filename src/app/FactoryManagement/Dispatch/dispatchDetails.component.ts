@@ -3,10 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DispatchService } from '../Services/disptach.service';
 import { OrderService } from '../Services/order.service';
+import { NgbDateCustomParserFormatter} from '../Helpers/dateFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-dispatch-details',
   templateUrl: './dispatchDetails.component.html',
-  styleUrls: ['./dispatchDetails.component.scss']
+  styleUrls: ['./dispatchDetails.component.scss'],
+  providers: [
+    {provide: NgbDateParserFormatter, useClass: NgbDateCustomParserFormatter}
+   ]
 })
 export class DispatchDetailsComponent implements OnInit {
   model = {
