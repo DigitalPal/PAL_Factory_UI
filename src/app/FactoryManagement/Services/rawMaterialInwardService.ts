@@ -7,6 +7,7 @@ import { RawMaterialInward } from '../Entities/RawMaterialInward';
 
 @Injectable()
 export class RawMaterialInwardService {
+
   constructor(private http: HttpClient) {}
   getRawMaterialInwards(logedInUser): Observable < any > {
     const url = environment.factoryAPIBase + '/api/DigitalPal/v1/RawMaterialInward';
@@ -74,6 +75,34 @@ export class RawMaterialInwardService {
       'Content-Type': 'application/json;charset=UTF-8',
     };
     return this.http.delete(url + '/' + plant.id, {
+      headers: headers
+    });
+  }
+
+  getInwardReport(rawMaterialName, supplierName, startDate, endDate): Observable < any > {
+    const url = environment.factoryAPIBase + '/api/DigitalPal/v1/Inward/Search';
+    const headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+    };
+
+    const request = {};
+    if (rawMaterialName) {
+      request['rawMaterialName'] = rawMaterialName;
+    }
+
+    if (supplierName) {
+      request['supplierName'] = supplierName;
+    }
+
+    if (startDate) {
+      request['startDate'] = startDate.month + '-' + startDate.day + '-' + startDate.year;
+    }
+
+    if (endDate) {
+      request['endDate'] = endDate.month + '-' + endDate.day + '-' + endDate.year;
+    }
+
+    return this.http.post(url, request, {
       headers: headers
     });
   }

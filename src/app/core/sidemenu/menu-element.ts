@@ -108,13 +108,13 @@ export const menus = [
         'open': false,
         'chip': null,
         'sub': [
-            // {
-            //     'name': 'Raw Material Inward',
-            //     'link': '/auth/dashboard',
-            //     'icon': 'pie_chart',
-            //     'chip': false,
-            //     'open': true,
-            // },
+            {
+                 'name': 'Raw Material Inward',
+                 'link': '/auth/inwardReport',
+                 'icon': 'pie_chart',
+                 'chip': false,
+                 'open': true,
+            },
             {
                 'name': 'Raw Material Consumption',
                 'link': '/auth/consumptionReport',

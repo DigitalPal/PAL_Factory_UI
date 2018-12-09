@@ -29,6 +29,7 @@ import { SupplierPODetailsComponent } from '../FactoryManagement/SupplierPO/supp
 import { SupplierPOPrintComponent } from '../FactoryManagement/SupplierPO/printPO.component';
 import { SupplierPOReportComponent } from '../FactoryManagement/Reports/SupplierPO/supplierPOReport.component';
 import { SummaryReportComponent } from '../FactoryManagement/Reports/Summary/summaryReport.component';
+import { InwardReportComponent } from '../FactoryManagement/Reports/inward/inwardReport.component';
 
 
 
@@ -129,7 +130,11 @@ export const appRoutes: Routes = [{
     { path: 'dispatchReport', component:  DispatchReportComponent, canActivate: [AuthGuard]},
 
     { path: 'productionReport', component:  ProductionReportComponent, canActivate: [AuthGuard]},
-    { path: 'consumptionReport', component:  ConsumptionReportComponent, canActivate: [AuthGuard]},
+    {
+      path: 'consumptionReport',
+      component:  ConsumptionReportComponent,
+      canActivate: [AuthGuard]
+    },
 
     {
       path: 'supplierPOList',
@@ -156,7 +161,11 @@ export const appRoutes: Routes = [{
       component: SummaryReportComponent,
       canActivate: [AuthGuard]
     },
-
+    {
+      path: 'inwardReport',
+      component: InwardReportComponent,
+      canActivate: [AuthGuard]
+    },
     {
       path: 'material-widgets',
       loadChildren: '../material-widgets/material-widgets.module#MaterialWidgetsModule'
