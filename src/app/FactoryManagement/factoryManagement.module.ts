@@ -51,7 +51,7 @@ import { SupplierPOPrintComponent } from './SupplierPO/printPO.component';
 import { SupplierPOReportComponent } from './Reports/SupplierPO/supplierPOReport.component';
 import { SummaryReportComponent } from './Reports/Summary/summaryReport.component';
 import { SummaryReportService } from './Services/summaryReport.service';
-import { inwardReportComponent } from './Reports/inward/inwardReport.component';
+import { InwardReportComponent } from './Reports/inward/inwardReport.component';
 
 
 @NgModule({
@@ -84,7 +84,7 @@ import { inwardReportComponent } from './Reports/inward/inwardReport.component';
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
-    inwardReportComponent,
+    InwardReportComponent,
 
   ],
 
@@ -161,7 +161,7 @@ import { inwardReportComponent } from './Reports/inward/inwardReport.component';
     SupplierPOPrintComponent,
     SupplierPOReportComponent,
     SummaryReportComponent,
-    inwardReportComponent,
+    InwardReportComponent,
 
   ],
 })

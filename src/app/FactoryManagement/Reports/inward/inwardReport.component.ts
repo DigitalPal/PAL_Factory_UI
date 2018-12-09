@@ -1,42 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { RawMaterialService } from '../../Services/rawMaterial.service';
+import { RawMaterialInwardService } from '../../Services/rawMaterialInwardService';
 import { SuppliersService } from '../../Services/suppliers.service';
 
-import { RawMaterialInwardService } from '../../Services/rawMaterialInwardService';
 @Component({
-    selector: 'app-inward-report',
-    templateUrl: './inwardReport.component.html',
-    styleUrls: ['./inwardReport.component.scss']
-  })
-  export class inwardReportComponent implements OnInit {
-    public displayedColumns = [
-                                'srNum',
-                                'inwardDate',
-                                'supplierName', 
-                                'rawMaterialName',
-                                'poNumber', 
-                                'quantity',
-                                'unit',
-                                
-                                ];
-    rawMaterialInwards = [];
-    model = {
-      rawMaterialId: '',
-      rawMaterialName: '',
-      supplierId: '',
-      supplierName: '',
-      poNumber: '',
-      startDate: '',
-      endDate: '',
-      inwardDate: '',
-      };
-    rawMaterialMaster = [];
-    supplierMaster = [];
-    constructor(private rawMaterialInwardService: RawMaterialInwardService,
-                private rawMaterialService: RawMaterialService, 
-                private suppliersService: SuppliersService, 
-                private spinner: NgxSpinnerService) {}
+  selector: 'app-inward-report',
+  templateUrl: './inwardReport.component.html',
+  styleUrls: ['./inwardReport.component.scss']
+})
+export class InwardReportComponent implements OnInit {
+  public displayedColumns = [
+    'srNum',
+    'inwardDate',
+    'supplierName',
+    'rawMaterialName',
+    'poNumber',
+    'quantity',
+    'units'
+  ];
+  rawMaterialInwards = [];
+  model = {
+    rawMaterialId: '',
+    rawMaterialName: '',
+    supplierId: '',
+    supplierName: '',
+    poNumber: '',
+    startDate: '',
+    endDate: '',
+    inwardDate: '',
+  };
+  rawMaterialMaster = [];
+  supplierMaster = [];
+  constructor(private rawMaterialInwardService: RawMaterialInwardService,
+    private rawMaterialService: RawMaterialService,
+    private suppliersService: SuppliersService,
+    private spinner: NgxSpinnerService) {}
 
 
   ngOnInit() {
@@ -49,17 +48,17 @@ import { RawMaterialInwardService } from '../../Services/rawMaterialInwardServic
   }
 
   getRawMaterialInward() {
-    const rawMaterialName = (this.model.rawMaterialId === '' || this.model.rawMaterialId === 'ALL') ? ''
-    : this.rawMaterialMaster.find(f => f.id === this.model.rawMaterialId).name;
+    const rawMaterialName = (this.model.rawMaterialId === '' || this.model.rawMaterialId === 'ALL') ? '' :
+      this.rawMaterialMaster.find(f => f.id === this.model.rawMaterialId).name;
 
-    const supplierlName = (this.model.supplierId === '' || this.model.supplierName === 'ALL') ? ''
-    : this.supplierMaster.find(f => f.id === this.model.supplierId).supplierName;
+    const supplierlName = (this.model.supplierId === '' || this.model.supplierName === 'ALL') ? '' :
+      this.supplierMaster.find(f => f.id === this.model.supplierId).supplierName;
 
     this.rawMaterialInwardService.getInwardReport(rawMaterialName, supplierlName, this.model.startDate, this.model.endDate).subscribe(s => {
       const localInward = [];
       if (s && s.length > 0) {
         s.forEach(element => {
-            localInward.push({
+          localInward.push({
             srNum: element.SrNum,
             rawMaterialName: element.rawMaterialName,
             supplierlName: element.supplierlName,
@@ -79,7 +78,7 @@ import { RawMaterialInwardService } from '../../Services/rawMaterialInwardServic
       const localRawMaterials = [];
       if (s && s.length > 0) {
         s.forEach(element => {
-            localRawMaterials.push({
+          localRawMaterials.push({
             id: element.Id,
             name: element.Title.toString().trim(),
           });
